@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warren Chris - IT Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Warren Chris</h1>
+            <h2>Cloud Architect | Cybersecurity Specialist | Full Stack Developer</h2>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#about" class="active"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
+                <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
+                <li><a href="#certifications"><i class="fas fa-certificate"></i> Certifications</a></li>
+                <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main class="container">
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <img src="https://via.placeholder.com/300" alt="Warren Chris" class="profile-img">
+                <div>
+                    <p>I'm a passionate IT professional with 5+ years of experience in cloud architecture, cybersecurity, and full-stack development. My mission is to build secure, scalable solutions that drive business innovation.</p>
+                    <p>Currently pursuing my Bachelor's in Information Technology while working as a Cloud Solutions Engineer. I specialize in AWS architectures, network security, and developing efficient web applications.</p>
+                    <div class="social-links">
+                        <a href="https://github.com/Warrenchris"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/warren-chris-723a00263"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="C:\Users\WARREN CHRIS\Desktop\WARREN CHRIS\WARRENCHRIS_RESUME.pdf"><i class="fas fa-file-pdf"></i> Resume</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category animate-on-scroll">
+                    <h3><i class="fas fa-cloud"></i> Cloud</h3>
+                    <ul>
+                        <li>AWS (EC2, S3, Lambda, RDS)</li>
+                        <li>Azure Cloud Services</li>
+                        <li>Google Cloud Platform</li>
+                        <li>Docker & Kubernetes</li>
+                        <li>Terraform</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category animate-on-scroll">
+                    <h3><i class="fas fa-shield-alt"></i> Security</h3>
+                    <ul>
+                        <li>Network Security</li>
+                        <li>Ethical Hacking</li>
+                        <li>Firewall Configuration</li>
+                        <li>SIEM Tools</li>
+                        <li>Compliance Standards</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category animate-on-scroll">
+                    <h3><i class="fas fa-code"></i> Development</h3>
+                    <ul>
+                        <li>JavaScript/TypeScript</li>
+                        <li>Python</li>
+                        <li>React & Node.js</li>
+                        <li>SQL/NoSQL Databases</li>
+                        <li>RESTful APIs</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category animate-on-scroll">
+                    <h3><i class="fas fa-network-wired"></i> Networking</h3>
+                    <ul>
+                        <li>Cisco Routing/Switching</li>
+                        <li>Huawei Networking</li>
+                        <li>VPN Configuration</li>
+                        <li>Load Balancing</li>
+                        <li>SD-WAN</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <h2>Featured Projects</h2>
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="cloud">Cloud</button>
+                <button class="filter-btn" data-filter="security">Security</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card animate-on-scroll" data-category="cloud">
+                    <div class="project-image" style="background-image: url('https://via.placeholder.com/600x400')"></div>
+                    <div class="project-details">
+                        <h3>Cloud Migration Framework</h3>
+                        <div class="project-tech">
+                            <span>AWS</span>
+                            <span>Terraform</span>
+                            <span>Python</span>
+                        </div>
+                        <p>Designed a framework for migrating enterprise applications to AWS, reducing migration time by 40% and costs by 30%.</p>
+                        <a href="#" class="btn">View Case Study</a>
+                    </div>
+                </div>
+                
+                <div class="project-card animate-on-scroll" data-category="security">
+                    <div class="project-image" style="background-image: url('https://via.placeholder.com/600x400')"></div>
+                    <div class="project-details">
+                        <h3>Zero Trust Implementation</h3>
+                        <div class="project-tech">
+                            <span>Azure AD</span>
+                            <span>SIEM</span>
+                            <span>PAM</span>
+                        </div>
+                        <p>Implemented Zero Trust security model for financial institution, reducing attack surface by 75%.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="project-card animate-on-scroll" data-category="web">
+                    <div class="project-image" style="background-image: url('https://via.placeholder.com/600x400')"></div>
+                    <div class="project-details">
+                        <h3>E-Commerce Platform</h3>
+                        <div class="project-tech">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>MongoDB</span>
+                        </div>
+                        <p>Developed full-stack e-commerce solution with payment integration and inventory management.</p>
+                        <a href="#" class="btn">Visit Site</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <div class="certs-grid">
+                <div class="cert-card animate-on-scroll">
+                    <img src="https://images.credly.com/size/680x680/images/bc08972c-3c7d-4b99-82a0-c94bcca36674/Badges_v8-07_Practitioner.png" alt="IBM Enterprise Design Thinking Practitioner">
+                    <h3>Enterprise design thinking practitioner</h3>
+                    <p>Professional</p>
+                    <span>2024</span>
+                </div>
+                
+                <div class="cert-card animate-on-scroll">
+                    <img src="https://via.placeholder.com/150" alt="Redhat">
+                    <h3>Redhat Systems Adminitration 1</h3>
+                    <p>Redhat</p>
+                    <span>2023</span>
+                </div>
+                
+                <div class="cert-card animate-on-scroll">
+                    <img src="https://images.credly.com/size/680x680/images/a54994ef-57d1-4972-aad1-d99b372b188a/fdb07080-5446-437d-a044-54823cc4c79e.png" alt="Cisco Certified">
+                    <h3>Cisco DevNet Associate</h3>
+                    <p>Cisco</p>
+                    <span>2023</span>
+                </div>
+                
+                <div class="cert-card animate-on-scroll">
+                    <img src="https://media.licdn.com/dms/image/v2/D4D22AQEzq5DEAjcxRw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1722622584977?e=1746662400&v=beta&t=j1Fzi0KhF-S_FUFRo1ZURIPLQlTtDPs_Xkq3OtYfBY8" alt="Huawei Certified">
+                    <h3>HCIA - Datacom</h3>
+                    <p>Huawei</p>
+                    <span>2022</span>
+                </div>
+            </div>
+        </section>
+        
+        <section id="experience">
+            <h2>Professional Experience</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-date">2023 - Present</div>
+                    <div class="timeline-content">
+                        <h3>Cloud Solutions Engineer</h3>
+                        <h4>Tech Innovations Inc.</h4>
+                        <ul>
+                            <li>Design and implement cloud architectures for enterprise clients</li>
+                            <li>Lead migration projects from on-prem to cloud environments</li>
+                            <li>Develop automation scripts for infrastructure deployment</li>
+                            <li>Provide security consulting for cloud implementations</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-date">2021 - 2023</div>
+                    <div class="timeline-content">
+                        <h3>Network Security Specialist</h3>
+                        <h4>SecureNet Systems</h4>
+                        <ul>
+                            <li>Implemented network security measures for corporate clients</li>
+                            <li>Conducted vulnerability assessments and penetration tests</li>
+                            <li>Configured and maintained firewall systems</li>
+                            <li>Developed security awareness training programs</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-date">2019 - 2021</div>
+                    <div class="timeline-content">
+                        <h3>IT Support Engineer</h3>
+                        <h4>Digital Solutions Ltd.</h4>
+                        <ul>
+                            <li>Provided technical support for hardware and software issues</li>
+                            <li>Managed Active Directory and user accounts</li>
+                            <li>Implemented backup and disaster recovery solutions</li>
+                            <li>Documented IT processes and procedures</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> warrenchris745@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +254 742 118572</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                    
+                    <div class="social-links">
+                        <a href="https://github.com/Warrenchris"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://www.linkedin.com/in/warren-chris-723a00263"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                    </div>
+                </div>
+                
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <input type="text" placeholder="Subject">
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Warren Chris. All rights reserved.</p>
+            <p>Designed and built with <i class="fas fa-heart"></i> by Warren Chris</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
