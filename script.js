@@ -1,176 +1,136 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('nav a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            if (this.getAttribute('href').startsWith('#')) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Update URL without page reload
-                    history.pushState(null, null, targetId);
-                }
+
+// Dark Mode Toggle
+const darkModeToggle = document.getElementById("darkModeToggle");
+
+darkModeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+    // Save user preference
+    if (document.body.classList.contains("light-mode")) {
+        localStorage.setItem("theme", "light");
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    } else {
+        localStorage.setItem("theme", "dark");
+        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    }
+});
+
+// Check for saved theme preference
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "light") {
+    document.body.classList.add("light-mode");
+    darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+} else {
+    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+}
+
+// Dynamic Year in Footer
+document.getElementById("current-year").textContent = new Date().getFullYear();
+
+// Smooth Scrolling for Navigation
+document.querySelectorAll("nav a").forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth"
+        });
+    });
+});
+
+// Profile Card Flip
+const profileCard = document.querySelector(".profile-card");
+profileCard.addEventListener("click", () => {
+    profileCard.querySelector(".card-inner").style.transform = 
+        profileCard.querySelector(".card-inner").style.transform === "rotateY(180deg)" ? "rotateY(0deg)" : "rotateY(180deg)";
+});
+
+// Profile Card Mouse Tracking (for 3D effect)
+const profileCardContainer = document.querySelector(".profile-card-container");
+profileCardContainer.addEventListener("mousemove", (e) => {
+    const rect = profileCardContainer.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+    const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+    profileCard.style.transform = `perspective(1000px) rotateX(${-y * 10}deg) rotateY(${x * 10}deg)`;
+});
+
+profileCardContainer.addEventListener("mouseleave", () => {
+    profileCard.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+});
+// Project Filtering
+const filterButtons = document.querySelectorAll('.filter-btn');
+const projectCards = document.querySelectorAll('.project-card');
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        button.classList.add('active');
+        
+        const filter = button.getAttribute('data-filter');
+        
+        projectCards.forEach(card => {
+            if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                card.style.display = 'block';
+                card.style.animation = 'fadeIn 0.5s ease';
+            } else {
+                card.style.display = 'none';
             }
         });
     });
+});
 
-    // Active navigation highlighting
-    const sections = document.querySelectorAll('section');
-    const navItems = document.querySelectorAll('nav a');
+// Contact Form Handling
+const contactForm = document.querySelector('.contact-form');
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
     
-    function updateActiveNav() {
-        let current = '';
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            
-            if (window.pageYOffset >= (sectionTop - 100)) {
-                current = section.getAttribute('id');
-            }
-        });
-        
-        navItems.forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('href') === `#${current}`) {
-                item.classList.add('active');
-            }
-        });
+    const submitBtn = document.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    
+    // Show loading state
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+    
+    // Simulate form submission (replace with actual form handling)
+    setTimeout(() => {
+        alert('Thank you for your message! I will get back to you soon.');
+        contactForm.reset();
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }, 2000);
+});
+
+// Add fade-in animation keyframes via JavaScript
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
-    
-    window.addEventListener('scroll', updateActiveNav);
-    updateActiveNav(); // Initialize on load
+`;
+document.head.appendChild(style);
 
-    // Project filter functionality
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-    
-    if (filterButtons.length > 0) {
-        filterButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Remove active class from all buttons
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                // Add active class to clicked button
-                this.classList.add('active');
-                
-                const filterValue = this.getAttribute('data-filter');
-                
-                projectCards.forEach(card => {
-                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                        card.style.display = 'block';
-                        setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
-                        }, 50);
-                    } else {
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(20px)';
-                        setTimeout(() => {
-                            card.style.display = 'none';
-                        }, 300);
-                    }
-                });
-            });
-        });
-    }
+// Scroll animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
 
-    // Form submission handling
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const submitBtn = this.querySelector('button[type="submit"]');
-            
-            // Change button text and disable during submission
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-            
-            // Simulate form submission (replace with actual AJAX call)
-            setTimeout(() => {
-                // Reset form
-                this.reset();
-                submitBtn.textContent = 'Message Sent!';
-                
-                // Show success message
-                const successMsg = document.createElement('div');
-                successMsg.className = 'form-success';
-                successMsg.textContent = 'Thank you for your message! I will get back to you soon.';
-                this.parentNode.insertBefore(successMsg, this.nextSibling);
-                
-                // Reset button after delay
-                setTimeout(() => {
-                    submitBtn.textContent = 'Send Message';
-                    submitBtn.disabled = false;
-                    successMsg.remove();
-                }, 3000);
-            }, 1500);
-        });
-    }
-
-    // Dark mode toggle
-    const darkModeToggle = document.createElement('div');
-    darkModeToggle.className = 'dark-mode-toggle';
-    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-    document.body.appendChild(darkModeToggle);
-    
-    darkModeToggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-mode');
-        const icon = this.querySelector('i');
-        if (document.body.classList.contains('dark-mode')) {
-            icon.classList.replace('fa-moon', 'fa-sun');
-            localStorage.setItem('darkMode', 'enabled');
-        } else {
-            icon.classList.replace('fa-sun', 'fa-moon');
-            localStorage.setItem('darkMode', 'disabled');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.animation = 'fadeIn 0.6s ease forwards';
         }
     });
+}, observerOptions);
 
-    // Check for saved dark mode preference
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        document.body.classList.add('dark-mode');
-        darkModeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
-    }
-
-    // Intersection Observer for scroll animations
-    const animateOnScroll = function() {
-        const elements = document.querySelectorAll('.animate-on-scroll');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-        
-        elements.forEach(element => {
-            observer.observe(element);
-        });
-    };
-
-    // Initialize animations
-    animateOnScroll();
-
-    // Dynamic copyright year
-    const currentYear = new Date().getFullYear();
-    const yearElement = document.getElementById('current-year');
-    if (yearElement) {
-        yearElement.textContent = currentYear;
-    }
-
-    // Console greeting
-    console.log('%c👋 Hello there! Interested in my code?', 'color: #3498db; font-size: 16px;');
-    console.log('%cCheck out my GitHub: https://github.com/Warrenchris', 'color: #2ecc71; font-size: 14px;');
+// Observe all animated elements
+document.addEventListener('DOMContentLoaded', () => {
+    const animatedElements = document.querySelectorAll('.skill-category, .project-card, .certification-card, .timeline-item');
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        observer.observe(el);
+    });
 });
+
