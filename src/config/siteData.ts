@@ -38,7 +38,7 @@ export const skills = [
   {
     category: 'Security',
     icon: '🔒',
-    color: '#00d4ff',
+    color: '#FDE900',
     items: [
       { name: 'Network Security', level: 95 },
       { name: 'Cybersecurity', level: 88 },
@@ -51,7 +51,7 @@ export const skills = [
   {
     category: 'Development',
     icon: '💻',
-    color: '#9333ea',
+    color: '#F5A623',
     items: [
       { name: 'JavaScript / TypeScript', level: 85 },
       { name: 'Python', level: 90 },
@@ -66,7 +66,7 @@ export const skills = [
   {
     category: 'Networking',
     icon: '🌐',
-    color: '#10b981',
+    color: '#FDE900',
     items: [
       { name: 'Cisco Routing & Switching', level: 92 },
       { name: 'Huawei Networking', level: 88 },
@@ -79,7 +79,7 @@ export const skills = [
   {
     category: 'Cloud & DevOps',
     icon: '☁️',
-    color: '#f59e0b',
+    color: '#F5A623',
     items: [
       { name: 'Cloud Computing', level: 82 },
       { name: 'Linux Administration', level: 88 },
@@ -105,7 +105,7 @@ export const projects = [
     demo: '#',
     image: '/artemis-tracker.png',
     featured: true,
-    color: '#00d4ff',
+    color: '#FDE900',
     tags: ['NASA', 'Space', 'Real-time', 'Visualization'],
   },
   {
@@ -122,7 +122,7 @@ export const projects = [
     demo: '#',
     image: '/isp-billing.png',
     featured: true,
-    color: '#9333ea',
+    color: '#F5A623',
     tags: ['ISP', 'Billing', 'Enterprise', 'Telecom'],
   },
   {
@@ -139,7 +139,7 @@ export const projects = [
     demo: '#',
     image: '/sigma-hrm.png',
     featured: true,
-    color: '#10b981',
+    color: '#FDE900',
     tags: ['HRM', 'Payroll', 'Enterprise', 'HR'],
   },
   {
@@ -156,7 +156,7 @@ export const projects = [
     demo: '#',
     image: '/zana-pos.png',
     featured: false,
-    color: '#ec4899',
+    color: '#FFB800',
     tags: ['POS', 'Retail', 'Business', 'M-Pesa'],
   },
   {
@@ -173,7 +173,7 @@ export const projects = [
     demo: '#',
     image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80',
     featured: false,
-    color: '#f59e0b',
+    color: '#F5A623',
     tags: ['Machine Learning', 'Data Science', 'Python', 'Analytics'],
   },
   {
@@ -190,7 +190,7 @@ export const projects = [
     demo: '#',
     image: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&q=80',
     featured: false,
-    color: '#06b6d4',
+    color: '#FFD700',
     tags: ['Flask', 'Python', 'CRUD', 'Payments'],
   },
   {
@@ -207,7 +207,7 @@ export const projects = [
     demo: '#',
     image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80',
     featured: false,
-    color: '#7c3aed',
+    color: '#FFED00',
     tags: ['Java', 'E-Commerce', 'MySQL', 'Spring'],
   },
 ];
@@ -228,7 +228,7 @@ export const experience = [
       'Conducted security audits and vulnerability assessments',
     ],
     tech: ['Python', 'React', 'Cisco', 'Linux', 'AWS'],
-    color: '#00d4ff',
+    color: '#FDE900',
   },
   {
     id: 2,
@@ -245,7 +245,7 @@ export const experience = [
       'Configured and maintained Cisco and Huawei networking equipment',
     ],
     tech: ['Cisco IOS', 'Huawei VRP', 'Wireshark', 'Linux', 'SIEM'],
-    color: '#9333ea',
+    color: '#F5A623',
   },
 ];
 
@@ -303,42 +303,42 @@ export const services = [
     title: 'Full Stack Development',
     description: 'End-to-end web applications using React, Node.js, Python with modern architecture and clean code practices.',
     features: ['React / Next.js Frontend', 'Python / Node.js Backend', 'REST & GraphQL APIs', 'Database Design'],
-    color: '#00d4ff',
+    color: '#FDE900',
   },
   {
     icon: '🔒',
     title: 'Cybersecurity Consulting',
     description: 'Comprehensive security audits, penetration testing, compliance implementation, and threat mitigation strategies.',
     features: ['Security Audits', 'Vulnerability Assessment', 'Compliance (ISO 27001)', 'Incident Response'],
-    color: '#ec4899',
+    color: '#FFB800',
   },
   {
     icon: '🌐',
     title: 'Network Engineering',
     description: 'Design, implementation, and optimization of enterprise network infrastructure using Cisco and Huawei technologies.',
     features: ['Cisco & Huawei Setup', 'VPN & SD-WAN', 'Network Monitoring', 'Troubleshooting'],
-    color: '#10b981',
+    color: '#FDE900',
   },
   {
     icon: '☁️',
     title: 'Cloud Solutions',
     description: 'Cloud architecture design, migration strategies, and deployment automation for scalable, resilient infrastructure.',
     features: ['Cloud Architecture', 'Migration Planning', 'Cost Optimization', 'DevOps Integration'],
-    color: '#f59e0b',
+    color: '#F5A623',
   },
   {
     icon: '🔌',
     title: 'API Development',
     description: 'Robust, well-documented REST and GraphQL APIs with authentication, rate limiting, and comprehensive testing.',
     features: ['RESTful API Design', 'GraphQL', 'API Security', 'Documentation'],
-    color: '#9333ea',
+    color: '#F5A623',
   },
   {
     icon: '🎨',
     title: 'UI/UX Design',
     description: 'Modern, intuitive interfaces with a focus on user experience, accessibility, and premium visual design.',
     features: ['Responsive Design', 'Prototyping', 'Component Libraries', 'Accessibility'],
-    color: '#06b6d4',
+    color: '#FFD700',
   },
 ];
 
@@ -350,7 +350,7 @@ export const testimonials = [
     avatar: 'https://ui-avatars.com/api/?name=James+Mwangi&background=00d4ff&color=020817&size=100',
     content: "Warren delivered an outstanding network security overhaul for our company. His attention to detail and deep technical knowledge made the project a huge success. Highly recommended!",
     rating: 5,
-    color: '#00d4ff',
+    color: '#FDE900',
   },
   {
     id: 2,
@@ -359,7 +359,7 @@ export const testimonials = [
     avatar: 'https://ui-avatars.com/api/?name=Aisha+Kamau&background=9333ea&color=fff&size=100',
     content: "The ISP billing system Warren built completely transformed our operations. Automated billing, real-time monitoring — everything we needed and more. Exceptional work.",
     rating: 5,
-    color: '#9333ea',
+    color: '#F5A623',
   },
   {
     id: 3,
@@ -368,7 +368,7 @@ export const testimonials = [
     avatar: 'https://ui-avatars.com/api/?name=David+Ochieng&background=10b981&color=fff&size=100',
     content: "Working with Warren was an absolute pleasure. He's technically brilliant, communicates clearly, and always delivers on time. Our network uptime improved dramatically.",
     rating: 5,
-    color: '#10b981',
+    color: '#FDE900',
   },
   {
     id: 4,
@@ -377,7 +377,7 @@ export const testimonials = [
     avatar: 'https://ui-avatars.com/api/?name=Sarah+Njeri&background=ec4899&color=fff&size=100',
     content: "Zana POS has been a game-changer for our retail chain. Warren understood exactly what we needed and built a robust, easy-to-use system that our staff love.",
     rating: 5,
-    color: '#ec4899',
+    color: '#FFB800',
   },
 ];
 

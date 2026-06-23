@@ -105,7 +105,7 @@ const Hero = () => {
         >
           {/* Status Badge */}
           <motion.div variants={itemVariants} className="flex justify-center mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-green-400/20 text-green-400 text-sm font-medium">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-yellow-400/20 text-yellow-400 text-sm font-medium" style={{borderColor:'rgba(253,233,0,0.2)',color:'#FDE900'}}>
               <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
               <Sparkles size={14} />
               Available for opportunities
@@ -118,7 +118,7 @@ const Hero = () => {
             className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight mb-4"
           >
             <span className="text-white">Warren</span>{' '}
-            <span className="gradient-text">Chris</span>
+            <span className="gradient-text-yellow">Chris</span>
           </motion.h1>
 
           {/* Typewriter */}
@@ -132,7 +132,7 @@ const Hero = () => {
               wrapper="span"
               speed={50}
               repeat={Infinity}
-              className="gradient-text-cyan font-semibold"
+              className="gradient-text-yellow font-semibold"
             />
           </motion.div>
 
@@ -142,7 +142,7 @@ const Hero = () => {
             className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed"
           >
             Passionate about building{' '}
-            <span className="text-primary-400 font-medium">secure, scalable solutions</span>{' '}
+            <span className="text-yellow-400 font-medium" style={{color:'#FDE900'}}>secure, scalable solutions</span>{' '}
             that drive business innovation. Based in{' '}
             <span className="text-white font-medium">Nairobi, Kenya</span> 🇰🇪
           </motion.p>
@@ -151,9 +151,9 @@ const Hero = () => {
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <motion.button
               onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-              whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(0, 212, 255, 0.5)' }}
+              whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(253, 233, 0, 0.6)' }}
               whileTap={{ scale: 0.97 }}
-              className="px-8 py-4 rounded-2xl bg-gradient-to-r from-primary-500 to-accent-purple text-white font-semibold text-base shadow-neon-cyan transition-all duration-300 w-full sm:w-auto"
+              className="px-8 py-4 rounded-2xl btn-yellow text-dark font-bold text-base shadow-neon-yellow transition-all duration-300 w-full sm:w-auto"
             >
               View My Work
             </motion.button>
@@ -162,8 +162,7 @@ const Hero = () => {
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="px-8 py-4 rounded-2xl glass border border-white/10 text-white font-semibold text-base hover:border-primary-500/40 transition-all duration-300 flex items-center gap-2 w-full sm:w-auto"
-            >
+              className="px-8 py-4 rounded-2xl glass border border-white/10 text-white font-semibold text-base hover:border-yellow-400/40 transition-all duration-300 flex items-center gap-2 w-full sm:w-auto" style={{borderColor:'rgba(253,233,0,0.15)'}}>
               <Mail size={18} />
               Get In Touch
             </motion.button>
@@ -184,7 +183,8 @@ const Hero = () => {
                 aria-label={social.label}
                 whileHover={{ scale: 1.15, y: -3 }}
                 whileTap={{ scale: 0.9 }}
-                className="w-11 h-11 rounded-xl glass border border-white/10 flex items-center justify-center text-slate-400 hover:text-primary-400 hover:border-primary-500/30 transition-colors duration-200"
+                className="w-11 h-11 rounded-xl glass border border-white/10 flex items-center justify-center text-slate-400 hover:text-yellow-400 hover:border-yellow-500/30 transition-colors duration-200"
+                style={{'--hover-color': '#FDE900'} as React.CSSProperties}
               >
                 {social.icon}
               </motion.a>
@@ -205,7 +205,7 @@ const Hero = () => {
                 transition={{ delay: i * 0.1, duration: 0.5, type: 'spring' }}
                 className="glass-card p-4 text-center"
               >
-                <div className="font-display text-3xl font-bold gradient-text-cyan mb-1">
+                <div className="font-display text-3xl font-bold mb-1" style={{color:'#FDE900'}}>
                   {statsInView ? (
                     <CountUp end={stat.value} duration={2} delay={i * 0.1} suffix={stat.suffix} />
                   ) : (
@@ -223,7 +223,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
+          className="flex flex-col items-center gap-2 cursor-pointer" style={{color:'#FDE900'}}
           onClick={scrollToAbout}
         >
           <span className="text-xs text-slate-500 uppercase tracking-widest">Scroll</span>
@@ -231,7 +231,7 @@ const Hero = () => {
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <ChevronDown size={20} className="text-primary-400" />
+            <ChevronDown size={20} style={{color:'#FDE900'}} />
           </motion.div>
         </motion.div>
       </div>

@@ -5,15 +5,21 @@ import * as THREE from 'three';
 
 function Stars({ count = 3000 }: { count?: number }) {
   const ref = useRef<THREE.Points>(null!);
+
   const [positions, colors] = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
+
+    // BVB palette: Yellow, Gold, White, near-white
     const colorOptions = [
-      [0, 0.83, 1],       // cyan
-      [0.58, 0.2, 0.92],  // purple
-      [0.93, 0.28, 0.6],  // magenta
-      [1, 1, 1],           // white
+      [0.99, 0.91, 0.0],    // #FDE900 — BVB yellow
+      [0.96, 0.65, 0.14],   // #F5A623 — Gold
+      [1.0, 0.93, 0.0],     // #FFED00 — Bright yellow
+      [1.0, 1.0, 1.0],      // White
+      [1.0, 0.72, 0.0],     // #FFB800 — Amber
+      [1.0, 0.85, 0.0],     // Light gold
     ];
+
     for (let i = 0; i < count; i++) {
       const spread = 4;
       positions[i * 3]     = (Math.random() - 0.5) * spread;
@@ -28,10 +34,10 @@ function Stars({ count = 3000 }: { count?: number }) {
     return [positions, colors];
   }, [count]);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (ref.current) {
-      ref.current.rotation.x -= delta * 0.03;
-      ref.current.rotation.y -= delta * 0.04;
+      ref.current.rotation.x -= delta * 0.025;
+      ref.current.rotation.y -= delta * 0.035;
     }
   });
 
@@ -41,7 +47,7 @@ function Stars({ count = 3000 }: { count?: number }) {
         <PointMaterial
           transparent
           vertexColors
-          size={0.005}
+          size={0.006}
           sizeAttenuation={true}
           depthWrite={false}
           blending={THREE.AdditiveBlending}
@@ -77,42 +83,48 @@ function FloatingGeometry() {
 
   return (
     <>
+      {/* BVB Yellow octahedron */}
       <mesh ref={meshRef} position={[2, 0, -1]}>
         <octahedronGeometry args={[0.35, 0]} />
         <meshStandardMaterial
-          color="#00d4ff"
-          emissive="#00d4ff"
-          emissiveIntensity={0.3}
+          color="#FDE900"
+          emissive="#FDE900"
+          emissiveIntensity={0.5}
           wireframe
           transparent
-          opacity={0.5}
+          opacity={0.6}
         />
       </mesh>
+      {/* Gold icosahedron */}
       <mesh ref={mesh2Ref} position={[-2.5, 0.5, -0.5]}>
         <icosahedronGeometry args={[0.3, 0]} />
         <meshStandardMaterial
-          color="#9333ea"
-          emissive="#9333ea"
-          emissiveIntensity={0.3}
+          color="#F5A623"
+          emissive="#F5A623"
+          emissiveIntensity={0.4}
           wireframe
           transparent
           opacity={0.5}
         />
       </mesh>
+      {/* Amber tetrahedron */}
       <mesh ref={mesh3Ref} position={[1.5, -1, -1.5]}>
         <tetrahedronGeometry args={[0.25, 0]} />
         <meshStandardMaterial
-          color="#ec4899"
-          emissive="#ec4899"
-          emissiveIntensity={0.3}
+          color="#FFED00"
+          emissive="#FFED00"
+          emissiveIntensity={0.4}
           wireframe
           transparent
-          opacity={0.4}
+          opacity={0.45}
         />
       </mesh>
-      <pointLight position={[0, 0, 2]} intensity={2} color="#00d4ff" distance={5} />
-      <pointLight position={[-2, 1, 1]} intensity={1.5} color="#9333ea" distance={5} />
-      <ambientLight intensity={0.1} />
+
+      {/* Yellow lights */}
+      <pointLight position={[0, 0, 2]} intensity={3} color="#FDE900" distance={5} />
+      <pointLight position={[-2, 1, 1]} intensity={2} color="#F5A623" distance={5} />
+      <pointLight position={[2, -1, 0]} intensity={1.5} color="#FFED00" distance={4} />
+      <ambientLight intensity={0.05} />
     </>
   );
 }
