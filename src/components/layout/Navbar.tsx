@@ -49,10 +49,12 @@ const Navbar = () => {
   return (
     <>
       {/* Scroll Progress Bar */}
-      <motion.div
-        className="scroll-progress-bar fixed top-0 left-0 right-0 z-[10001] h-[2px]"
-        style={{ scaleX: scrollProgress / 100 }}
-        initial={{ scaleX: 0 }}
+      <div
+        className="scroll-progress-bar"
+        style={{
+          width: `${scrollProgress}%`,
+          transition: 'width 0.1s linear',
+        }}
       />
 
       <motion.nav
