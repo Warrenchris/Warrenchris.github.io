@@ -10,7 +10,6 @@ const blogPosts = [
     category: 'Networking',
     readTime: '8 min read',
     date: 'June 2026',
-    color: '#00d4ff',
     emoji: '🔒',
   },
   {
@@ -20,7 +19,6 @@ const blogPosts = [
     category: 'Development',
     readTime: '12 min read',
     date: 'May 2026',
-    color: '#9333ea',
     emoji: '🎮',
   },
   {
@@ -30,7 +28,6 @@ const blogPosts = [
     category: 'Certifications',
     readTime: '6 min read',
     date: 'April 2026',
-    color: '#10b981',
     emoji: '🎓',
   },
 ];
@@ -39,20 +36,19 @@ const Blog = () => {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
-    <section id="blog" className="section-wrapper relative bg-dark-50/20" ref={ref}>
-      <div className="blob blob-cyan absolute top-0 right-20 w-72 h-72 opacity-5" />
+    <section id="blog" className="section-wrapper relative bg-black border-b border-[var(--border-color)]" ref={ref}>
+      <div className="absolute top-0 right-20 w-72 h-72 bg-primary/2 blur-[140px] rounded-full pointer-events-none" />
 
-      <div className="container mx-auto px-6 max-w-7xl">
+      <div className="container mx-auto px-6 max-w-6xl">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-14"
+          className="text-center mb-16"
         >
-          <span className="section-tag"><BookOpen size={12} /> Blog</span>
-          <h2 className="section-title mt-3">
-            Thoughts & <span className="gradient-text">Insights</span>
-          </h2>
-          <p className="section-subtitle mx-auto mt-4 text-slate-400">
+          <span className="section-tag"><BookOpen size={12} className="text-primary" /> Blog</span>
+          <h2 className="section-title mt-3 font-display">Thoughts &amp; Insights</h2>
+          <p className="section-subtitle mx-auto mt-4 text-[var(--text-secondary)] font-light text-base">
             Sharing knowledge on networking, cybersecurity, development, and tech career growth.
           </p>
         </motion.div>
@@ -61,55 +57,44 @@ const Blog = () => {
           {blogPosts.map((post, i) => (
             <motion.article
               key={post.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              whileHover={{ y: -6 }}
-              className="group glass border border-white/06 rounded-2xl overflow-hidden cursor-pointer hover:border-primary-500/20 transition-all duration-300"
+              transition={{ delay: i * 0.08, duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
+              whileHover={{ y: -4 }}
+              className="bg-white/[0.01] border border-white/[0.04] backdrop-blur-md rounded-3xl overflow-hidden shadow-sm transition-all duration-300 hover:border-white/[0.08] flex flex-col justify-between cursor-pointer group"
             >
-              {/* Header */}
-              <div
-                className="h-36 relative flex items-center justify-center text-5xl"
-                style={{
-                  background: `linear-gradient(135deg, ${post.color}15, ${post.color}05)`,
-                  borderBottom: `1px solid ${post.color}15`,
-                }}
-              >
+              {/* Image Header Placeholder */}
+              <div className="h-32 bg-[#0A0A0C] border-b border-[var(--border-color)] relative flex items-center justify-center text-4xl">
                 <span>{post.emoji}</span>
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: `radial-gradient(circle at center, ${post.color}10, transparent 70%)` }} />
               </div>
 
-              <div className="p-5">
-                {/* Meta */}
-                <div className="flex items-center justify-between mb-3">
-                  <span
-                    className="flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full"
-                    style={{ background: `${post.color}12`, color: post.color }}
-                  >
-                    <Tag size={10} />
-                    {post.category}
-                  </span>
-                  <span className="flex items-center gap-1 text-xs text-slate-600">
-                    <Clock size={10} /> {post.readTime}
-                  </span>
+              <div className="p-6 flex flex-col flex-1 justify-between">
+                <div>
+                  {/* Meta */}
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-primary/15 bg-primary/5 text-primary">
+                      <Tag size={9} />
+                      {post.category}
+                    </span>
+                    <span className="flex items-center gap-1 text-[10px] text-[var(--text-secondary)] font-medium">
+                      <Clock size={9} /> {post.readTime}
+                    </span>
+                  </div>
+
+                  <h3 className="font-sans font-bold text-white text-sm leading-tight mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                    {post.title}
+                  </h3>
+
+                  <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed mb-4 line-clamp-3">
+                    {post.excerpt}
+                  </p>
                 </div>
 
-                <h3 className="font-display font-bold text-white text-base leading-tight mb-2 group-hover:text-primary-400 transition-colors">
-                  {post.title}
-                </h3>
-
-                <p className="text-sm text-slate-500 leading-relaxed mb-4 line-clamp-3">
-                  {post.excerpt}
-                </p>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-slate-600">{post.date}</span>
-                  <div
-                    className="flex items-center gap-1 text-xs font-semibold group-hover:gap-2 transition-all duration-200"
-                    style={{ color: post.color }}
-                  >
-                    Read More <ArrowRight size={12} />
+                <div className="flex items-center justify-between pt-3 border-t border-[var(--border-color)]">
+                  <span className="text-[10px] text-[var(--text-muted)] font-medium">{post.date}</span>
+                  <div className="flex items-center gap-1 text-[10px] font-semibold text-primary group-hover:gap-1.5 transition-all duration-200">
+                    <span>Read More</span>
+                    <ArrowRight size={11} />
                   </div>
                 </div>
               </div>
@@ -121,10 +106,10 @@ const Blog = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.6 }}
-          className="text-center mt-10"
+          transition={{ delay: 0.4 }}
+          className="text-center mt-12"
         >
-          <p className="text-xs text-slate-600">
+          <p className="text-xs text-[var(--text-muted)] font-medium">
             Full blog coming soon — stay tuned for in-depth articles on networking, cybersecurity, and development.
           </p>
         </motion.div>

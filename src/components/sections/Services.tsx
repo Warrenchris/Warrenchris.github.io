@@ -7,79 +7,59 @@ const Services = () => {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
-    <section id="services" className="section-wrapper relative bg-dark-50/20">
-      <div className="blob blob-purple absolute top-0 right-0 w-80 h-80 opacity-5" />
+    <section id="services" className="section-wrapper relative bg-black border-b border-[var(--border-color)]">
+      <div className="absolute top-0 right-0 w-80 h-80 bg-accent-purple/2 blur-[140px] rounded-full pointer-events-none" />
 
-      <div className="container mx-auto px-6 max-w-7xl" ref={ref}>
+      <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-14"
+          className="text-center mb-16"
         >
-          <span className="section-tag"><Layers size={12} /> Services</span>
-          <h2 className="section-title mt-3">
-            What I <span className="gradient-text">Offer</span>
-          </h2>
-          <p className="section-subtitle mx-auto mt-4 text-slate-400">
+          <span className="section-tag"><Layers size={12} className="text-primary" /> Services</span>
+          <h2 className="section-title mt-3 font-display">What I Offer</h2>
+          <p className="section-subtitle mx-auto mt-4 text-[var(--text-secondary)] font-light text-base">
             Comprehensive technology solutions tailored to your business needs.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              whileHover={{ y: -6 }}
-              className="group glass border border-white/06 rounded-2xl p-6 cursor-default transition-all duration-300 hover:border-opacity-30 relative overflow-hidden"
-              style={{ '--service-color': service.color } as React.CSSProperties}
+              transition={{ delay: i * 0.08, duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
+              whileHover={{ y: -4 }}
+              className="bg-white/[0.01] border border-white/[0.04] backdrop-blur-md rounded-3xl p-6 transition-all duration-300 hover:border-white/[0.08] shadow-sm flex flex-col justify-between group cursor-default"
             >
-              {/* Glow on hover */}
-              <div
-                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{ background: `radial-gradient(circle at top left, ${service.color}08 0%, transparent 70%)` }}
-              />
+              <div>
+                {/* Icon */}
+                <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center text-primary mb-5 border border-primary/10 transition-transform duration-300 group-hover:scale-102">
+                  <span className="text-lg">{service.icon}</span>
+                </div>
 
-              {/* Icon */}
-              <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-5 transition-transform duration-300 group-hover:scale-110"
-                style={{ background: `${service.color}15`, border: `1px solid ${service.color}25` }}
-              >
-                {service.icon}
+                <h3 className="font-sans font-bold text-white text-base mb-2 tracking-tight group-hover:text-primary transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-xs text-[var(--text-secondary)] leading-relaxed mb-4">{service.description}</p>
+
+                {/* Features */}
+                <ul className="space-y-2 mb-6">
+                  {service.features.map(feature => (
+                    <li key={feature} className="flex items-center gap-2 text-[11px] text-[var(--text-muted)]">
+                      <div className="w-1 h-1 rounded-full bg-primary flex-shrink-0" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <h3 className="font-display font-bold text-white text-lg mb-3 group-hover:gradient-text transition-all">
-                {service.title}
-              </h3>
-              <p className="text-sm text-slate-400 leading-relaxed mb-5">{service.description}</p>
-
-              {/* Features */}
-              <ul className="space-y-2 mb-5">
-                {service.features.map(feature => (
-                  <li key={feature} className="flex items-center gap-2 text-xs text-slate-500">
-                    <div
-                      className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                      style={{ background: service.color }}
-                    />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-
-              <div
-                className="flex items-center gap-1 text-xs font-semibold transition-all duration-300 group-hover:gap-2"
-                style={{ color: service.color }}
-              >
-                Learn More <ArrowRight size={12} />
+              <div className="flex items-center gap-1.5 text-[11px] font-semibold text-primary group-hover:gap-2 transition-all duration-200">
+                <span>Learn More</span>
+                <ArrowRight size={12} />
               </div>
-
-              {/* Bottom border accent */}
-              <div
-                className="absolute bottom-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ background: `linear-gradient(90deg, ${service.color}, transparent)` }}
-              />
             </motion.div>
           ))}
         </div>
