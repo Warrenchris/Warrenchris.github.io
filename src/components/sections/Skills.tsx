@@ -140,7 +140,7 @@ const Skills = () => {
   const currentSkills = skills[activeCategory];
 
   return (
-    <section id="skills" className="section-wrapper relative bg-black">
+    <section id="skills" className="section-wrapper relative bg-[var(--bg-primary)]">
       <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/2 blur-[140px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -169,7 +169,7 @@ const Skills = () => {
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-tight transition-all duration-200 ${
                   activeCategory === i
                     ? 'bg-primary text-white shadow-sm'
-                    : 'border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-white hover:border-[var(--text-secondary)]'
+                    : 'border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-secondary)]'
                 }`}
               >
                 <span className="opacity-80">{categoryIcons[cat.category] || <Zap size={13} />}</span>
@@ -194,7 +194,7 @@ const Skills = () => {
                   initial={{ opacity: 0, y: 15 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: i * 0.04, duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
-                  className="bg-white/[0.01] border border-white/[0.04] backdrop-blur-md rounded-3xl p-6 transition-all duration-300 hover:border-white/[0.08] flex flex-col justify-between"
+                  className="bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md rounded-3xl p-6 transition-all duration-300 hover:border-[var(--text-secondary)]/30 flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-start justify-between mb-4">
@@ -209,7 +209,7 @@ const Skills = () => {
                       </span>
                     </div>
 
-                    <h4 className="font-sans font-bold text-white text-base mb-2 tracking-tight">
+                    <h4 className="font-sans font-bold text-[var(--text-primary)] text-base mb-2 tracking-tight">
                       {skill.name}
                     </h4>
 
@@ -248,7 +248,7 @@ const Skills = () => {
                   animate={inView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ delay: 0.3 + i * 0.02 }}
                   whileHover={{ scale: 1.05, y: -1 }}
-                  className="tech-pill text-[11px] px-3 py-1 rounded-full border border-[var(--border-color)] bg-white/[0.01] text-[var(--text-secondary)] transition-all duration-200 cursor-default"
+                  className="tech-pill text-[11px] px-3 py-1 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] transition-all duration-200 cursor-default"
                 >
                   {tech}
                 </motion.span>

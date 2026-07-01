@@ -39,10 +39,11 @@ const Testimonials = () => {
   const t = testimonials[current];
 
   return (
-    <section id="testimonials" className="section-wrapper relative bg-black border-b border-[var(--border-color)]">
+    <section id="testimonials" className="section-wrapper relative bg-[var(--bg-primary)] border-b border-[var(--border-color)]">
       <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-accent-purple/1 blur-[140px] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
       <div className="container mx-auto px-6 max-w-4xl" ref={ref}>
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -68,10 +69,10 @@ const Testimonials = () => {
               exit="exit"
               transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
             >
-              <div className="bg-white/[0.01] border border-white/[0.04] backdrop-blur-md rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-sm">
+              <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-sm">
                 <Quote size={32} className="mb-6 text-primary opacity-20" />
 
-                <p className="text-base md:text-lg text-white leading-relaxed mb-8 font-light italic">
+                <p className="text-base md:text-lg text-[var(--text-primary)] leading-relaxed mb-8 font-light italic">
                   "{t.content}"
                 </p>
 
@@ -83,7 +84,7 @@ const Testimonials = () => {
                       className="w-10 h-10 rounded-full border border-[var(--border-color)] object-cover"
                     />
                     <div>
-                      <div className="font-sans font-bold text-white text-xs">{t.name}</div>
+                      <div className="font-sans font-bold text-[var(--text-primary)] text-xs">{t.name}</div>
                       <div className="text-[10px] text-[var(--text-secondary)] font-medium mt-0.5">{t.role}</div>
                     </div>
                   </div>
@@ -103,7 +104,7 @@ const Testimonials = () => {
               onClick={() => navigate(-1)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-white transition-colors shadow-sm"
+              className="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors shadow-sm"
               aria-label="Previous"
             >
               <ChevronLeft size={14} />
@@ -116,7 +117,7 @@ const Testimonials = () => {
                   key={i}
                   onClick={() => { setDirection(i > current ? 1 : -1); setCurrent(i); }}
                   className={`rounded-full transition-all duration-300 ${
-                    i === current ? 'w-5 h-1.5 bg-primary' : 'w-1.5 h-1.5 bg-white/20'
+                    i === current ? 'w-5 h-1.5 bg-primary' : 'w-1.5 h-1.5 bg-[var(--border-color)]'
                   }`}
                   aria-label={`Testimonial ${i + 1}`}
                 />
@@ -127,7 +128,7 @@ const Testimonials = () => {
               onClick={() => navigate(1)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-white transition-colors shadow-sm"
+              className="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors shadow-sm"
               aria-label="Next"
             >
               <ChevronRight size={14} />

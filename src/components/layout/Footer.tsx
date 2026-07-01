@@ -8,7 +8,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative border-t border-[var(--border-color)] bg-black py-10">
+    <footer className="relative border-t border-[var(--border-color)] bg-[var(--bg-primary)] py-10">
       <div className="container mx-auto px-6 max-w-6xl">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo & copy */}
@@ -17,7 +17,7 @@ const Footer = () => {
               <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary to-accent-magenta flex items-center justify-center font-sans font-bold text-white text-xs shadow-sm">
                 W
               </div>
-              <span className="font-sans font-semibold text-sm tracking-tight text-white">
+              <span className="font-sans font-semibold text-sm tracking-tight text-[var(--text-primary)]">
                 Warren<span className="text-primary font-bold">Chris</span>
               </span>
             </div>
@@ -45,7 +45,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 aria-label={s.label}
                 whileHover={{ scale: 1.05, y: -1 }}
-                className="text-[var(--text-secondary)] hover:text-white transition-colors"
+                className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
               >
                 {s.icon}
               </motion.a>
@@ -55,7 +55,7 @@ const Footer = () => {
               onClick={scrollToTop}
               whileHover={{ scale: 1.05, y: -1 }}
               whileTap={{ scale: 0.95 }}
-              className="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-white transition-all ml-2"
+              className="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all ml-2"
               aria-label="Back to top"
             >
               <ArrowUp size={14} />

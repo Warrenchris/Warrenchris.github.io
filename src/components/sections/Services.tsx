@@ -7,7 +7,7 @@ const Services = () => {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
-    <section id="services" className="section-wrapper relative bg-black border-b border-[var(--border-color)]">
+    <section id="services" className="section-wrapper relative bg-[var(--bg-primary)] border-b border-[var(--border-color)]">
       <div className="absolute top-0 right-0 w-80 h-80 bg-accent-purple/2 blur-[140px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
@@ -32,7 +32,7 @@ const Services = () => {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.08, duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
               whileHover={{ y: -4 }}
-              className="bg-white/[0.01] border border-white/[0.04] backdrop-blur-md rounded-3xl p-6 transition-all duration-300 hover:border-white/[0.08] shadow-sm flex flex-col justify-between group cursor-default"
+              className="bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md rounded-3xl p-6 transition-all duration-300 hover:border-[var(--text-secondary)]/30 shadow-sm flex flex-col justify-between group cursor-default"
             >
               <div>
                 {/* Icon */}
@@ -40,7 +40,7 @@ const Services = () => {
                   <span className="text-lg">{service.icon}</span>
                 </div>
 
-                <h3 className="font-sans font-bold text-white text-base mb-2 tracking-tight group-hover:text-primary transition-colors">
+                <h3 className="font-sans font-bold text-[var(--text-primary)] text-base mb-2 tracking-tight group-hover:text-primary transition-colors">
                   {service.title}
                 </h3>
                 <p className="text-xs text-[var(--text-secondary)] leading-relaxed mb-4">{service.description}</p>

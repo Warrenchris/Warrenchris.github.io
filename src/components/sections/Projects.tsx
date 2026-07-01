@@ -25,7 +25,7 @@ const Projects = () => {
   }, [activeFilter, searchQuery]);
 
   return (
-    <section id="projects" className="section-wrapper relative bg-black">
+    <section id="projects" className="section-wrapper relative bg-[var(--bg-primary)]">
       {/* Subtle blurs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/2 blur-[140px] rounded-full pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent-purple/2 blur-[140px] rounded-full pointer-events-none" />
@@ -43,7 +43,7 @@ const Projects = () => {
             className="text-center mb-16"
           >
             <span className="section-tag"><FolderOpen size={12} className="text-primary" /> Projects</span>
-            <h2 className="section-title mt-3">Featured Work</h2>
+            <h2 className="section-title mt-3 font-display">Featured Work</h2>
             <p className="section-subtitle mx-auto mt-4 text-[var(--text-secondary)] font-light text-base">
               A showcase of projects spanning cybersecurity, networking, full-stack development, and data science.
             </p>
@@ -64,7 +64,7 @@ const Projects = () => {
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
                 placeholder="Search projects..."
-                className="form-input pl-11 py-2 text-xs rounded-full bg-white/[0.01] border-white/[0.04] focus:border-primary focus:ring-0"
+                className="form-input pl-11 py-2 text-xs rounded-full bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-primary)] placeholder-slate-500 focus:border-primary focus:ring-0 w-full"
               />
             </div>
 
@@ -79,7 +79,7 @@ const Projects = () => {
                   className={`px-4 py-2 rounded-full text-xs font-semibold tracking-tight transition-all duration-200 ${
                     activeFilter === filter
                       ? 'bg-primary text-white shadow-sm'
-                      : 'border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-white hover:border-[var(--text-secondary)]'
+                      : 'border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-secondary)]'
                   }`}
                 >
                   {filter}
@@ -113,16 +113,16 @@ const Projects = () => {
                     transitionSpeed={600}
                     className="h-full"
                   >
-                    <div className="bg-white/[0.01] border border-white/[0.04] backdrop-blur-md rounded-3xl overflow-hidden shadow-md flex flex-col h-full hover:border-white/[0.08] transition-all duration-300 group">
+                    <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md rounded-3xl overflow-hidden shadow-md flex flex-col h-full hover:border-[var(--text-secondary)]/30 transition-all duration-300 group">
                       {/* Image */}
-                      <div className="relative h-48 overflow-hidden bg-black border-b border-[var(--border-color)]">
+                      <div className="relative h-48 overflow-hidden bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
                         <img
                           src={project.image}
                           alt={project.title}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102"
                           loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
                         {/* Featured badge */}
                         {project.featured && (
@@ -138,7 +138,7 @@ const Projects = () => {
                         <span className="text-[10px] text-primary font-bold uppercase tracking-[0.25em] mb-1.5 block">
                           {project.subtitle}
                         </span>
-                        <h3 className="font-sans font-bold text-white text-lg mb-2.5 tracking-tight leading-tight">
+                        <h3 className="font-sans font-bold text-[var(--text-primary)] text-lg mb-2.5 tracking-tight leading-tight">
                           {project.title}
                         </h3>
                         <p className="text-xs text-[var(--text-secondary)] leading-relaxed mb-5 flex-1 line-clamp-3">
@@ -148,10 +148,10 @@ const Projects = () => {
                         {/* Tech pills */}
                         <div className="flex flex-wrap gap-1.5 mb-5">
                           {project.tech.slice(0, 3).map(t => (
-                            <span key={t} className="tech-pill text-[10px] px-2 py-0.5 rounded-full border border-[var(--border-color)] bg-white/[0.02] text-[var(--text-secondary)]">{t}</span>
+                            <span key={t} className="tech-pill text-[10px] px-2 py-0.5 rounded-full border border-[var(--border-color)] bg-[var(--bg-secondary)] text-[var(--text-secondary)]">{t}</span>
                           ))}
                           {project.tech.length > 3 && (
-                            <span className="tech-pill text-[10px] px-2 py-0.5 rounded-full border border-[var(--border-color)] bg-white/[0.02] text-[var(--text-secondary)]">+{project.tech.length - 3}</span>
+                            <span className="tech-pill text-[10px] px-2 py-0.5 rounded-full border border-[var(--border-color)] bg-[var(--bg-secondary)] text-[var(--text-secondary)]">+{project.tech.length - 3}</span>
                           )}
                         </div>
 
@@ -163,7 +163,7 @@ const Projects = () => {
                             rel="noopener noreferrer"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-white hover:border-[var(--text-secondary)] text-[12px] font-semibold transition-all duration-200"
+                            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-secondary)] text-[12px] font-semibold transition-all duration-200"
                           >
                             <Github size={13} />
                             <span>GitHub</span>
@@ -218,19 +218,19 @@ const Projects = () => {
               className="w-full max-w-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-3xl overflow-hidden shadow-2xl"
               onClick={e => e.stopPropagation()}
             >
-              <div className="relative h-60 overflow-hidden bg-black border-b border-[var(--border-color)]">
+              <div className="relative h-60 overflow-hidden bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
                 <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className="absolute top-4 right-4 w-8 h-8 rounded-full border border-white/[0.08] bg-black/60 flex items-center justify-center text-white hover:bg-black/90 transition-colors"
+                  className="absolute top-4 right-4 w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors"
                   aria-label="Close"
                 >
                   <X size={14} />
                 </button>
                 <div className="absolute bottom-5 left-6">
                   <span className="text-[10px] text-primary font-bold uppercase tracking-[0.25em] mb-1.5 block">{selectedProject.subtitle}</span>
-                  <h3 className="font-sans text-2xl font-bold text-white tracking-tight leading-tight">{selectedProject.title}</h3>
+                  <h3 className="font-sans text-2xl font-bold text-[var(--text-primary)] tracking-tight leading-tight">{selectedProject.title}</h3>
                 </div>
               </div>
 
@@ -239,7 +239,7 @@ const Projects = () => {
 
                 <div className="flex flex-wrap gap-1.5 mb-6">
                   {selectedProject.tech.map(t => (
-                    <span key={t} className="tech-pill text-[10px] px-2 py-0.5 rounded-full border border-[var(--border-color)] bg-white/[0.02] text-[var(--text-secondary)]">{t}</span>
+                    <span key={t} className="tech-pill text-[10px] px-2 py-0.5 rounded-full border border-[var(--border-color)] bg-[var(--bg-secondary)] text-[var(--text-secondary)]">{t}</span>
                   ))}
                 </div>
 
@@ -248,7 +248,7 @@ const Projects = () => {
                     href={selectedProject.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-white hover:border-[var(--text-secondary)] text-[12px] font-semibold transition-all"
+                    className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-secondary)] text-[12px] font-semibold transition-all"
                   >
                     <Github size={14} />
                     <span>View on GitHub</span>

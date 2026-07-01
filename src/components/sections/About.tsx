@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Tilt from 'react-parallax-tilt';
-import { Github, Linkedin, GraduationCap, Heart, Shield, Globe, Terminal, Cloud } from 'lucide-react';
+import { Github, Linkedin, Heart, Shield, Globe, Terminal, Cloud } from 'lucide-react';
 import { personalInfo } from '@/config/siteData';
 
 const skillBars = [
@@ -49,7 +49,7 @@ const About = () => {
           <span className="section-tag">
             <Heart size={12} className="text-primary" /> About Me
           </span>
-          <h2 className="section-title mt-3">Driven by curiosity. Secured by engineering.</h2>
+          <h2 className="section-title mt-3 font-display">Driven by curiosity. Secured by engineering.</h2>
         </motion.div>
 
         {/* Narrative & Timeline Block */}
@@ -61,25 +61,25 @@ const About = () => {
         >
           {/* Left: Narrative */}
           <div className="lg:col-span-7 space-y-6">
-            <h3 className="text-lg font-semibold tracking-tight text-white mb-2 uppercase text-[10px] tracking-[0.2em] text-primary">The Journey</h3>
+            <h3 className="text-lg font-semibold tracking-tight text-primary mb-2 uppercase text-[10px] tracking-[0.2em]">The Journey</h3>
             <p className="text-lg font-light text-[var(--text-secondary)] leading-relaxed">{personalInfo.bio}</p>
             <p className="text-base text-[var(--text-secondary)] leading-relaxed font-light">{personalInfo.bioExtended}</p>
           </div>
 
           {/* Right: Academic/Professional Timeline */}
           <div className="lg:col-span-5 space-y-6">
-            <h3 className="text-lg font-semibold tracking-tight text-white mb-2 uppercase text-[10px] tracking-[0.2em] text-primary">Timeline</h3>
+            <h3 className="text-lg font-semibold tracking-tight text-primary mb-2 uppercase text-[10px] tracking-[0.2em]">Timeline</h3>
             <div className="relative pl-6 border-l border-[var(--border-color)] space-y-8">
               <div className="relative">
                 <span className="absolute -left-[30px] top-1 w-2.5 h-2.5 rounded-full bg-primary border-2 border-[var(--bg-secondary)]" />
                 <span className="text-[10px] uppercase font-semibold text-primary">Current Study</span>
-                <h4 className="text-sm font-semibold text-white mt-1">{personalInfo.degree}</h4>
+                <h4 className="text-sm font-semibold text-[var(--text-primary)] mt-1">{personalInfo.degree}</h4>
                 <p className="text-xs text-[var(--text-secondary)] mt-0.5">{personalInfo.university}</p>
               </div>
               <div className="relative">
                 <span className="absolute -left-[30px] top-1 w-2.5 h-2.5 rounded-full bg-accent-purple border-2 border-[var(--bg-secondary)]" />
                 <span className="text-[10px] uppercase font-semibold text-accent-purple">Active Focus</span>
-                <h4 className="text-sm font-semibold text-white mt-1">Freelance IT & Security Consultant</h4>
+                <h4 className="text-sm font-semibold text-[var(--text-primary)] mt-1">Freelance IT & Security Consultant</h4>
                 <p className="text-xs text-[var(--text-secondary)] mt-0.5">Designing networks, securing endpoints, and developing React applications.</p>
               </div>
             </div>
@@ -95,7 +95,7 @@ const About = () => {
         >
           <div className="flex flex-col mb-10">
             <span className="text-[10px] uppercase font-semibold text-primary tracking-[0.2em] mb-2">Capabilities</span>
-            <h3 className="text-2xl font-bold tracking-tight text-white">Areas of expertise</h3>
+            <h3 className="text-2xl font-bold tracking-tight text-[var(--text-primary)]">Areas of expertise</h3>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {whatIDo.map((item) => (
@@ -103,12 +103,12 @@ const About = () => {
                 key={item.title}
                 variants={itemVariants}
                 whileHover={{ y: -4, borderColor: 'rgba(0,113,227,0.2)' }}
-                className="bg-white/[0.01] border border-white/[0.04] backdrop-blur-md rounded-2xl p-6 transition-all duration-300"
+                className="bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md rounded-2xl p-6 transition-all duration-300 shadow-sm"
               >
                 <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center text-primary mb-4 border border-primary/10">
                   {item.icon}
                 </div>
-                <h4 className="font-semibold text-white text-base mb-2">{item.title}</h4>
+                <h4 className="font-semibold text-[var(--text-primary)] text-base mb-2">{item.title}</h4>
                 <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
@@ -131,7 +131,7 @@ const About = () => {
               transitionSpeed={600}
               className="w-full max-w-sm"
             >
-              <div className="bg-white/[0.01] border border-white/[0.04] backdrop-blur-md rounded-3xl p-6 relative overflow-hidden shadow-lg">
+              <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md rounded-3xl p-6 relative overflow-hidden shadow-lg">
                 <div className="flex flex-col items-center text-center">
                   <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-[var(--border-color)] mb-4">
                     <img
@@ -142,9 +142,9 @@ const About = () => {
                         (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${personalInfo.name}&background=0071E3&color=ffffff&size=200`;
                       }}
                     />
-                    <div className="absolute bottom-1 right-1 w-3 h-3 rounded-full bg-[#30D158] border-2 border-black" />
+                    <div className="absolute bottom-1 right-1 w-3 h-3 rounded-full bg-[#30D158] border-2 border-[var(--bg-primary)]" />
                   </div>
-                  <h3 className="font-sans text-lg font-bold text-white mb-0.5">{personalInfo.name}</h3>
+                  <h3 className="font-sans text-lg font-bold text-[var(--text-primary)] mb-0.5">{personalInfo.name}</h3>
                   <p className="text-xs text-[var(--text-secondary)] mb-6 font-medium">Developer &amp; Engineer</p>
 
                   <div className="w-full border-t border-[var(--border-color)] pt-5 space-y-3.5 text-left text-xs">
@@ -156,9 +156,9 @@ const About = () => {
                       <div key={i} className="flex flex-col">
                         <span className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider font-semibold mb-0.5">{item.label}</span>
                         {item.link ? (
-                          <a href={item.link} className="text-white hover:text-primary transition-colors truncate">{item.value}</a>
+                          <a href={item.link} className="text-[var(--text-primary)] hover:text-primary transition-colors truncate">{item.value}</a>
                         ) : (
-                          <span className="text-white truncate">{item.value}</span>
+                          <span className="text-[var(--text-primary)] truncate">{item.value}</span>
                         )}
                       </div>
                     ))}
@@ -166,11 +166,11 @@ const About = () => {
 
                   <div className="flex gap-3 mt-6">
                     <a href={personalInfo.github} target="_blank" rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-white transition-colors">
+                      className="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
                       <Github size={14} />
                     </a>
                     <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-white transition-colors">
+                      className="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
                       <Linkedin size={14} />
                     </a>
                   </div>
@@ -183,7 +183,7 @@ const About = () => {
           <div className="lg:col-span-7 space-y-6">
             <div className="flex flex-col mb-4">
               <span className="text-[10px] uppercase font-semibold text-primary tracking-[0.2em] mb-2">Specifications</span>
-              <h3 className="text-xl font-bold tracking-tight text-white">System capabilities</h3>
+              <h3 className="text-xl font-bold tracking-tight text-[var(--text-primary)]">System capabilities</h3>
             </div>
             <div className="space-y-4">
               {skillBars.map(skill => (

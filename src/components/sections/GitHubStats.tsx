@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Github, Star, GitFork, Users, BookOpen } from 'lucide-react';
+import { Github, Star, Users, BookOpen } from 'lucide-react';
 import CountUp from 'react-countup';
 import { personalInfo } from '@/config/siteData';
 
@@ -42,7 +42,7 @@ const GitHubStats = () => {
   };
 
   return (
-    <section className="section-wrapper relative bg-black border-b border-[var(--border-color)]" ref={ref}>
+    <section className="section-wrapper relative bg-[var(--bg-primary)] border-b border-[var(--border-color)]" ref={ref}>
       <div className="container mx-auto px-6 max-w-6xl">
         {/* Header */}
         <motion.div
@@ -73,10 +73,10 @@ const GitHubStats = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.2 + i * 0.05, duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
-                className="bg-white/[0.01] border border-white/[0.04] backdrop-blur-md rounded-2xl p-5 text-center shadow-sm"
+                className="bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md rounded-2xl p-5 text-center shadow-sm"
               >
                 <div className="flex justify-center mb-2 text-primary">{stat.icon}</div>
-                <div className="font-sans text-2xl font-bold text-white">
+                <div className="font-sans text-2xl font-bold text-[var(--text-primary)]">
                   <CountUp end={stat.value} duration={1.8} delay={0.2} />
                 </div>
                 <div className="text-[10px] text-[var(--text-secondary)] font-semibold uppercase tracking-wider mt-1">{stat.label}</div>
@@ -98,11 +98,11 @@ const GitHubStats = () => {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.3 + i * 0.04 }}
                 whileHover={{ y: -2, borderColor: 'rgba(0, 113, 227, 0.15)' }}
-                className="bg-white/[0.01] border border-white/[0.04] backdrop-blur-md rounded-2xl p-4 flex items-center justify-between group transition-all duration-300 shadow-sm"
+                className="bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md rounded-2xl p-4 flex items-center justify-between group transition-all duration-300 shadow-sm"
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <Github size={16} className="text-[var(--text-secondary)] flex-shrink-0" />
-                  <span className="text-xs text-white font-medium truncate group-hover:text-primary transition-colors">
+                  <span className="text-xs text-[var(--text-primary)] font-medium truncate group-hover:text-primary transition-colors">
                     {repo.name}
                   </span>
                 </div>
@@ -137,7 +137,7 @@ const GitHubStats = () => {
             href={personalInfo.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-white hover:border-[var(--text-secondary)] text-[12px] font-semibold transition-all duration-200 shadow-sm"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-secondary)] text-[12px] font-semibold transition-all duration-200 shadow-sm"
           >
             <Github size={14} />
             <span>View Full GitHub Profile</span>

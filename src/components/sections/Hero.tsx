@@ -1,21 +1,21 @@
 import { useEffect, useRef, useState, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import { Github, Linkedin, Mail, Sparkles, ChevronDown, Shield, Globe, Terminal } from 'lucide-react';
+import { ChevronDown, Mail, Github, Linkedin, Shield, Globe, Terminal, Sparkles } from 'lucide-react';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
 import HeroCanvas from '@/components/three/HeroCanvas';
 import { personalInfo, stats } from '@/config/siteData';
 
 const Hero = () => {
-  const { ref: statsRef, inView: statsInView } = useInView({ threshold: 0.3, triggerOnce: true });
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [statsRef, statsInView] = useInView({ threshold: 0.1, triggerOnce: true });
 
   useEffect(() => {
     const handleMouse = (e: MouseEvent) => {
       setMousePos({
-        x: (e.clientX / window.innerWidth - 0.5) * 15,
-        y: (e.clientY / window.innerHeight - 0.5) * 15,
+        x: (e.clientX / window.innerWidth - 0.5) * 20,
+        y: (e.clientY / window.innerHeight - 0.5) * 20,
       });
     };
     window.addEventListener('mousemove', handleMouse, { passive: true });
@@ -23,7 +23,7 @@ const Hero = () => {
   }, []);
 
   const scrollToAbout = () => {
-    document.getElementById('about-me')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const typeSequence = personalInfo.roles.flatMap(role => [role, 2000]);
@@ -32,7 +32,7 @@ const Hero = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+      transition: { staggerChildren: 0.15, delayChildren: 0.2 },
     },
   };
 
@@ -44,7 +44,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden bg-black"
+      className="relative min-h-screen flex items-center overflow-hidden bg-[var(--bg-primary)]"
     >
       {/* Three.js Background */}
       <Suspense fallback={null}>
@@ -52,7 +52,7 @@ const Hero = () => {
       </Suspense>
 
       {/* Gradient Overlays (Vercel & Apple style top radial light source) */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black via-black/85 to-black pointer-events-none" />
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[var(--bg-primary)] via-[var(--bg-primary)]/85 to-[var(--bg-primary)] pointer-events-none" />
       <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_top,rgba(0,113,227,0.12),transparent_70%)] pointer-events-none" />
 
       {/* Animated subtle background blobs */}
@@ -68,7 +68,7 @@ const Hero = () => {
         }}
         transition={{ type: 'spring', stiffness: 50, damping: 15 }}
       >
-        <div className="w-12 h-12 rounded-xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-md flex items-center justify-center text-primary/70 shadow-sm animate-float">
+        <div className="w-12 h-12 rounded-xl bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md flex items-center justify-center text-primary/70 shadow-sm animate-float">
           <Shield size={20} strokeWidth={1.5} />
         </div>
       </motion.div>
@@ -78,7 +78,7 @@ const Hero = () => {
         animate={{ x: mousePos.x * 0.2, y: mousePos.y * 0.2 }}
         transition={{ type: 'spring', stiffness: 45, damping: 15 }}
       >
-        <div className="w-10 h-10 rounded-xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-md flex items-center justify-center text-accent-purple/70 shadow-sm animate-float" style={{ animationDelay: '1s' }}>
+        <div className="w-10 h-10 rounded-xl bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md flex items-center justify-center text-accent-purple/70 shadow-sm animate-float" style={{ animationDelay: '1s' }}>
           <Globe size={18} strokeWidth={1.5} />
         </div>
       </motion.div>
@@ -88,7 +88,7 @@ const Hero = () => {
         animate={{ x: mousePos.x * 0.3, y: mousePos.y * 0.3 }}
         transition={{ type: 'spring', stiffness: 35, damping: 15 }}
       >
-        <div className="w-11 h-11 rounded-xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-md flex items-center justify-center text-accent-magenta/70 shadow-sm animate-float" style={{ animationDelay: '2s' }}>
+        <div className="w-11 h-11 rounded-xl bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md flex items-center justify-center text-accent-magenta/70 shadow-sm animate-float" style={{ animationDelay: '2s' }}>
           <Terminal size={18} strokeWidth={1.5} />
         </div>
       </motion.div>
@@ -106,7 +106,7 @@ const Hero = () => {
         >
           {/* Status Badge */}
           <motion.div variants={itemVariants} className="flex justify-center mb-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/[0.06] bg-white/[0.02] backdrop-blur-md text-[var(--text-secondary)] text-[12px] font-medium shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] backdrop-blur-md text-[var(--text-secondary)] text-[12px] font-medium shadow-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-[#30D158] animate-pulse" />
               <Sparkles size={12} className="text-primary" />
               <span>Available for opportunities</span>
@@ -116,7 +116,7 @@ const Hero = () => {
           {/* Name */}
           <motion.h1
             variants={itemVariants}
-            className="font-sans text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-[1.05] mb-2 text-white"
+            className="font-sans text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-[1.05] mb-2 text-[var(--text-primary)]"
           >
             Warren <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-[#007AFF] to-accent-magenta">Chris</span>
           </motion.h1>
@@ -124,7 +124,7 @@ const Hero = () => {
           {/* Headline Value Proposition */}
           <motion.p
             variants={itemVariants}
-            className="font-sans text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-white mb-6 max-w-2xl mx-auto leading-snug"
+            className="font-sans text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-[var(--text-primary)] mb-6 max-w-2xl mx-auto leading-snug"
           >
             Engineered to scale. <span className="text-[var(--text-secondary)]">Secured by design.</span>
           </motion.p>
@@ -208,9 +208,9 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={statsInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: i * 0.08, duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
-                className="bg-white/[0.01] border border-white/[0.04] backdrop-blur-md rounded-2xl p-4.5 text-center shadow-sm"
+                className="bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md rounded-2xl p-4.5 text-center shadow-sm"
               >
-                <div className="font-sans text-3xl font-bold tracking-tight mb-1 text-white">
+                <div className="font-sans text-3xl font-bold tracking-tight mb-1 text-[var(--text-primary)]">
                   {statsInView ? (
                     <CountUp end={stat.value} duration={1.8} delay={i * 0.08} suffix={stat.suffix} />
                   ) : (
@@ -228,7 +228,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.8, duration: 0.8 }}
-          className="flex flex-col items-center gap-1 cursor-pointer mt-4 text-[var(--text-secondary)] hover:text-white transition-colors duration-200"
+          className="flex flex-col items-center gap-1 cursor-pointer mt-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-200"
           onClick={scrollToAbout}
         >
           <span className="text-[9px] uppercase tracking-[0.25em] font-semibold text-[var(--text-muted)]">Scroll</span>

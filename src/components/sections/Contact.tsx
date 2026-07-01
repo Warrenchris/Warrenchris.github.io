@@ -60,7 +60,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="section-wrapper relative bg-black">
+    <section id="contact" className="section-wrapper relative bg-[var(--bg-primary)]">
       {/* Subtle blurs */}
       <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-primary/2 blur-[140px] rounded-full pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-accent-purple/2 blur-[140px] rounded-full pointer-events-none" />
@@ -88,7 +88,7 @@ const Contact = () => {
             className="space-y-8"
           >
             <div className="space-y-4">
-              <h3 className="font-sans text-xl font-bold text-white tracking-tight">Connect with me</h3>
+              <h3 className="font-sans text-xl font-bold text-[var(--text-primary)] tracking-tight">Connect with me</h3>
               <p className="text-[var(--text-secondary)] leading-relaxed font-light text-sm">
                 Whether you need a network infrastructure design, a web application built from scratch, 
                 or a cybersecurity audit — I am here to help. Reach out using the form, or via direct channels.
@@ -105,14 +105,14 @@ const Contact = () => {
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.3 + i * 0.05 }}
                   whileHover={{ x: 2, borderColor: 'rgba(0,113,227,0.15)' }}
-                  className="flex items-center gap-4 bg-white/[0.01] border border-white/[0.04] rounded-2xl p-4 transition-all duration-300 group"
+                  className="flex items-center gap-4 bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-2xl p-4 transition-all duration-300 group"
                 >
                   <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center text-primary border border-primary/10 transition-transform group-hover:scale-102 flex-shrink-0">
                     {card.icon}
                   </div>
                   <div className="min-w-0">
                     <div className="text-[10px] text-[var(--text-muted)] font-semibold uppercase tracking-wider mb-0.5">{card.label}</div>
-                    <div className="text-sm text-white font-medium truncate">{card.value}</div>
+                    <div className="text-sm text-[var(--text-primary)] font-medium truncate">{card.value}</div>
                   </div>
                 </motion.a>
               ))}
@@ -135,7 +135,7 @@ const Contact = () => {
                     aria-label={s.label}
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-10 h-10 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-white hover:border-[var(--text-secondary)] transition-all duration-200"
+                    className="w-10 h-10 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-secondary)] transition-all duration-200"
                   >
                     {s.icon}
                   </motion.a>
@@ -150,7 +150,7 @@ const Contact = () => {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            <div className="bg-white/[0.01] border border-white/[0.04] backdrop-blur-md rounded-3xl p-8 shadow-lg">
+            <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md rounded-3xl p-8 shadow-lg">
               <AnimatePresence mode="wait">
                 {formState === 'success' ? (
                   <motion.div
@@ -166,7 +166,7 @@ const Contact = () => {
                     >
                       <CheckCircle size={48} className="text-[#30D158] mb-4" />
                     </motion.div>
-                    <h3 className="font-sans font-bold text-white text-lg mb-2">Message Sent</h3>
+                    <h3 className="font-sans font-bold text-[var(--text-primary)] text-lg mb-2">Message Sent</h3>
                     <p className="text-xs text-[var(--text-secondary)]">Thanks for reaching out. I'll get back to you within 24 hours.</p>
                   </motion.div>
                 ) : formState === 'error' ? (
@@ -178,7 +178,7 @@ const Contact = () => {
                     className="flex flex-col items-center justify-center py-12 text-center"
                   >
                     <XCircle size={48} className="text-[#FF3B30] mb-4" />
-                    <h3 className="font-sans font-bold text-white text-lg mb-2">Something went wrong</h3>
+                    <h3 className="font-sans font-bold text-[var(--text-primary)] text-lg mb-2">Something went wrong</h3>
                     <p className="text-xs text-[var(--text-secondary)]">Please try again or email me directly.</p>
                   </motion.div>
                 ) : (
@@ -189,7 +189,7 @@ const Contact = () => {
                           type="text"
                           name="name"
                           placeholder="Your Name"
-                          className={`form-input bg-white/[0.01] border-white/[0.04] rounded-2xl p-4 text-xs text-white placeholder-slate-500 focus:border-primary focus:ring-0 w-full ${errors.name ? 'border-[#FF3B30]/50' : ''}`}
+                          className={`form-input bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-4 text-xs text-[var(--text-primary)] placeholder-slate-500 focus:border-primary focus:ring-0 w-full ${errors.name ? 'border-[#FF3B30]/50' : ''}`}
                           aria-label="Name"
                         />
                         {errors.name && <p className="text-[10px] text-[#FF3B30] font-semibold mt-1">{errors.name}</p>}
@@ -199,7 +199,7 @@ const Contact = () => {
                           type="email"
                           name="email"
                           placeholder="Your Email"
-                          className={`form-input bg-white/[0.01] border-white/[0.04] rounded-2xl p-4 text-xs text-white placeholder-slate-500 focus:border-primary focus:ring-0 w-full ${errors.email ? 'border-[#FF3B30]/50' : ''}`}
+                          className={`form-input bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-4 text-xs text-[var(--text-primary)] placeholder-slate-500 focus:border-primary focus:ring-0 w-full ${errors.email ? 'border-[#FF3B30]/50' : ''}`}
                           aria-label="Email"
                         />
                         {errors.email && <p className="text-[10px] text-[#FF3B30] font-semibold mt-1">{errors.email}</p>}
@@ -210,7 +210,7 @@ const Contact = () => {
                       type="text"
                       name="subject"
                       placeholder="Subject"
-                      className="form-input bg-white/[0.01] border-white/[0.04] rounded-2xl p-4 text-xs text-white placeholder-slate-500 focus:border-primary focus:ring-0 w-full"
+                      className="form-input bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-4 text-xs text-[var(--text-primary)] placeholder-slate-500 focus:border-primary focus:ring-0 w-full"
                       aria-label="Subject"
                     />
 
@@ -219,7 +219,7 @@ const Contact = () => {
                         name="message"
                         rows={5}
                         placeholder="Tell me about your project..."
-                        className={`form-input bg-white/[0.01] border-white/[0.04] rounded-2xl p-4 text-xs text-white placeholder-slate-500 focus:border-primary focus:ring-0 w-full resize-none ${errors.message ? 'border-[#FF3B30]/50' : ''}`}
+                        className={`form-input bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-4 text-xs text-[var(--text-primary)] placeholder-slate-500 focus:border-primary focus:ring-0 w-full resize-none ${errors.message ? 'border-[#FF3B30]/50' : ''}`}
                         aria-label="Message"
                       />
                       {errors.message && <p className="text-[10px] text-[#FF3B30] font-semibold mt-1">{errors.message}</p>}

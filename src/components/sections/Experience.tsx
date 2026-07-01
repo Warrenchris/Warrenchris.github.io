@@ -7,7 +7,7 @@ const Experience = () => {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
-    <section id="experience" className="section-wrapper relative bg-black border-b border-[var(--border-color)]">
+    <section id="experience" className="section-wrapper relative bg-[var(--bg-primary)] border-b border-[var(--border-color)]">
       <div className="absolute top-1/2 left-0 w-80 h-80 bg-primary/2 blur-[140px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-6 max-w-5xl" ref={ref}>
@@ -44,7 +44,7 @@ const Experience = () => {
                     initial={{ scale: 0 }}
                     animate={inView ? { scale: 1 } : {}}
                     transition={{ delay: i * 0.15 + 0.2, type: 'spring' }}
-                    className="w-3.5 h-3.5 rounded-full bg-primary border-2 border-black shadow-sm"
+                    className="w-3.5 h-3.5 rounded-full bg-primary border-2 border-[var(--bg-primary)] shadow-sm"
                   />
                 </div>
 
@@ -60,7 +60,7 @@ const Experience = () => {
                 <div className="flex-1">
                   <motion.div
                     whileHover={{ y: -2 }}
-                    className="bg-white/[0.01] border border-white/[0.04] backdrop-blur-md rounded-3xl p-6 transition-all duration-300 hover:border-white/[0.08] shadow-sm"
+                    className="bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md rounded-3xl p-6 transition-all duration-300 hover:border-[var(--text-secondary)]/30 shadow-sm"
                   >
                     {/* Mobile date */}
                     <div className="flex items-center gap-2 mb-3 md:hidden text-[var(--text-secondary)]">
@@ -73,7 +73,7 @@ const Experience = () => {
                         <Briefcase size={18} strokeWidth={1.5} />
                       </div>
                       <div>
-                        <h3 className="font-sans font-bold text-white text-base tracking-tight">{exp.role}</h3>
+                        <h3 className="font-sans font-bold text-[var(--text-primary)] text-base tracking-tight">{exp.role}</h3>
                         <div className="flex flex-wrap items-center gap-2 mt-0.5">
                           <span className="text-xs font-semibold text-primary">{exp.company}</span>
                           <span className="text-[var(--text-muted)] font-medium text-xs">&bull;</span>
@@ -81,7 +81,7 @@ const Experience = () => {
                             <MapPin size={10} />
                             {exp.location}
                           </span>
-                          <span className="px-2 py-0.5 rounded-full text-[10px] border border-[var(--border-color)] bg-white/[0.02] text-[var(--text-secondary)]">
+                          <span className="px-2 py-0.5 rounded-full text-[10px] border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)]">
                             {exp.type}
                           </span>
                         </div>

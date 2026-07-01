@@ -36,7 +36,7 @@ const Blog = () => {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
-    <section id="blog" className="section-wrapper relative bg-black border-b border-[var(--border-color)]" ref={ref}>
+    <section id="blog" className="section-wrapper relative bg-[var(--bg-primary)] border-b border-[var(--border-color)]" ref={ref}>
       <div className="absolute top-0 right-20 w-72 h-72 bg-primary/2 blur-[140px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-6 max-w-6xl">
@@ -61,10 +61,10 @@ const Blog = () => {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.08, duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
               whileHover={{ y: -4 }}
-              className="bg-white/[0.01] border border-white/[0.04] backdrop-blur-md rounded-3xl overflow-hidden shadow-sm transition-all duration-300 hover:border-white/[0.08] flex flex-col justify-between cursor-pointer group"
+              className="bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md rounded-3xl overflow-hidden shadow-sm transition-all duration-300 hover:border-[var(--text-secondary)]/30 flex flex-col justify-between cursor-pointer group"
             >
               {/* Image Header Placeholder */}
-              <div className="h-32 bg-[#0A0A0C] border-b border-[var(--border-color)] relative flex items-center justify-center text-4xl">
+              <div className="h-32 bg-[var(--bg-secondary)] border-b border-[var(--border-color)] relative flex items-center justify-center text-4xl">
                 <span>{post.emoji}</span>
               </div>
 
@@ -81,7 +81,7 @@ const Blog = () => {
                     </span>
                   </div>
 
-                  <h3 className="font-sans font-bold text-white text-sm leading-tight mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                  <h3 className="font-sans font-bold text-[var(--text-primary)] text-sm leading-tight mb-2 group-hover:text-primary transition-colors line-clamp-2">
                     {post.title}
                   </h3>
 
