@@ -30,48 +30,48 @@ export default {
       },
       colors: {
         primary: {
-          DEFAULT: '#0071E3',   /* Mapped BVB yellow to Apple Blue */
-          50: '#F2F8FF',
-          100: '#E1F0FF',
-          200: '#BADEFF',
-          300: '#8AC7FF',
-          400: '#4CA7FF',
-          500: '#0071E3',
-          600: '#0059B3',
-          700: '#004080',
-          800: '#002854',
-          900: '#001229',
+          DEFAULT: '#F4B400',   /* Mapped primary accent to Premium Gold */
+          50: '#FFFDF0',
+          100: '#FFF7C2',
+          200: '#FFE87A',
+          300: '#FFD733',
+          400: '#F4B400',
+          500: '#F4B400',
+          600: '#C79200',
+          700: '#997000',
+          800: '#6B4E00',
+          900: '#3D2C00',
         },
         accent: {
-          blue: '#0071E3',
-          purple: '#007AFF',   /* iOS System Blue */
-          magenta: '#5E5CE6',  /* iOS System Purple */
-          gray: '#8E8E93',
-          light: '#F5F5F7',
-          dark: '#1D1D1F',
+          blue: '#F4B400',
+          purple: '#C79200',
+          magenta: '#C79200',
+          gray: '#A3A3A8',
+          light: '#F8F5EF',
+          dark: '#1A1A1D',
         },
         dark: {
-          DEFAULT: '#000000',  /* Pure Black background */
-          50: '#0A0A0C',       /* Linear elevated background */
-          100: '#161618',      /* Raycast card background */
-          200: '#222225',
-          300: '#424245',
-          400: '#8E8E93',
-          glass: 'rgba(10, 10, 12, 0.8)',
-          border: 'rgba(255, 255, 255, 0.08)',
+          DEFAULT: '#0B0B0C',  /* Rich Black */
+          50: '#121215',       /* Subtle dark elevation */
+          100: '#1A1A1D',      /* Charcoal card background */
+          200: '#2A2A30',
+          300: '#5A5A60',
+          400: '#A3A3A8',
+          glass: 'rgba(11, 11, 12, 0.8)',
+          border: 'rgba(163, 163, 168, 0.12)',
         },
         glass: {
-          DEFAULT: 'rgba(255, 255, 255, 0.03)',
-          border: 'rgba(255, 255, 255, 0.08)',
+          DEFAULT: 'var(--glass-bg)',
+          border: 'var(--border-color)',
         },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'hero-gradient': 'linear-gradient(180deg, #000000 0%, #0A0A0C 100%)',
-        'card-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0) 100%)',
-        'neon-gradient': 'linear-gradient(135deg, #0071E3, #007AFF)',
-        'yellow-black': 'linear-gradient(180deg, #0071E3, #000000)',
-        'gold-gradient': 'linear-gradient(135deg, #0071E3, #0059B3)',
+        'hero-gradient': 'linear-gradient(180deg, #0B0B0C 0%, #121215 100%)',
+        'card-gradient': 'linear-gradient(180deg, rgba(248, 245, 239, 0.02) 0%, rgba(248, 245, 239, 0) 100%)',
+        'neon-gradient': 'linear-gradient(135deg, #F4B400, #C79200)',
+        'yellow-black': 'linear-gradient(180deg, #F4B400, #0B0B0C)',
+        'gold-gradient': 'linear-gradient(135deg, #F4B400, #C79200)',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
