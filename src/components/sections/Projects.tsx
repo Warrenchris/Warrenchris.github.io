@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Github, ExternalLink, Search, FolderOpen, X, Star, Rocket } from 'lucide-react';
+import { Github, ExternalLink, Search, FolderOpen, X, Star } from 'lucide-react';
 import Tilt from 'react-parallax-tilt';
 import { projects } from '@/config/siteData';
 
@@ -25,11 +25,12 @@ const Projects = () => {
   }, [activeFilter, searchQuery]);
 
   return (
-    <section id="projects" className="section-wrapper relative">
-      <div className="blob blob-purple absolute top-10 left-10 w-80 h-80 opacity-6" />
-      <div className="blob blob-magenta absolute bottom-10 right-10 w-60 h-60 opacity-5" />
+    <section id="projects" className="section-wrapper relative bg-black">
+      {/* Subtle blurs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/2 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent-purple/2 blur-[140px] rounded-full pointer-events-none" />
 
-      <div className="container mx-auto px-6 max-w-7xl" ref={ref}>
+      <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
@@ -37,50 +38,48 @@ const Projects = () => {
         >
           {/* Header */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <span className="section-tag"><FolderOpen size={12} /> Projects</span>
-            <h2 className="section-title mt-3">
-              Featured <span className="gradient-text">Work</span>
-            </h2>
-            <p className="section-subtitle mx-auto mt-4 text-slate-400">
+            <span className="section-tag"><FolderOpen size={12} className="text-primary" /> Projects</span>
+            <h2 className="section-title mt-3">Featured Work</h2>
+            <p className="section-subtitle mx-auto mt-4 text-[var(--text-secondary)] font-light text-base">
               A showcase of projects spanning cybersecurity, networking, full-stack development, and data science.
             </p>
           </motion.div>
 
           {/* Search & Filters */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.15 }}
-            className="flex flex-col sm:flex-row gap-4 mb-10"
+            className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-12"
           >
             {/* Search */}
-            <div className="relative flex-1 max-w-sm">
-              <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" />
+            <div className="relative w-full sm:max-w-xs">
+              <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
                 placeholder="Search projects..."
-                className="form-input pl-11"
+                className="form-input pl-11 py-2 text-xs rounded-full bg-white/[0.01] border-white/[0.04] focus:border-primary focus:ring-0"
               />
             </div>
 
             {/* Filter buttons */}
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex gap-2 flex-wrap justify-center">
               {filters.map(filter => (
                 <motion.button
                   key={filter}
                   onClick={() => setActiveFilter(filter)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.97 }}
-                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`px-4 py-2 rounded-full text-xs font-semibold tracking-tight transition-all duration-200 ${
                     activeFilter === filter
-                      ? 'bg-gradient-to-r from-primary-500 to-accent-purple text-white shadow-neon-cyan'
-                      : 'glass border border-white/08 text-slate-400 hover:text-white'
+                      ? 'bg-primary text-white shadow-sm'
+                      : 'border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-white hover:border-[var(--text-secondary)]'
                   }`}
                 >
                   {filter}
@@ -93,92 +92,90 @@ const Projects = () => {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeFilter + searchQuery}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="grid md:grid-cols-2 xl:grid-cols-3 gap-6"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.25 }}
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
               {filteredProjects.map((project, i) => (
                 <motion.div
                   key={project.id}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: i * 0.08, duration: 0.5 }}
+                  transition={{ delay: i * 0.05, duration: 0.5 }}
                   layout
                 >
                   <Tilt
-                    tiltMaxAngleX={8}
-                    tiltMaxAngleY={8}
-                    scale={1.01}
-                    transitionSpeed={400}
+                    tiltMaxAngleX={4}
+                    tiltMaxAngleY={4}
+                    scale={1.005}
+                    transitionSpeed={600}
                     className="h-full"
                   >
-                    <div className="project-card-inner h-full flex flex-col">
+                    <div className="bg-white/[0.01] border border-white/[0.04] backdrop-blur-md rounded-3xl overflow-hidden shadow-md flex flex-col h-full hover:border-white/[0.08] transition-all duration-300 group">
                       {/* Image */}
-                      <div className="relative h-44 overflow-hidden">
+                      <div className="relative h-48 overflow-hidden bg-black border-b border-[var(--border-color)]">
                         <img
                           src={project.image}
                           alt={project.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102"
                           loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-dark-50 via-transparent to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
                         {/* Featured badge */}
                         {project.featured && (
-                          <div className="absolute top-3 left-3 flex items-center gap-1 px-2 py-1 rounded-lg bg-gradient-to-r from-primary-500 to-accent-purple text-white text-xs font-semibold">
+                          <div className="absolute top-3.5 left-3.5 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary text-white text-[10px] font-bold shadow-sm">
                             <Star size={10} fill="white" />
-                            Featured
+                            <span>Featured</span>
                           </div>
                         )}
-
-                        {/* Color accent */}
-                        <div
-                          className="absolute bottom-0 left-0 right-0 h-1"
-                          style={{ background: `linear-gradient(90deg, ${project.color}, transparent)` }}
-                        />
                       </div>
 
                       {/* Content */}
-                      <div className="p-5 flex flex-col flex-1">
-                        <div className="mb-1 text-xs text-slate-500 font-medium uppercase tracking-wider">
+                      <div className="p-6 flex flex-col flex-1">
+                        <span className="text-[10px] text-primary font-bold uppercase tracking-[0.25em] mb-1.5 block">
                           {project.subtitle}
-                        </div>
-                        <h3 className="font-display font-bold text-white text-lg mb-2 leading-tight">
+                        </span>
+                        <h3 className="font-sans font-bold text-white text-lg mb-2.5 tracking-tight leading-tight">
                           {project.title}
                         </h3>
-                        <p className="text-sm text-slate-400 leading-relaxed mb-4 flex-1 line-clamp-3">
+                        <p className="text-xs text-[var(--text-secondary)] leading-relaxed mb-5 flex-1 line-clamp-3">
                           {project.description}
                         </p>
 
                         {/* Tech pills */}
-                        <div className="flex flex-wrap gap-1.5 mb-4">
-                          {project.tech.slice(0, 4).map(t => (
-                            <span key={t} className="tech-pill text-xs px-2 py-0.5">{t}</span>
+                        <div className="flex flex-wrap gap-1.5 mb-5">
+                          {project.tech.slice(0, 3).map(t => (
+                            <span key={t} className="tech-pill text-[10px] px-2 py-0.5 rounded-full border border-[var(--border-color)] bg-white/[0.02] text-[var(--text-secondary)]">{t}</span>
                           ))}
-                          {project.tech.length > 4 && (
-                            <span className="tech-pill text-xs px-2 py-0.5">+{project.tech.length - 4}</span>
+                          {project.tech.length > 3 && (
+                            <span className="tech-pill text-[10px] px-2 py-0.5 rounded-full border border-[var(--border-color)] bg-white/[0.02] text-[var(--text-secondary)]">+{project.tech.length - 3}</span>
                           )}
                         </div>
 
                         {/* Actions */}
-                        <div className="flex gap-2">
+                        <div className="flex gap-3 mt-auto">
                           <motion.a
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            whileHover={{ scale: 1.05 }}
-                            className="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl glass border border-white/08 text-slate-400 hover:text-white hover:border-primary-500/30 text-sm font-medium transition-all duration-200"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-white hover:border-[var(--text-secondary)] text-[12px] font-semibold transition-all duration-200"
                           >
-                            <Github size={14} /> GitHub
+                            <Github size={13} />
+                            <span>GitHub</span>
                           </motion.a>
                           <motion.button
                             onClick={() => setSelectedProject(project)}
-                            whileHover={{ scale: 1.05 }}
-                            className="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl bg-gradient-to-r from-primary-500/20 to-accent-purple/20 border border-primary-500/20 text-primary-400 hover:from-primary-500/30 hover:to-accent-purple/30 text-sm font-medium transition-all duration-200"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-full bg-primary text-white text-[12px] font-semibold hover:bg-primary-600 active:bg-primary-700 transition-all duration-200"
                           >
-                            <ExternalLink size={14} /> Details
+                            <ExternalLink size={13} />
+                            <span>Details</span>
                           </motion.button>
                         </div>
                       </div>
@@ -191,10 +188,10 @@ const Projects = () => {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="col-span-full text-center py-16 text-slate-500"
+                  className="col-span-full text-center py-16 text-[var(--text-muted)]"
                 >
-                  <FolderOpen size={40} className="mx-auto mb-3 opacity-30" />
-                  <p>No projects match your search.</p>
+                  <FolderOpen size={36} className="mx-auto mb-3 opacity-30 text-primary" />
+                  <p className="text-xs">No projects match your search query.</p>
                 </motion.div>
               )}
             </motion.div>
@@ -202,7 +199,7 @@ const Projects = () => {
         </motion.div>
       </div>
 
-      {/* Project Modal */}
+      {/* Project Modal (Detailed dialog popup style) */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
@@ -210,39 +207,39 @@ const Projects = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[2000] flex items-center justify-center p-4"
-            style={{ background: 'rgba(2, 8, 23, 0.9)', backdropFilter: 'blur(20px)' }}
+            style={{ background: 'rgba(0, 0, 0, 0.85)', backdropFilter: 'blur(20px)' }}
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              initial={{ scale: 0.95, opacity: 0, y: 15 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              transition={{ type: 'spring', damping: 25 }}
-              className="w-full max-w-2xl glass-card overflow-hidden"
+              exit={{ scale: 0.95, opacity: 0, y: 15 }}
+              transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+              className="w-full max-w-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-3xl overflow-hidden shadow-2xl"
               onClick={e => e.stopPropagation()}
             >
-              <div className="relative h-52 overflow-hidden">
+              <div className="relative h-60 overflow-hidden bg-black border-b border-[var(--border-color)]">
                 <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className="absolute top-4 right-4 w-9 h-9 rounded-xl glass border border-white/10 flex items-center justify-center text-white hover:text-red-400 transition-colors"
+                  className="absolute top-4 right-4 w-8 h-8 rounded-full border border-white/[0.08] bg-black/60 flex items-center justify-center text-white hover:bg-black/90 transition-colors"
                   aria-label="Close"
                 >
-                  <X size={16} />
+                  <X size={14} />
                 </button>
-                <div className="absolute bottom-4 left-5">
-                  <h3 className="font-display text-2xl font-bold text-white">{selectedProject.title}</h3>
-                  <p className="text-sm text-primary-400">{selectedProject.subtitle}</p>
+                <div className="absolute bottom-5 left-6">
+                  <span className="text-[10px] text-primary font-bold uppercase tracking-[0.25em] mb-1.5 block">{selectedProject.subtitle}</span>
+                  <h3 className="font-sans text-2xl font-bold text-white tracking-tight leading-tight">{selectedProject.title}</h3>
                 </div>
               </div>
 
               <div className="p-6">
-                <p className="text-slate-300 leading-relaxed mb-5 text-sm">{selectedProject.longDescription}</p>
+                <p className="text-[var(--text-secondary)] leading-relaxed mb-6 text-xs">{selectedProject.longDescription}</p>
 
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap gap-1.5 mb-6">
                   {selectedProject.tech.map(t => (
-                    <span key={t} className="tech-pill">{t}</span>
+                    <span key={t} className="tech-pill text-[10px] px-2 py-0.5 rounded-full border border-[var(--border-color)] bg-white/[0.02] text-[var(--text-secondary)]">{t}</span>
                   ))}
                 </div>
 
@@ -251,15 +248,19 @@ const Projects = () => {
                     href={selectedProject.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl glass border border-white/10 text-white font-medium hover:border-primary-500/30 transition-all"
+                    className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-white hover:border-[var(--text-secondary)] text-[12px] font-semibold transition-all"
                   >
-                    <Github size={16} /> View on GitHub
+                    <Github size={14} />
+                    <span>View on GitHub</span>
                   </a>
                   <a
                     href={selectedProject.demo}
-                    className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-primary-500 to-accent-purple text-white font-medium shadow-neon-cyan"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-full bg-primary text-white text-[12px] font-semibold hover:bg-primary-600 active:bg-primary-700 transition-all"
                   >
-                    <Rocket size={16} /> Live Demo
+                    <ExternalLink size={14} />
+                    <span>Live Demo</span>
                   </a>
                 </div>
               </div>
