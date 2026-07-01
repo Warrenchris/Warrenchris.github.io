@@ -61,30 +61,33 @@ const Navbar = () => {
         ref={navRef}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 ${
-          scrolled ? 'navbar-glass shadow-lg' : 'bg-transparent'
+        transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
+        className={`fixed top-0 left-0 right-0 z-[1000] border-b transition-all duration-300 ${
+          scrolled 
+            ? 'navbar-glass bg-[var(--glass-bg)] border-[var(--border-color)] shadow-sm' 
+            : 'bg-transparent border-transparent'
         }`}
       >
         <div className="container mx-auto px-6 max-w-7xl">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-14"> {/* Compact 56px Apple height */}
             {/* Logo */}
             <motion.a
               href="#hero"
               onClick={(e) => { e.preventDefault(); scrollTo('#hero'); }}
               className="flex items-center gap-2 group"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-500 to-accent-purple flex items-center justify-center font-display font-bold text-white text-base shadow-neon-cyan">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary to-accent-magenta flex items-center justify-center font-sans font-bold text-white text-sm shadow-sm">
                 W
               </div>
-              <span className="font-display font-bold text-lg text-white hidden sm:block">
-                Warren<span className="gradient-text-cyan">Chris</span>
+              <span className="font-sans font-semibold text-[15px] tracking-tight text-[var(--text-primary)] hidden sm:block">
+                Warren<span className="text-primary font-bold">Chris</span>
               </span>
             </motion.a>
 
             {/* Desktop Nav */}
-            <div className="hidden lg:flex items-center gap-1">
+            <div className="hidden lg:flex items-center gap-6">
               {navLinks.map((link) => {
                 const sectionId = link.href.replace('#', '');
                 const isActive = activeSection === sectionId;
@@ -93,19 +96,18 @@ const Navbar = () => {
                     key={link.href}
                     href={link.href}
                     onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
-                    className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
+                    className={`relative py-1 text-[13px] font-medium tracking-tight transition-colors duration-200 ${
                       isActive
-                        ? 'text-primary-400'
-                        : 'text-slate-400 hover:text-white'
+                        ? 'text-[var(--text-primary)]'
+                        : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                     }`}
-                    whileHover={{ y: -1 }}
                   >
                     {link.label}
                     {isActive && (
                       <motion.div
                         layoutId="nav-indicator"
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary-400"
-                        transition={{ type: 'spring', bounce: 0.3, duration: 0.4 }}
+                        className="absolute bottom-[-16px] left-0 right-0 h-[2px] bg-primary"
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
                   </motion.a>
@@ -114,24 +116,24 @@ const Navbar = () => {
             </div>
 
             {/* Right Actions */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               {/* Theme Toggle */}
               <motion.button
                 onClick={toggleTheme}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="p-2 rounded-lg glass border border-white/10 text-slate-400 hover:text-white transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-1.5 rounded-lg border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
                 aria-label="Toggle theme"
               >
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={isDark ? 'moon' : 'sun'}
-                    initial={{ opacity: 0, rotate: -90 }}
-                    animate={{ opacity: 1, rotate: 0 }}
-                    exit={{ opacity: 0, rotate: 90 }}
-                    transition={{ duration: 0.2 }}
+                    initial={{ opacity: 0, rotate: -30, scale: 0.8 }}
+                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                    exit={{ opacity: 0, rotate: 30, scale: 0.8 }}
+                    transition={{ duration: 0.15 }}
                   >
-                    {isDark ? <Sun size={16} /> : <Moon size={16} />}
+                    {isDark ? <Sun size={15} /> : <Moon size={15} />}
                   </motion.div>
                 </AnimatePresence>
               </motion.button>
@@ -140,23 +142,23 @@ const Navbar = () => {
               <motion.a
                 href={personalInfo.cvUrl}
                 download
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-primary-500 to-accent-purple text-white text-sm font-semibold shadow-neon-cyan hover:shadow-neon-purple transition-all duration-300"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary text-white text-[12px] font-medium hover:bg-primary-600 active:bg-primary-700 transition-all duration-200"
               >
-                <Download size={14} />
+                <Download size={12} />
                 Download CV
               </motion.a>
 
               {/* Hamburger */}
               <motion.button
                 onClick={() => setIsOpen(!isOpen)}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="lg:hidden p-2 rounded-lg glass border border-white/10 text-slate-400 hover:text-white"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="lg:hidden p-1.5 rounded-lg border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
                 aria-label="Toggle menu"
               >
-                {isOpen ? <X size={18} /> : <Menu size={18} />}
+                {isOpen ? <X size={15} /> : <Menu size={15} />}
               </motion.button>
             </div>
           </div>
@@ -169,8 +171,8 @@ const Navbar = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="lg:hidden navbar-glass border-t border-white/05 overflow-hidden"
+              transition={{ duration: 0.25, ease: [0.25, 1, 0.5, 1] }}
+              className="lg:hidden bg-[var(--bg-secondary)] border-t border-[var(--border-color)] overflow-hidden"
             >
               <div className="container mx-auto px-6 py-4 flex flex-col gap-1">
                 {navLinks.map((link, i) => (
@@ -178,13 +180,13 @@ const Navbar = () => {
                     key={link.href}
                     href={link.href}
                     onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                    className={`px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
+                    transition={{ delay: i * 0.03 }}
+                    className={`px-4 py-2.5 rounded-xl text-[13px] font-medium tracking-tight transition-colors ${
                       activeSection === link.href.replace('#', '')
-                        ? 'text-primary-400 bg-primary-500/10'
-                        : 'text-slate-400 hover:text-white hover:bg-white/05'
+                        ? 'text-primary bg-primary/10'
+                        : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--border-color)]'
                     }`}
                   >
                     {link.label}
@@ -193,12 +195,12 @@ const Navbar = () => {
                 <motion.a
                   href={personalInfo.cvUrl}
                   download
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: navLinks.length * 0.05 }}
-                  className="mt-2 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-primary-500 to-accent-purple text-white text-sm font-semibold"
+                  transition={{ delay: navLinks.length * 0.03 }}
+                  className="mt-2 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full bg-primary text-white text-[12px] font-medium"
                 >
-                  <Download size={14} />
+                  <Download size={12} />
                   Download CV
                 </motion.a>
               </div>
