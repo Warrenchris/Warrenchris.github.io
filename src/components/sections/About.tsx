@@ -1,22 +1,15 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Tilt from 'react-parallax-tilt';
-import { MapPin, Mail, Phone, Github, Linkedin, GraduationCap, Heart } from 'lucide-react';
+import { Github, Linkedin, GraduationCap, Heart, Shield, Globe, Terminal, Cloud } from 'lucide-react';
 import { personalInfo } from '@/config/siteData';
 
 const skillBars = [
-  { name: 'Network Security', level: 95, color: '#00d4ff' },
-  { name: 'Python', level: 90, color: '#9333ea' },
-  { name: 'Cybersecurity', level: 88, color: '#ec4899' },
-  { name: 'React / TypeScript', level: 85, color: '#10b981' },
-  { name: 'Cloud Computing', level: 82, color: '#f59e0b' },
-];
-
-const whatIDo = [
-  { icon: '🔒', title: 'Cybersecurity', desc: 'Network security, threat analysis, and compliance implementation' },
-  { icon: '🌐', title: 'Networking', desc: 'Cisco & Huawei infrastructure, VPN, and SD-WAN solutions' },
-  { icon: '💻', title: 'Development', desc: 'Full-stack web applications using modern frameworks' },
-  { icon: '☁️', title: 'Cloud', desc: 'Cloud architecture and deployment strategies' },
+  { name: 'Network Security', level: 95 },
+  { name: 'Python & Scripting', level: 90 },
+  { name: 'Cybersecurity Ops', level: 88 },
+  { name: 'React / TypeScript', level: 85 },
+  { name: 'Cloud Infrastructure', level: 82 },
 ];
 
 const containerVariants = {
@@ -25,172 +18,192 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+  hidden: { opacity: 0, y: 25 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 1, 0.5, 1] } },
 };
 
 const About = () => {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
 
-  return (
-    <section id="about" className="section-wrapper relative">
-      {/* Background */}
-      <div className="blob blob-purple absolute top-0 right-0 w-80 h-80 opacity-8" />
-      <div className="blob blob-cyan absolute bottom-0 left-0 w-60 h-60 opacity-6" />
+  const whatIDo = [
+    { icon: <Shield size={18} strokeWidth={1.5} />, title: 'Cybersecurity', desc: 'Network security, threat analysis, and compliance implementation' },
+    { icon: <Globe size={18} strokeWidth={1.5} />, title: 'Networking', desc: 'Cisco & Huawei infrastructure, VPN, and SD-WAN solutions' },
+    { icon: <Terminal size={18} strokeWidth={1.5} />, title: 'Development', desc: 'Full-stack web applications using modern frameworks' },
+    { icon: <Cloud size={18} strokeWidth={1.5} />, title: 'Cloud', desc: 'Cloud architecture and deployment strategies' },
+  ];
 
-      <div className="container mx-auto px-6 max-w-7xl" ref={ref}>
+  return (
+    <section id="about" className="section-wrapper relative bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
+      {/* Background Blurs */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/3 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent-purple/3 blur-[140px] rounded-full pointer-events-none" />
+
+      <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
+        {/* Section Header */}
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+          className="mb-16"
+        >
+          <span className="section-tag">
+            <Heart size={12} className="text-primary" /> About Me
+          </span>
+          <h2 className="section-title mt-3">Driven by curiosity. Secured by engineering.</h2>
+        </motion.div>
+
+        {/* Narrative & Timeline Block */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          className="grid lg:grid-cols-2 gap-16 items-center"
+          className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start mb-24"
         >
-          {/* Left — Profile Card */}
-          <motion.div variants={itemVariants} className="flex justify-center">
+          {/* Left: Narrative */}
+          <div className="lg:col-span-7 space-y-6">
+            <h3 className="text-lg font-semibold tracking-tight text-white mb-2 uppercase text-[10px] tracking-[0.2em] text-primary">The Journey</h3>
+            <p className="text-lg font-light text-[var(--text-secondary)] leading-relaxed">{personalInfo.bio}</p>
+            <p className="text-base text-[var(--text-secondary)] leading-relaxed font-light">{personalInfo.bioExtended}</p>
+          </div>
+
+          {/* Right: Academic/Professional Timeline */}
+          <div className="lg:col-span-5 space-y-6">
+            <h3 className="text-lg font-semibold tracking-tight text-white mb-2 uppercase text-[10px] tracking-[0.2em] text-primary">Timeline</h3>
+            <div className="relative pl-6 border-l border-[var(--border-color)] space-y-8">
+              <div className="relative">
+                <span className="absolute -left-[30px] top-1 w-2.5 h-2.5 rounded-full bg-primary border-2 border-[var(--bg-secondary)]" />
+                <span className="text-[10px] uppercase font-semibold text-primary">Current Study</span>
+                <h4 className="text-sm font-semibold text-white mt-1">{personalInfo.degree}</h4>
+                <p className="text-xs text-[var(--text-secondary)] mt-0.5">{personalInfo.university}</p>
+              </div>
+              <div className="relative">
+                <span className="absolute -left-[30px] top-1 w-2.5 h-2.5 rounded-full bg-accent-purple border-2 border-[var(--bg-secondary)]" />
+                <span className="text-[10px] uppercase font-semibold text-accent-purple">Active Focus</span>
+                <h4 className="text-sm font-semibold text-white mt-1">Freelance IT & Security Consultant</h4>
+                <p className="text-xs text-[var(--text-secondary)] mt-0.5">Designing networks, securing endpoints, and developing React applications.</p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* What I Do capabilities grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+          className="mb-24"
+        >
+          <div className="flex flex-col mb-10">
+            <span className="text-[10px] uppercase font-semibold text-primary tracking-[0.2em] mb-2">Capabilities</span>
+            <h3 className="text-2xl font-bold tracking-tight text-white">Areas of expertise</h3>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {whatIDo.map((item) => (
+              <motion.div
+                key={item.title}
+                variants={itemVariants}
+                whileHover={{ y: -4, borderColor: 'rgba(0,113,227,0.2)' }}
+                className="bg-white/[0.01] border border-white/[0.04] backdrop-blur-md rounded-2xl p-6 transition-all duration-300"
+              >
+                <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center text-primary mb-4 border border-primary/10">
+                  {item.icon}
+                </div>
+                <h4 className="font-semibold text-white text-base mb-2">{item.title}</h4>
+                <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Profile Card & Technical Specs */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+          className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center"
+        >
+          {/* Left: Spec Sheet / Profile Card */}
+          <div className="lg:col-span-5 flex justify-center">
             <Tilt
-              tiltMaxAngleX={10}
-              tiltMaxAngleY={10}
-              scale={1.02}
+              tiltMaxAngleX={6}
+              tiltMaxAngleY={6}
+              scale={1.01}
               transitionSpeed={600}
               className="w-full max-w-sm"
             >
-              <div className="glass-card p-1 relative overflow-hidden">
-                {/* Gradient border glow */}
-                <div className="absolute inset-0 rounded-3xl opacity-30" style={{
-                  background: 'linear-gradient(135deg, #00d4ff, #9333ea, #ec4899)',
-                  padding: '1px',
-                }} />
+              <div className="bg-white/[0.01] border border-white/[0.04] backdrop-blur-md rounded-3xl p-6 relative overflow-hidden shadow-lg">
+                <div className="flex flex-col items-center text-center">
+                  <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-[var(--border-color)] mb-4">
+                    <img
+                      src={personalInfo.avatar}
+                      alt={personalInfo.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${personalInfo.name}&background=0071E3&color=ffffff&size=200`;
+                      }}
+                    />
+                    <div className="absolute bottom-1 right-1 w-3 h-3 rounded-full bg-[#30D158] border-2 border-black" />
+                  </div>
+                  <h3 className="font-sans text-lg font-bold text-white mb-0.5">{personalInfo.name}</h3>
+                  <p className="text-xs text-[var(--text-secondary)] mb-6 font-medium">Developer &amp; Engineer</p>
 
-                <div className="relative bg-dark-50 rounded-[calc(1.5rem-1px)] overflow-hidden">
-                  {/* Header with image */}
-                  <div className="relative h-36 bg-gradient-to-br from-primary-500/20 via-accent-purple/20 to-accent-magenta/10">
-                    <div className="absolute inset-0 noise" />
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
-                      <div className="relative w-24 h-24 rounded-2xl overflow-hidden border-4 border-dark-50 shadow-neon-cyan">
-                        <img
-                          src={personalInfo.avatar}
-                          alt={personalInfo.name}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${personalInfo.name}&background=00d4ff&color=020817&size=200`;
-                          }}
-                        />
-                        <div className="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-green-400 border-2 border-dark-50 shadow-lg" />
+                  <div className="w-full border-t border-[var(--border-color)] pt-5 space-y-3.5 text-left text-xs">
+                    {[
+                      { label: 'Primary Mail', value: personalInfo.email, link: `mailto:${personalInfo.email}` },
+                      { label: 'Hotline', value: personalInfo.phone, link: `tel:${personalInfo.phone.replace(/\s+/g, '')}` },
+                      { label: 'Location', value: personalInfo.location },
+                    ].map((item, i) => (
+                      <div key={i} className="flex flex-col">
+                        <span className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider font-semibold mb-0.5">{item.label}</span>
+                        {item.link ? (
+                          <a href={item.link} className="text-white hover:text-primary transition-colors truncate">{item.value}</a>
+                        ) : (
+                          <span className="text-white truncate">{item.value}</span>
+                        )}
                       </div>
-                    </div>
+                    ))}
                   </div>
 
-                  <div className="pt-14 pb-6 px-6 text-center">
-                    <h3 className="font-display text-xl font-bold text-white mb-1">{personalInfo.name}</h3>
-                    <p className="text-sm text-primary-400 font-medium mb-4">
-                      Developer · Network Engineer · Cybersecurity Specialist
-                    </p>
-
-                    {/* Contact info */}
-                    <div className="space-y-2 text-left mb-5">
-                      {[
-                        { icon: <Mail size={14} />, text: personalInfo.email },
-                        { icon: <Phone size={14} />, text: personalInfo.phone },
-                        { icon: <MapPin size={14} />, text: personalInfo.location },
-                        { icon: <GraduationCap size={14} />, text: 'BSc IT – JKUAT' },
-                      ].map((item, i) => (
-                        <div key={i} className="flex items-center gap-3 text-slate-400 text-xs">
-                          <span className="text-primary-400 flex-shrink-0">{item.icon}</span>
-                          <span className="truncate">{item.text}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Skill bars */}
-                    <div className="space-y-3 mb-5">
-                      {skillBars.map(skill => (
-                        <div key={skill.name}>
-                          <div className="flex justify-between text-xs text-slate-400 mb-1">
-                            <span>{skill.name}</span>
-                            <span style={{ color: skill.color }}>{skill.level}%</span>
-                          </div>
-                          <div className="skill-progress-track">
-                            <motion.div
-                              className="skill-progress-fill"
-                              initial={{ scaleX: 0 }}
-                              animate={inView ? { scaleX: skill.level / 100 } : { scaleX: 0 }}
-                              transition={{ duration: 1.2, delay: 0.5, ease: 'easeOut' }}
-                              style={{ background: `linear-gradient(90deg, ${skill.color}, ${skill.color}88)` }}
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Social links */}
-                    <div className="flex justify-center gap-3">
-                      <a href={personalInfo.github} target="_blank" rel="noopener noreferrer"
-                        className="w-9 h-9 rounded-xl glass border border-white/10 flex items-center justify-center text-slate-400 hover:text-primary-400 hover:border-primary-500/30 transition-colors">
-                        <Github size={16} />
-                      </a>
-                      <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer"
-                        className="w-9 h-9 rounded-xl glass border border-white/10 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/30 transition-colors">
-                        <Linkedin size={16} />
-                      </a>
-                    </div>
+                  <div className="flex gap-3 mt-6">
+                    <a href={personalInfo.github} target="_blank" rel="noopener noreferrer"
+                      className="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-white transition-colors">
+                      <Github size={14} />
+                    </a>
+                    <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer"
+                      className="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-white transition-colors">
+                      <Linkedin size={14} />
+                    </a>
                   </div>
                 </div>
               </div>
             </Tilt>
-          </motion.div>
+          </div>
 
-          {/* Right — Content */}
-          <div className="space-y-8">
-            <motion.div variants={itemVariants}>
-              <span className="section-tag">
-                <Heart size={12} /> About Me
-              </span>
-              <h2 className="section-title mt-3">
-                Passionate about <br />
-                <span className="gradient-text">Technology & Security</span>
-              </h2>
-            </motion.div>
-
-            <motion.div variants={itemVariants} className="space-y-4 text-slate-400 leading-relaxed">
-              <p>{personalInfo.bio}</p>
-              <p>{personalInfo.bioExtended}</p>
-            </motion.div>
-
-            {/* What I Do Grid */}
-            <motion.div variants={itemVariants}>
-              <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-widest mb-4">What I Do</h3>
-              <div className="grid grid-cols-2 gap-3">
-                {whatIDo.map((item, i) => (
-                  <motion.div
-                    key={item.title}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={inView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: 0.4 + i * 0.1, duration: 0.4 }}
-                    whileHover={{ scale: 1.03, borderColor: 'rgba(0, 212, 255, 0.3)' }}
-                    className="glass border border-white/05 rounded-2xl p-4 transition-all duration-200 cursor-default"
-                  >
-                    <span className="text-2xl block mb-2">{item.icon}</span>
-                    <h4 className="font-semibold text-white text-sm mb-1">{item.title}</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Education */}
-            <motion.div
-              variants={itemVariants}
-              className="glass border border-white/08 rounded-2xl p-5 flex items-center gap-4"
-            >
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500/20 to-accent-purple/20 flex items-center justify-center flex-shrink-0">
-                <GraduationCap size={22} className="text-primary-400" />
-              </div>
-              <div>
-                <div className="text-xs text-slate-500 mb-0.5">Currently Studying</div>
-                <div className="font-semibold text-white text-sm">{personalInfo.degree}</div>
-                <div className="text-xs text-slate-400">{personalInfo.university}</div>
-              </div>
-            </motion.div>
+          {/* Right: Technical Specs progress bars */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="flex flex-col mb-4">
+              <span className="text-[10px] uppercase font-semibold text-primary tracking-[0.2em] mb-2">Specifications</span>
+              <h3 className="text-xl font-bold tracking-tight text-white">System capabilities</h3>
+            </div>
+            <div className="space-y-4">
+              {skillBars.map(skill => (
+                <div key={skill.name} className="space-y-1.5">
+                  <div className="flex justify-between text-xs font-semibold text-[var(--text-secondary)]">
+                    <span>{skill.name}</span>
+                    <span className="text-primary">{skill.level}%</span>
+                  </div>
+                  <div className="skill-progress-track">
+                    <motion.div
+                      className="skill-progress-fill"
+                      initial={{ scaleX: 0 }}
+                      animate={inView ? { scaleX: skill.level / 100 } : { scaleX: 0 }}
+                      transition={{ duration: 1.2, delay: 0.2, ease: 'easeOut' }}
+                      style={{ background: 'var(--color-primary)' }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>
