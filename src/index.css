@@ -15,7 +15,7 @@
   --text-primary: #F8F5EF;        /* Warm Cream */
   --text-secondary: #A3A3A8;      /* Soft Grey */
   --text-muted: #7E7E84;          /* Subtle muted warm grey */
-  --color-accent: #F4B400;        /* Premium Gold */
+  --color-accent: #dda15e;        /* Premium Gold */
   --border-color: rgba(163, 163, 168, 0.12); /* Subtle warm-grey border */
 
   /* Glassmorphism */
@@ -60,15 +60,15 @@
 
   /* Gradients */
   --gradient-hero: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-  --gradient-neon: linear-gradient(135deg, var(--color-accent), #C79200);
+  --gradient-neon: linear-gradient(135deg, var(--color-accent), #bc6c25);
   --gradient-yellow-black: linear-gradient(180deg, var(--color-accent) 0%, var(--bg-primary) 100%);
   --gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0) 100%);
 
   /* Legacy aliases mapping BVB yellow/gold properties to design system tokens */
   --color-primary: var(--color-accent);
-  --color-secondary: #C79200;
-  --color-accent-gold: #F4B400;
-  --color-accent-purple: #C79200;
+  --color-secondary: #bc6c25;
+  --color-accent-gold: #dda15e;
+  --color-accent-purple: #bc6c25;
   --color-white: #F8F5EF;
   --color-green: #34C759;
   --color-red: #FF3B30;
@@ -76,7 +76,7 @@
   --shadow-neon-yellow: var(--shadow-md);
   --shadow-neon-gold: var(--shadow-md);
   --shadow-card: var(--shadow-lg);
-  --shadow-card-hover: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(244, 180, 0, 0.2);
+  --shadow-card-hover: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(221, 161, 94, 0.2);
 
   --section-padding: var(--space-9) 0;
   --container-max: 1200px;
@@ -96,7 +96,7 @@
   --glass-border: rgba(26, 26, 29, 0.08);
 
   --shadow-lg: 0 12px 30px rgba(26, 26, 29, 0.04), 0 0 0 1px rgba(26, 26, 29, 0.02);
-  --shadow-card-hover: 0 20px 40px rgba(26, 26, 29, 0.06), 0 0 0 1px rgba(244, 180, 0, 0.25);
+  --shadow-card-hover: 0 20px 40px rgba(26, 26, 29, 0.06), 0 0 0 1px rgba(221, 161, 94, 0.25);
 
   --gradient-hero: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
   --gradient-card: linear-gradient(180deg, rgba(26, 26, 29, 0.01) 0%, rgba(26, 26, 29, 0) 100%);
@@ -493,9 +493,9 @@ body {
   pointer-events: none;
 }
 
-.blob-cyan  { background: #F4B400; }
-.blob-purple { background: #C79200; animation-delay: 3s; }
-.blob-magenta { background: #C79200; animation-delay: 6s; }
+.blob-cyan  { background: #dda15e; }
+.blob-purple { background: #bc6c25; animation-delay: 3s; }
+.blob-magenta { background: #bc6c25; animation-delay: 6s; }
 
 .aurora-bg {
   position: fixed;

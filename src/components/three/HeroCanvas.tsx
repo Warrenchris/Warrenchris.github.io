@@ -10,14 +10,14 @@ function Stars({ count = 3000 }: { count?: number }) {
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
 
-    // BVB palette: Yellow, Gold, White, near-white
+    // New palette: #dda15e, #bc6c25, and light variations
     const colorOptions = [
-      [0.99, 0.91, 0.0],    // #FDE900 — BVB yellow
-      [0.96, 0.65, 0.14],   // #F5A623 — Gold
-      [1.0, 0.93, 0.0],     // #FFED00 — Bright yellow
-      [1.0, 1.0, 1.0],      // White
-      [1.0, 0.72, 0.0],     // #FFB800 — Amber
-      [1.0, 0.85, 0.0],     // Light gold
+      [0.87, 0.63, 0.37],    // #dda15e — Earth Yellow base
+      [0.74, 0.42, 0.15],    // #bc6c25 — Tiger's Eye dark
+      [0.94, 0.82, 0.69],    // #efd0b0 — Warm cream
+      [1.0, 1.0, 1.0],       // White
+      [0.99, 0.96, 0.94],    // Warm white
+      [0.53, 0.38, 0.22],    // #886237 — Muted brown/gold
     ];
 
     for (let i = 0; i < count; i++) {
@@ -83,36 +83,36 @@ function FloatingGeometry() {
 
   return (
     <>
-      {/* BVB Yellow octahedron */}
+      {/* Earth Yellow octahedron */}
       <mesh ref={meshRef} position={[2, 0, -1]}>
         <octahedronGeometry args={[0.35, 0]} />
         <meshStandardMaterial
-          color="#FDE900"
-          emissive="#FDE900"
+          color="#dda15e"
+          emissive="#dda15e"
           emissiveIntensity={0.5}
           wireframe
           transparent
           opacity={0.6}
         />
       </mesh>
-      {/* Gold icosahedron */}
+      {/* Tiger's Eye icosahedron */}
       <mesh ref={mesh2Ref} position={[-2.5, 0.5, -0.5]}>
         <icosahedronGeometry args={[0.3, 0]} />
         <meshStandardMaterial
-          color="#F5A623"
-          emissive="#F5A623"
+          color="#bc6c25"
+          emissive="#bc6c25"
           emissiveIntensity={0.4}
           wireframe
           transparent
           opacity={0.5}
         />
       </mesh>
-      {/* Amber tetrahedron */}
+      {/* Warm cream tetrahedron */}
       <mesh ref={mesh3Ref} position={[1.5, -1, -1.5]}>
         <tetrahedronGeometry args={[0.25, 0]} />
         <meshStandardMaterial
-          color="#FFED00"
-          emissive="#FFED00"
+          color="#efd0b0"
+          emissive="#efd0b0"
           emissiveIntensity={0.4}
           wireframe
           transparent
@@ -120,10 +120,10 @@ function FloatingGeometry() {
         />
       </mesh>
 
-      {/* Yellow lights */}
-      <pointLight position={[0, 0, 2]} intensity={3} color="#FDE900" distance={5} />
-      <pointLight position={[-2, 1, 1]} intensity={2} color="#F5A623" distance={5} />
-      <pointLight position={[2, -1, 0]} intensity={1.5} color="#FFED00" distance={4} />
+      {/* Accent lights */}
+      <pointLight position={[0, 0, 2]} intensity={3} color="#dda15e" distance={5} />
+      <pointLight position={[-2, 1, 1]} intensity={2} color="#bc6c25" distance={5} />
+      <pointLight position={[2, -1, 0]} intensity={1.5} color="#efd0b0" distance={4} />
       <ambientLight intensity={0.05} />
     </>
   );
