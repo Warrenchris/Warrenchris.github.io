@@ -118,7 +118,7 @@ const Hero = () => {
             variants={itemVariants}
             className="font-sans text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-[1.05] mb-2 text-[var(--text-primary)]"
           >
-            Warren <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-[#FFE87A] to-primary">Chris</span>
+            Warren <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-[#f6e3d0] to-primary">Chris</span>
           </motion.h1>
 
           {/* Headline Value Proposition */}
@@ -140,7 +140,7 @@ const Hero = () => {
               wrapper="span"
               speed={50}
               repeat={Infinity}
-              className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-[#FFE87A] font-semibold"
+              className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-[#f6e3d0] font-semibold"
             />
           </motion.div>
 
