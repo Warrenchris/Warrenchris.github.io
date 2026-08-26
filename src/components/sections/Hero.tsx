@@ -1,26 +1,13 @@
-import { useEffect, useRef, useState, Suspense } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import { ChevronDown, Mail, Github, Linkedin, Shield, Globe, Terminal, Sparkles } from 'lucide-react';
+import { ChevronDown, Mail, Github, Linkedin, Sparkles } from 'lucide-react';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
-import HeroCanvas from '@/components/three/HeroCanvas';
 import { personalInfo, stats } from '@/config/siteData';
 
 const Hero = () => {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [statsRef, statsInView] = useInView({ threshold: 0.1, triggerOnce: true });
-
-  useEffect(() => {
-    const handleMouse = (e: MouseEvent) => {
-      setMousePos({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20,
-      });
-    };
-    window.addEventListener('mousemove', handleMouse, { passive: true });
-    return () => window.removeEventListener('mousemove', handleMouse);
-  }, []);
 
   const scrollToAbout = () => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
@@ -46,52 +33,13 @@ const Hero = () => {
       id="hero"
       className="relative min-h-screen flex items-center overflow-hidden bg-[var(--bg-primary)]"
     >
-      {/* Three.js Background */}
-      <Suspense fallback={null}>
-        <HeroCanvas />
-      </Suspense>
+      {/* Subtle gradient background */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[var(--bg-primary)] via-[var(--bg-primary)]/95 to-[var(--bg-primary)] pointer-events-none" />
+      <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_top,rgba(221,161,94,0.08),transparent_70%)] pointer-events-none" />
 
-      {/* Gradient Overlays (Vercel & Apple style top radial light source) */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[var(--bg-primary)] via-[var(--bg-primary)]/85 to-[var(--bg-primary)] pointer-events-none" />
-      <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_top,rgba(0,113,227,0.12),transparent_70%)] pointer-events-none" />
-
-      {/* Animated subtle background blobs */}
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none z-[1] animate-pulse-slow" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent-magenta/3 blur-[120px] rounded-full pointer-events-none z-[1] animate-pulse-slow" style={{ animationDelay: '2s' }} />
-
-      {/* Parallax floating geometric icons (subtle wireframes instead of emojis) */}
-      <motion.div
-        className="absolute top-1/3 right-[12%] hidden lg:block z-[2]"
-        animate={{
-          x: mousePos.x * 0.4,
-          y: mousePos.y * 0.4 + Math.sin(Date.now() * 0.001) * 8,
-        }}
-        transition={{ type: 'spring', stiffness: 50, damping: 15 }}
-      >
-        <div className="w-12 h-12 rounded-xl bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md flex items-center justify-center text-primary/70 shadow-sm animate-float">
-          <Shield size={20} strokeWidth={1.5} />
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="absolute top-1/2 right-[20%] hidden xl:block z-[2]"
-        animate={{ x: mousePos.x * 0.2, y: mousePos.y * 0.2 }}
-        transition={{ type: 'spring', stiffness: 45, damping: 15 }}
-      >
-        <div className="w-10 h-10 rounded-xl bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md flex items-center justify-center text-accent-purple/70 shadow-sm animate-float" style={{ animationDelay: '1s' }}>
-          <Globe size={18} strokeWidth={1.5} />
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="absolute bottom-1/3 left-[10%] hidden lg:block z-[2]"
-        animate={{ x: mousePos.x * 0.3, y: mousePos.y * 0.3 }}
-        transition={{ type: 'spring', stiffness: 35, damping: 15 }}
-      >
-        <div className="w-11 h-11 rounded-xl bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md flex items-center justify-center text-accent-magenta/70 shadow-sm animate-float" style={{ animationDelay: '2s' }}>
-          <Terminal size={18} strokeWidth={1.5} />
-        </div>
-      </motion.div>
+      {/* Subtle background blobs */}
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/3 blur-[140px] rounded-full pointer-events-none z-[1]" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent-purple/2 blur-[140px] rounded-full pointer-events-none z-[1]" />
 
       {/* Main Content */}
       <div className="relative z-10 container mx-auto px-6 max-w-7xl pt-28 pb-12 flex flex-col justify-between min-h-screen">
@@ -126,7 +74,7 @@ const Hero = () => {
             variants={itemVariants}
             className="font-sans text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-[var(--text-primary)] mb-6 max-w-2xl mx-auto leading-snug"
           >
-            Engineered to scale. <span className="text-[var(--text-secondary)]">Secured by design.</span>
+            Software systems that solve real problems.
           </motion.p>
 
           {/* Typewriter */}
@@ -134,7 +82,7 @@ const Hero = () => {
             variants={itemVariants}
             className="text-[15px] sm:text-base font-medium tracking-tight text-[var(--text-secondary)] mb-6 h-8 flex items-center justify-center gap-1.5"
           >
-            <span>Focused on</span>
+            <span>I build</span>
             <TypeAnimation
               sequence={typeSequence}
               wrapper="span"
@@ -149,7 +97,7 @@ const Hero = () => {
             variants={itemVariants}
             className="text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl mx-auto mb-10 leading-relaxed font-normal"
           >
-            Passionate about building secure, resilient network infrastructures and writing highly efficient, scalable code to drive business innovation. Based in <span className="text-[var(--text-primary)] font-medium">Nairobi, Kenya 🇰🇪</span>
+            Full-stack development + network infrastructure + cybersecurity + intelligent systems. Based in <span className="text-[var(--text-primary)] font-medium">Nairobi, Kenya 🇰🇪</span>
           </motion.p>
 
           {/* CTA Buttons */}

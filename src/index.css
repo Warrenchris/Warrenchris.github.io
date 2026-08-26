@@ -103,6 +103,42 @@
 }
 
 /* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primary);
+  color: white;
+  padding: 8px 16px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Focus visible styles for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
    BASE STYLES
    ============================================================ */
 *, *::before, *::after {
@@ -521,35 +557,6 @@ body {
   background: none; /* Clean backgrounds */
 }
 
-/* Custom cursor */
-.cursor-dot {
-  width: 8px; height: 8px;
-  background: var(--color-primary);
-  border-radius: 50%;
-  position: fixed; top: 0; left: 0;
-  pointer-events: none;
-  z-index: 10000;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease, opacity 0.3s ease;
-  box-shadow: 0 0 10px var(--color-primary);
-}
-
-.cursor-ring {
-  width: 44px; height: 44px;
-  border: 1.5px solid rgba(0, 113, 227, 0.3);
-  border-radius: 50%;
-  position: fixed; top: 0; left: 0;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
-}
-
-.cursor-ring.hovering {
-  width: 60px; height: 60px;
-  border-color: var(--color-primary);
-  background: rgba(244, 180, 0, 0.04);
-}
 
 /* Scroll progress bar */
 .scroll-progress-bar {

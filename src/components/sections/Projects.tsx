@@ -5,7 +5,7 @@ import { Github, ExternalLink, Search, FolderOpen, X, Star } from 'lucide-react'
 import Tilt from 'react-parallax-tilt';
 import { projects } from '@/config/siteData';
 
-const filters = ['All', 'Web', 'Cloud', 'Security'];
+const filters = ['All', 'Full Stack', 'Backend', 'AI', 'Cybersecurity', 'Infrastructure', 'Business Systems'];
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -15,7 +15,7 @@ const Projects = () => {
 
   const filteredProjects = useMemo(() => {
     return projects.filter(p => {
-      const matchFilter = activeFilter === 'All' || p.category === activeFilter.toLowerCase();
+      const matchFilter = activeFilter === 'All' || p.tags.includes(activeFilter);
       const matchSearch = !searchQuery ||
         p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -235,7 +235,50 @@ const Projects = () => {
               </div>
 
               <div className="p-6">
-                <p className="text-[var(--text-secondary)] leading-relaxed mb-6 text-xs">{selectedProject.longDescription}</p>
+                {/* Case Study Sections */}
+                <div className="space-y-5 mb-6">
+                  {selectedProject.problem && (
+                    <div>
+                      <h4 className="text-[10px] font-bold uppercase tracking-wider text-primary mb-1.5">Problem</h4>
+                      <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{selectedProject.problem}</p>
+                    </div>
+                  )}
+
+                  {selectedProject.solution && (
+                    <div>
+                      <h4 className="text-[10px] font-bold uppercase tracking-wider text-primary mb-1.5">Solution</h4>
+                      <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{selectedProject.solution}</p>
+                    </div>
+                  )}
+
+                  {selectedProject.architecture && (
+                    <div>
+                      <h4 className="text-[10px] font-bold uppercase tracking-wider text-primary mb-1.5">Architecture</h4>
+                      <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{selectedProject.architecture}</p>
+                    </div>
+                  )}
+
+                  {selectedProject.engineering && (
+                    <div>
+                      <h4 className="text-[10px] font-bold uppercase tracking-wider text-primary mb-1.5">Engineering</h4>
+                      <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{selectedProject.engineering}</p>
+                    </div>
+                  )}
+
+                  {selectedProject.security && (
+                    <div>
+                      <h4 className="text-[10px] font-bold uppercase tracking-wider text-primary mb-1.5">Security</h4>
+                      <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{selectedProject.security}</p>
+                    </div>
+                  )}
+
+                  {selectedProject.outcome && (
+                    <div>
+                      <h4 className="text-[10px] font-bold uppercase tracking-wider text-primary mb-1.5">Outcome</h4>
+                      <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{selectedProject.outcome}</p>
+                    </div>
+                  )}
+                </div>
 
                 <div className="flex flex-wrap gap-1.5 mb-6">
                   {selectedProject.tech.map(t => (
@@ -253,15 +296,17 @@ const Projects = () => {
                     <Github size={14} />
                     <span>View on GitHub</span>
                   </a>
-                  <a
-                    href={selectedProject.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-full bg-primary text-white text-[12px] font-semibold hover:bg-primary-600 active:bg-primary-700 transition-all"
-                  >
-                    <ExternalLink size={14} />
-                    <span>Live Demo</span>
-                  </a>
+                  {selectedProject.demo !== '#' && (
+                    <a
+                      href={selectedProject.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-full bg-primary text-white text-[12px] font-semibold hover:bg-primary-600 active:bg-primary-700 transition-all"
+                    >
+                      <ExternalLink size={14} />
+                      <span>Live Demo</span>
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>

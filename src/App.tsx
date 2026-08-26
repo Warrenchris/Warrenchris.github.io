@@ -1,20 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeProvider } from '@/context/ThemeContext';
 import SmoothScroll from '@/components/layout/SmoothScroll';
-import CustomCursor from '@/components/layout/CustomCursor';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import Hero from '@/components/sections/Hero';
 import About from '@/components/sections/About';
 import Skills from '@/components/sections/Skills';
+import Principles from '@/components/sections/Principles';
 import Projects from '@/components/sections/Projects';
 import Experience from '@/components/sections/Experience';
 import Certifications from '@/components/sections/Certifications';
-import Services from '@/components/sections/Services';
-import GitHubStats from '@/components/sections/GitHubStats';
-import Testimonials from '@/components/sections/Testimonials';
-import Blog from '@/components/sections/Blog';
 import Contact from '@/components/sections/Contact';
 
 // Page loader
@@ -59,24 +55,18 @@ function App() {
               {/* Aurora background */}
               <div className="aurora-bg" aria-hidden="true" />
 
-              {/* Custom cursor (desktop only) */}
-              <CustomCursor />
-
               {/* Navigation */}
               <Navbar />
 
               {/* Main content */}
-              <main>
+              <main id="main-content">
                 <Hero />
                 <About />
                 <Skills />
+                <Principles />
                 <Projects />
                 <Experience />
-                <GitHubStats />
                 <Certifications />
-                <Services />
-                <Testimonials />
-                <Blog />
                 <Contact />
               </main>
 
