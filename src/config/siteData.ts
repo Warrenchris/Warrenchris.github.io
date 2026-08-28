@@ -22,7 +22,7 @@ export const personalInfo = {
   twitter: '#',
   university: 'Jomo Kenyatta University of Agriculture and Technology',
   degree: 'Bachelor of Science in Information Technology',
-  avatar: '/warren.jpg',
+  avatar: '/warren-avatar.jpg',
   cvUrl: '#',
 };
 
@@ -309,7 +309,7 @@ export const certifications = [
     title: 'Red Hat System Administration I',
     issuer: 'Red Hat',
     year: '2024',
-    logo: '/images/redhat-logo.png',
+    logo: '/images/redhat-logo.webp',
     color: '#ee0000',
     description: 'Linux administration, system management, and enterprise deployments',
   },
@@ -318,58 +318,11 @@ export const certifications = [
     title: 'Enterprise Design Thinking Practitioner',
     issuer: 'IBM',
     year: '2023',
-    logo: '/images/ibm-logo.png',
+    logo: '/images/ibm-logo.webp',
     color: '#0530ad',
     description: 'Human-centered design principles and enterprise innovation methodology',
   },
 ];
-
-export const services = [
-  {
-    icon: '🌐',
-    title: 'Full Stack Development',
-    description: 'End-to-end web applications using React, Node.js, Python with modern architecture and clean code practices.',
-    features: ['React / Next.js Frontend', 'Python / Node.js Backend', 'REST & GraphQL APIs', 'Database Design'],
-    color: '#dda15e',
-  },
-  {
-    icon: '🔒',
-    title: 'Cybersecurity Consulting',
-    description: 'Comprehensive security audits, penetration testing, compliance implementation, and threat mitigation strategies.',
-    features: ['Security Audits', 'Vulnerability Assessment', 'Compliance (ISO 27001)', 'Incident Response'],
-    color: '#bc6c25',
-  },
-  {
-    icon: '🌐',
-    title: 'Network Engineering',
-    description: 'Design, implementation, and optimization of enterprise network infrastructure using Cisco and Huawei technologies.',
-    features: ['Cisco & Huawei Setup', 'VPN & SD-WAN', 'Network Monitoring', 'Troubleshooting'],
-    color: '#dda15e',
-  },
-  {
-    icon: '☁️',
-    title: 'Cloud Solutions',
-    description: 'Cloud architecture design, migration strategies, and deployment automation for scalable, resilient infrastructure.',
-    features: ['Cloud Architecture', 'Migration Planning', 'Cost Optimization', 'DevOps Integration'],
-    color: '#bc6c25',
-  },
-  {
-    icon: '🔌',
-    title: 'API Development',
-    description: 'Robust, well-documented REST and GraphQL APIs with authentication, rate limiting, and comprehensive testing.',
-    features: ['RESTful API Design', 'GraphQL', 'API Security', 'Documentation'],
-    color: '#bc6c25',
-  },
-  {
-    icon: '🎨',
-    title: 'UI/UX Design',
-    description: 'Modern, intuitive interfaces with a focus on user experience, accessibility, and premium visual design.',
-    features: ['Responsive Design', 'Prototyping', 'Component Libraries', 'Accessibility'],
-    color: '#dda15e',
-  },
-];
-
-export const testimonials = [];
 
 export const navLinks = [
   { label: 'Home', href: '#hero' },

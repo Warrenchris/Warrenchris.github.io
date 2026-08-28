@@ -1,4 +1,4 @@
-import { useState } from 'react';
+
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { ChevronDown, Mail, Github, Linkedin, Sparkles } from 'lucide-react';

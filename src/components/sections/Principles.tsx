@@ -75,7 +75,7 @@ const Principles = () => {
             variants={containerVariants}
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {principles.map((principle, i) => (
+            {principles.map((principle) => (
               <motion.div
                 key={principle.title}
                 variants={itemVariants}
