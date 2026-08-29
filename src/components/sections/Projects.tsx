@@ -1,130 +1,171 @@
-'use client';
-
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, X, FolderOpen, ArrowRight } from 'lucide-react';
+import { Github, ExternalLink, X, FolderOpen, ArrowUpRight, Check } from 'lucide-react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { projects } from '@/config/siteData';
 
-const filters = ['All', 'Full Stack', 'Backend', 'AI', 'Cybersecurity', 'Business Systems'];
+const filters = ['All', 'Full Stack', 'Backend', 'AI', 'Cybersecurity', 'Infrastructure', 'Business Systems'];
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('All');
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
 
-  const filteredProjects = projects.filter((project) =>
-    activeFilter === 'All' ? true : project.tags.includes(activeFilter)
-  );
+  const filteredProjects = useMemo(() => {
+    return projects.filter((project) =>
+      activeFilter === 'All' ? true : project.tags.includes(activeFilter)
+    );
+  }, [activeFilter]);
 
   return (
-    <section id="projects" className="py-20 bg-background text-foreground relative overflow-hidden">
-      <div className="container mx-auto px-4 max-w-6xl relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-4xl font-bold mb-4">Featured Projects</h2>
-          <div className="h-1 w-20 bg-primary mx-auto rounded-full" />
-        </motion.div>
+    <section id="projects" className="section-wrapper relative bg-[var(--bg-primary)]">
+      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+        {/* Header */}
+        <div className="text-center mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider mb-3">
+            <FolderOpen size={13} />
+            <span>Portfolio</span>
+          </div>
+          <h2 className="section-title font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[var(--text-primary)]">
+            Featured Projects
+          </h2>
+          <p className="section-subtitle mx-auto text-sm sm:text-base text-[var(--text-secondary)] mt-3 max-w-2xl">
+            Real-world systems spanning full-stack development, telecom billing, HR platforms, point-of-sale infrastructure, and security automation.
+          </p>
+        </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {filters.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                activeFilter === filter
-                  ? 'bg-primary text-primary-foreground shadow-md'
-                  : 'bg-muted text-muted-foreground hover:bg-muted/80'
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
+        {/* Filter Pills */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12 sm:mb-16">
+          {filters.map((filter) => {
+            const isActive = activeFilter === filter;
+            return (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`px-4 py-2 rounded-full text-xs font-semibold tracking-tight transition-all duration-200 ${
+                  isActive
+                    ? 'bg-primary text-white shadow-sm scale-102'
+                    : 'border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-secondary)]'
+                }`}
+              >
+                {filter}
+              </button>
+            );
+          })}
         </div>
 
         {/* Projects Grid */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
               <motion.div
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 15 }}
                 transition={{ duration: 0.3 }}
                 key={project.id}
-                className={`group rounded-xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-lg transition-all flex flex-col ${
+                className={`group rounded-3xl overflow-hidden border border-[var(--border-color)] bg-[var(--glass-bg)] backdrop-blur-md transition-all duration-300 hover:border-primary/40 flex flex-col h-full shadow-sm hover:shadow-lg ${
                   project.featured ? 'md:col-span-2 lg:col-span-2' : ''
                 }`}
               >
-                {/* Image or Placeholder */}
-                <div className={`relative overflow-hidden w-full ${project.featured ? 'h-64' : 'h-48'}`}>
+                {/* Media Banner / Placeholder */}
+                <div className={`relative overflow-hidden w-full bg-[var(--bg-secondary)] border-b border-[var(--border-color)] ${project.featured ? 'h-56 sm:h-64' : 'h-48'}`}>
                   {project.image ? (
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-103"
+                      loading="lazy"
                     />
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-primary/80 to-secondary flex items-center justify-center">
-                      <span className="text-5xl font-bold text-white uppercase opacity-50">
-                        {project.title.substring(0, 2)}
+                    <div className="w-full h-full bg-gradient-to-br from-primary/15 via-[var(--bg-secondary)] to-primary/5 flex items-center justify-center">
+                      <div className="text-center p-6">
+                        <span className="text-4xl sm:text-5xl font-mono font-bold text-primary/40">
+                          {project.title.substring(0, 3).toUpperCase()}
+                        </span>
+                        <p className="text-xs text-[var(--text-muted)] mt-1 font-mono tracking-wider">
+                          SYSTEM ARCHITECTURE
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-[var(--bg-primary)]/85 backdrop-blur-md text-primary border border-[var(--border-color)] shadow-sm">
+                      {project.subtitle}
+                    </span>
+                  </div>
+
+                  {project.featured && (
+                    <div className="absolute top-4 right-4">
+                      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary text-white shadow-sm">
+                        Flagship
                       </span>
                     </div>
                   )}
-                  <div className="absolute top-4 left-4 bg-background/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-primary">
-                    {project.subtitle}
-                  </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
+                <div className="p-6 sm:p-7 flex flex-col flex-grow">
+                  <h3 className="font-sans text-xl font-bold text-[var(--text-primary)] mb-2.5 tracking-tight group-hover:text-primary transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+
+                  <p className="text-xs sm:text-sm text-[var(--text-secondary)] mb-6 line-clamp-3 leading-relaxed flex-grow">
                     {project.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 mb-6 mt-auto">
-                    {project.tech.slice(0, 4).map((tech, idx) => (
+                  {/* Tech stack badges */}
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    {project.tech.slice(0, 5).map((tech, idx) => (
                       <span
                         key={idx}
-                        className="text-xs px-2 py-1 rounded-md bg-secondary text-secondary-foreground"
+                        className="tech-pill text-[11px]"
                       >
                         {tech}
                       </span>
                     ))}
-                    {project.tech.length > 4 && (
-                      <span className="text-xs px-2 py-1 rounded-md bg-muted text-muted-foreground">
-                        +{project.tech.length - 4}
+                    {project.tech.length > 5 && (
+                      <span className="tech-pill text-[11px] text-[var(--text-muted)]">
+                        +{project.tech.length - 5}
                       </span>
                     )}
                   </div>
 
-                  <div className="flex items-center justify-between mt-auto">
+                  {/* Card Actions */}
+                  <div className="flex items-center justify-between pt-4 border-t border-[var(--border-color)] mt-auto gap-3">
                     <button
                       onClick={() => setSelectedProject(project)}
-                      className="text-sm font-medium flex items-center gap-1 text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:text-primary-600 transition-colors"
                     >
-                      View Details
-                      <ArrowRight className="w-4 h-4" />
+                      <span>Case Study &amp; Specs</span>
+                      <ArrowUpRight size={14} />
                     </button>
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                        aria-label={`GitHub repository for ${project.title}`}
-                      >
-                        <Github className="w-5 h-5" />
-                      </a>
-                    )}
+
+                    <div className="flex items-center gap-2">
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-secondary)] transition-all"
+                          aria-label={`GitHub repository for ${project.title}`}
+                        >
+                          <Github size={14} />
+                        </a>
+                      )}
+                      {project.demo && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary-600 transition-all"
+                          aria-label={`Live demo for ${project.title}`}
+                        >
+                          <ExternalLink size={13} />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -133,59 +174,62 @@ export default function Projects() {
         </motion.div>
 
         {filteredProjects.length === 0 && (
-          <div className="text-center py-20 text-muted-foreground">
-            <FolderOpen className="w-12 h-12 mx-auto mb-4 opacity-50" />
-            <p>No projects found for this category.</p>
+          <div className="text-center py-20 text-[var(--text-muted)]">
+            <FolderOpen className="w-12 h-12 mx-auto mb-3 opacity-40 text-primary" />
+            <p className="text-sm">No projects found in this category.</p>
           </div>
         )}
       </div>
 
-      {/* Project Detail Modal */}
+      {/* Case Study Detail Modal (Radix Accessible Dialog) */}
       <Dialog.Root open={!!selectedProject} onOpenChange={(open) => !open && setSelectedProject(null)}>
         <Dialog.Portal>
-          <Dialog.Overlay className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-          <Dialog.Content className="fixed left-[50%] top-[50%] z-50 grid w-full max-w-4xl translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg md:w-full max-h-[90vh] overflow-y-auto">
+          <Dialog.Overlay className="fixed inset-0 bg-black/80 backdrop-blur-md z-[2000]" />
+          <Dialog.Content className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[2001] w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-3xl p-6 sm:p-8 shadow-2xl focus:outline-none">
             {selectedProject && (
               <div className="space-y-6">
-                <div className="flex items-start justify-between">
+                {/* Modal Header */}
+                <div className="flex items-start justify-between gap-4">
                   <div>
-                    <Dialog.Title className="text-3xl font-bold mb-2">
+                    <span className="text-xs font-bold text-primary uppercase tracking-widest block mb-1">
+                      {selectedProject.subtitle}
+                    </span>
+                    <Dialog.Title className="text-2xl sm:text-3xl font-bold text-[var(--text-primary)] tracking-tight">
                       {selectedProject.title}
                     </Dialog.Title>
-                    <Dialog.Description className="text-xl text-primary font-medium">
-                      {selectedProject.subtitle}
-                    </Dialog.Description>
                   </div>
-                  <Dialog.Close className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-                    <X className="h-6 w-6" />
-                    <span className="sr-only">Close</span>
+                  <Dialog.Close asChild>
+                    <button
+                      className="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--border-color)] transition-colors shrink-0"
+                      aria-label="Close modal"
+                    >
+                      <X size={16} />
+                    </button>
                   </Dialog.Close>
                 </div>
 
+                {/* Banner */}
                 {selectedProject.image ? (
-                  <img
-                    src={selectedProject.image}
-                    alt={selectedProject.title}
-                    className="w-full h-auto max-h-[400px] object-cover rounded-lg border border-border"
-                  />
-                ) : (
-                  <div className="w-full h-48 sm:h-64 bg-gradient-to-br from-primary/80 to-secondary flex items-center justify-center rounded-lg">
-                    <span className="text-6xl font-bold text-white uppercase opacity-50">
-                      {selectedProject.title.substring(0, 2)}
-                    </span>
+                  <div className="w-full h-56 sm:h-72 rounded-2xl overflow-hidden border border-[var(--border-color)] bg-[var(--bg-primary)]">
+                    <img
+                      src={selectedProject.image}
+                      alt={selectedProject.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                )}
+                ) : null}
 
-                <div className="flex flex-wrap gap-4 pt-4 border-t border-border">
+                {/* CTAs */}
+                <div className="flex flex-wrap gap-3 pt-2">
                   {selectedProject.github && (
                     <a
                       href={selectedProject.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md text-sm font-medium transition-colors"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] text-xs font-semibold text-[var(--text-primary)] hover:border-[var(--text-secondary)] transition-all"
                     >
-                      <Github className="w-4 h-4" />
-                      View Source
+                      <Github size={15} />
+                      <span>View Source on GitHub</span>
                     </a>
                   )}
                   {selectedProject.demo && (
@@ -193,71 +237,70 @@ export default function Projects() {
                       href={selectedProject.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-md text-sm font-medium transition-colors"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-white text-xs font-semibold hover:bg-primary-600 transition-all"
                     >
-                      <ExternalLink className="w-4 h-4" />
-                      Live Demo
+                      <ExternalLink size={14} />
+                      <span>Live Deployment</span>
                     </a>
                   )}
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
-                  <div className="space-y-6">
-                    {selectedProject.problem && (
-                      <section>
-                        <h4 className="text-lg font-semibold mb-2">The Problem</h4>
-                        <p className="text-muted-foreground text-sm leading-relaxed">{selectedProject.problem}</p>
-                      </section>
-                    )}
-                    {selectedProject.solution && (
-                      <section>
-                        <h4 className="text-lg font-semibold mb-2">The Solution</h4>
-                        <p className="text-muted-foreground text-sm leading-relaxed">{selectedProject.solution}</p>
-                      </section>
-                    )}
-                    {selectedProject.outcome && (
-                      <section>
-                        <h4 className="text-lg font-semibold mb-2">Outcome & Impact</h4>
-                        <p className="text-muted-foreground text-sm leading-relaxed">{selectedProject.outcome}</p>
-                      </section>
-                    )}
-                  </div>
-                  
-                  <div className="space-y-6">
-                    {selectedProject.architecture && (
-                      <section>
-                        <h4 className="text-lg font-semibold mb-2">Architecture</h4>
-                        <p className="text-muted-foreground text-sm leading-relaxed">{selectedProject.architecture}</p>
-                      </section>
-                    )}
-                    {selectedProject.engineering && (
-                      <section>
-                        <h4 className="text-lg font-semibold mb-2">Engineering Challenges</h4>
-                        <p className="text-muted-foreground text-sm leading-relaxed">{selectedProject.engineering}</p>
-                      </section>
-                    )}
-                    {selectedProject.security && (
-                      <section>
-                        <h4 className="text-lg font-semibold mb-2">Security Considerations</h4>
-                        <p className="text-muted-foreground text-sm leading-relaxed">{selectedProject.security}</p>
-                      </section>
-                    )}
-                  </div>
+                {/* Deep Engineering Case Study Sections */}
+                <div className="space-y-6 pt-4 border-t border-[var(--border-color)]">
+                  {selectedProject.problem && (
+                    <div>
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-primary mb-1.5">Problem</h4>
+                      <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">{selectedProject.problem}</p>
+                    </div>
+                  )}
+
+                  {selectedProject.solution && (
+                    <div>
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-primary mb-1.5">Solution</h4>
+                      <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">{selectedProject.solution}</p>
+                    </div>
+                  )}
+
+                  {selectedProject.architecture && (
+                    <div>
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-primary mb-1.5">Architecture &amp; Data Flow</h4>
+                      <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">{selectedProject.architecture}</p>
+                    </div>
+                  )}
+
+                  {selectedProject.engineering && (
+                    <div>
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-primary mb-1.5">Engineering Highlights</h4>
+                      <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">{selectedProject.engineering}</p>
+                    </div>
+                  )}
+
+                  {selectedProject.security && (
+                    <div>
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-primary mb-1.5">Security Considerations</h4>
+                      <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">{selectedProject.security}</p>
+                    </div>
+                  )}
+
+                  {selectedProject.outcome && (
+                    <div>
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-primary mb-1.5">Outcome</h4>
+                      <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">{selectedProject.outcome}</p>
+                    </div>
+                  )}
                 </div>
 
-                <section className="pt-4 border-t border-border">
-                  <h4 className="text-lg font-semibold mb-3">Technologies Used</h4>
+                {/* Tech Stack */}
+                <div className="pt-4 border-t border-[var(--border-color)]">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] mb-3">Technologies</h4>
                   <div className="flex flex-wrap gap-2">
-                    {selectedProject.tech.map((tech, idx) => (
-                      <span
-                        key={idx}
-                        className="text-sm px-3 py-1 rounded-full bg-secondary text-secondary-foreground"
-                      >
-                        {tech}
+                    {selectedProject.tech.map((t) => (
+                      <span key={t} className="tech-pill text-xs">
+                        {t}
                       </span>
                     ))}
                   </div>
-                </section>
+                </div>
               </div>
             )}
           </Dialog.Content>

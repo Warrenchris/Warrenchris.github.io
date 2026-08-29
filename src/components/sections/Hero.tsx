@@ -1,7 +1,5 @@
-'use client';
-
 import { motion } from 'framer-motion';
-import { ChevronDown, Mail, Github, Linkedin, Download, FileText } from 'lucide-react';
+import { ChevronDown, Mail, Github, Linkedin, FileText, ArrowUpRight } from 'lucide-react';
 import { personalInfo } from '@/config/siteData';
 
 const containerVariants = {
@@ -10,7 +8,7 @@ const containerVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.1,
-      delayChildren: 0.2,
+      delayChildren: 0.15,
     },
   },
 };
@@ -20,29 +18,30 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
+    transition: { duration: 0.5, ease: [0.25, 1, 0.5, 1] },
   },
 };
 
 export default function Hero() {
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <section 
-      id="home" 
-      className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden pt-20"
-      style={{
-        backgroundColor: 'var(--bg-primary)',
-        color: 'var(--text-primary)',
-      }}
+    <section
+      id="hero"
+      className="relative min-h-[92vh] flex flex-col justify-center items-center overflow-hidden pt-24 pb-16 bg-[var(--bg-primary)] text-[var(--text-primary)]"
     >
-      {/* Subtle radial gradient background */}
-      <div 
-        className="absolute inset-0 z-0 opacity-40 pointer-events-none"
+      {/* Subtle radial ambient lighting */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none opacity-60"
         style={{
-          background: 'radial-gradient(circle at 50% 0%, var(--border-color) 0%, transparent 60%)',
+          background: 'radial-gradient(circle at 50% 15%, rgba(221, 161, 94, 0.08) 0%, transparent 65%)',
         }}
+        aria-hidden="true"
       />
 
-      <div className="container mx-auto px-4 z-10 w-full max-w-3xl flex flex-col items-center text-center">
+      <div className="container mx-auto px-6 z-10 w-full max-w-4xl flex flex-col items-center text-center my-auto">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -50,144 +49,99 @@ export default function Hero() {
           className="flex flex-col items-center w-full"
         >
           {/* Status Badge */}
-          <motion.div variants={itemVariants} className="mb-8">
-            <div 
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium border"
-              style={{
-                backgroundColor: 'var(--glass-bg)',
-                borderColor: 'var(--border-color)',
-                color: 'var(--text-secondary)',
-              }}
-            >
+          <motion.div variants={itemVariants} className="mb-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] shadow-sm backdrop-blur-md">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#30D158] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#30D158]" />
               </span>
-              Available for opportunities
+              <span>Available for engineering roles & consulting</span>
             </div>
           </motion.div>
 
-          {/* Name & Headline */}
-          <motion.h1 
-            variants={itemVariants} 
-            className="font-bold tracking-tight mb-4 text-balance"
-            style={{ fontSize: 'clamp(2.5rem, 5vw + 1rem, 4.5rem)' }}
+          {/* Name */}
+          <motion.h1
+            variants={itemVariants}
+            className="font-display font-bold tracking-tight mb-4 text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05]"
           >
-            {personalInfo.name}
+            Warren <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-[#f6e3d0] to-primary">Chris</span>
           </motion.h1>
 
-          <motion.p 
-            variants={itemVariants} 
-            className="font-medium text-balance mb-6"
-            style={{ 
-              fontSize: 'clamp(1.25rem, 2vw + 1rem, 2rem)',
-              color: 'var(--text-primary)'
-            }}
+          {/* Headline Value Proposition */}
+          <motion.p
+            variants={itemVariants}
+            className="font-sans text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-[var(--text-primary)] mb-5 max-w-2xl text-balance leading-snug"
           >
             {personalInfo.headline}
           </motion.p>
 
-          <motion.p 
-            variants={itemVariants} 
-            className="text-balance mb-10 max-w-2xl"
-            style={{ 
-              fontSize: 'clamp(1rem, 1vw + 0.8rem, 1.25rem)',
-              color: 'var(--text-secondary)'
-            }}
+          {/* Subheadline */}
+          <motion.p
+            variants={itemVariants}
+            className="text-sm sm:text-base md:text-lg text-[var(--text-secondary)] mb-10 max-w-2xl leading-relaxed text-balance"
           >
             {personalInfo.subheadline}
           </motion.p>
 
           {/* CTAs */}
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-4 mb-12 w-full justify-center">
-            <a 
-              href="#projects"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium transition-transform hover:scale-105 active:scale-95 w-full sm:w-auto"
-              style={{
-                backgroundColor: 'var(--text-primary)',
-                color: 'var(--bg-primary)',
-              }}
+            <button
+              onClick={() => scrollToSection('projects')}
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm bg-primary text-white hover:bg-primary-600 active:scale-98 transition-all duration-200 shadow-sm w-full sm:w-auto"
             >
-              View My Work
-            </a>
-            <a 
+              <span>Explore My Work</span>
+              <ArrowUpRight size={16} />
+            </button>
+
+            <a
               href={personalInfo.cvUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium border transition-colors hover:bg-opacity-10 w-full sm:w-auto"
-              style={{
-                backgroundColor: 'transparent',
-                borderColor: 'var(--border-color)',
-                color: 'var(--text-primary)',
-              }}
+              download
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-semibold text-sm border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-primary)] hover:border-[var(--text-secondary)] active:scale-98 transition-all duration-200 w-full sm:w-auto"
             >
-              <FileText size={18} />
-              Download CV
+              <FileText size={16} className="text-primary" />
+              <span>Download CV</span>
             </a>
           </motion.div>
 
           {/* Social Links */}
-          <motion.div variants={itemVariants} className="flex items-center gap-4">
-            <a 
-              href={personalInfo.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="p-3 rounded-full border transition-transform hover:scale-110"
-              style={{
-                borderColor: 'var(--border-color)',
-                backgroundColor: 'var(--glass-bg)',
-                color: 'var(--text-primary)',
-              }}
-            >
-              <Github size={20} />
-            </a>
-            <a 
-              href={personalInfo.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="p-3 rounded-full border transition-transform hover:scale-110"
-              style={{
-                borderColor: 'var(--border-color)',
-                backgroundColor: 'var(--glass-bg)',
-                color: 'var(--text-primary)',
-              }}
-            >
-              <Linkedin size={20} />
-            </a>
-            <a 
-              href={`mailto:${personalInfo.email}`}
-              aria-label="Email"
-              className="p-3 rounded-full border transition-transform hover:scale-110"
-              style={{
-                borderColor: 'var(--border-color)',
-                backgroundColor: 'var(--glass-bg)',
-                color: 'var(--text-primary)',
-              }}
-            >
-              <Mail size={20} />
-            </a>
+          <motion.div variants={itemVariants} className="flex items-center gap-3">
+            {[
+              { icon: <Github size={18} />, href: personalInfo.github, label: 'GitHub' },
+              { icon: <Linkedin size={18} />, href: personalInfo.linkedin, label: 'LinkedIn' },
+              { icon: <Mail size={18} />, href: `mailto:${personalInfo.email}`, label: 'Email' },
+            ].map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                className="w-10 h-10 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-secondary)] hover:scale-105 active:scale-95 transition-all duration-200"
+              >
+                {social.icon}
+              </a>
+            ))}
           </motion.div>
         </motion.div>
       </div>
 
       {/* Scroll Indicator */}
-      <motion.div 
+      <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        style={{ color: 'var(--text-secondary)' }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+        onClick={() => scrollToSection('projects')}
+        className="flex flex-col items-center gap-1.5 cursor-pointer mt-6 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-200"
+        aria-label="Scroll to projects"
       >
-        <span className="text-sm font-medium tracking-widest uppercase">Scroll</span>
+        <span className="text-[10px] uppercase tracking-[0.25em] font-semibold">Scroll</span>
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          animate={{ y: [0, 5, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
         >
-          <ChevronDown size={24} />
+          <ChevronDown size={18} />
         </motion.div>
-      </motion.div>
+      </motion.button>
     </section>
   );
 }
