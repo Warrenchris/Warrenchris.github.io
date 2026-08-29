@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react';
 import { personalInfo } from '@/config/siteData';
 

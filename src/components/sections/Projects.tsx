@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, X, FolderOpen, ArrowUpRight, Check } from 'lucide-react';
+import { Github, ExternalLink, X, FolderOpen, ArrowUpRight } from 'lucide-react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { projects } from '@/config/siteData';
 
