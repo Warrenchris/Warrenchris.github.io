@@ -297,31 +297,6 @@ body {
 .light .form-input:focus {
   box-shadow: 0 0 0 3px rgba(221, 161, 94, 0.1);
 }
-
-/* Aurora Background */
-.aurora-bg {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: -1;
-  background: var(--bg-primary);
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.aurora-bg::before {
-  content: '';
-  position: absolute;
-  top: -50%; left: -50%;
-  width: 200%; height: 200%;
-  background:
-    radial-gradient(ellipse at 50% 30%, rgba(221, 161, 94, 0.04) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 80%, rgba(188, 108, 37, 0.02) 0%, transparent 50%);
-  animation: aurora 25s ease infinite;
-}
-
-@keyframes aurora {
-  0%, 100% { transform: rotate(0deg) scale(1); }
-  50% { transform: rotate(180deg) scale(1.05); }
 }
 
 /* ============================================================

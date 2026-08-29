@@ -78,7 +78,7 @@ export default function Projects() {
                       loading="lazy"
                     />
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-primary/15 via-[var(--bg-secondary)] to-primary/5 flex items-center justify-center">
+                    <div className="w-full h-full bg-[var(--bg-secondary)] flex items-center justify-center">
                       <div className="text-center p-6">
                         <span className="text-4xl sm:text-5xl font-mono font-bold text-primary/40">
                           {project.title.substring(0, 3).toUpperCase()}

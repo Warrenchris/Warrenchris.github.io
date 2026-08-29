@@ -50,9 +50,6 @@ function App() {
               transition={{ duration: 0.4 }}
               className="relative min-h-screen"
             >
-              {/* Aurora background */}
-              <div className="aurora-bg" aria-hidden="true" />
-
               {/* Navigation */}
               <Navbar />
 

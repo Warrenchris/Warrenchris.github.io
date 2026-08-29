@@ -90,7 +90,7 @@ const Navbar = () => {
               onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="flex items-center gap-2 group"
             >
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary to-primary-600 flex items-center justify-center font-sans font-bold text-white text-sm shadow-sm">
+              <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center font-sans font-bold text-white text-sm shadow-sm">
                 W
               </div>
               <span className="font-sans font-semibold text-[15px] tracking-tight text-[var(--text-primary)] hidden sm:block">

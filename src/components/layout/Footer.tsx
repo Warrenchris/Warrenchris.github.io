@@ -13,7 +13,7 @@ export default function Footer() {
           {/* Logo & Identity */}
           <div className="flex flex-col items-center md:items-start gap-1.5">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-md bg-gradient-to-br from-primary to-primary-600 flex items-center justify-center font-sans font-bold text-white text-xs shadow-sm">
+              <div className="w-6 h-6 rounded-md bg-primary flex items-center justify-center font-sans font-bold text-white text-xs shadow-sm">
                 W
               </div>
               <span className="font-sans font-semibold text-sm tracking-tight text-[var(--text-primary)]">

@@ -32,15 +32,6 @@ export default function Hero() {
       id="hero"
       className="relative min-h-[92vh] flex flex-col justify-center items-center overflow-hidden pt-24 pb-16 bg-[var(--bg-primary)] text-[var(--text-primary)]"
     >
-      {/* Subtle radial ambient lighting */}
-      <div
-        className="absolute inset-0 z-0 pointer-events-none opacity-60"
-        style={{
-          background: 'radial-gradient(circle at 50% 15%, rgba(221, 161, 94, 0.08) 0%, transparent 65%)',
-        }}
-        aria-hidden="true"
-      />
-
       <div className="container mx-auto px-6 z-10 w-full max-w-4xl flex flex-col items-center text-center my-auto">
         <motion.div
           variants={containerVariants}
@@ -64,7 +55,7 @@ export default function Hero() {
             variants={itemVariants}
             className="font-display font-bold tracking-tight mb-4 text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05]"
           >
-            Warren <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-[#f6e3d0] to-primary">Chris</span>
+            Warren <span className="text-primary">Chris</span>
           </motion.h1>
 
           {/* Headline Value Proposition */}
