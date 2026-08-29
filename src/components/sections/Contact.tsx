@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import emailjs from '@emailjs/browser';
 import {
-  Mail, Phone, MapPin, Github, Linkedin, Send,
+  Mail, MapPin, Github, Linkedin, Send,
   CheckCircle, XCircle, Loader2, MessageCircle
 } from 'lucide-react';
 import { personalInfo } from '@/config/siteData';
@@ -55,17 +55,12 @@ const Contact = () => {
 
   const contactCards = [
     { icon: <Mail size={16} strokeWidth={1.5} />, label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}` },
-    { icon: <Phone size={16} strokeWidth={1.5} />, label: 'Phone', value: personalInfo.phone, href: `tel:${personalInfo.phone.replace(/\s+/g, '')}` },
     { icon: <MapPin size={16} strokeWidth={1.5} />, label: 'Location', value: personalInfo.location, href: '#' },
   ];
 
   return (
     <section id="contact" className="section-wrapper relative bg-[var(--bg-primary)]">
-      {/* Subtle blurs */}
-      <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-primary/2 blur-[140px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-accent-purple/2 blur-[140px] rounded-full pointer-events-none" />
-
-      <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
+      <div className="container mx-auto px-6 max-w-5xl" ref={ref}>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -73,7 +68,7 @@ const Contact = () => {
           className="text-center mb-16"
         >
           <span className="section-tag"><MessageCircle size={12} className="text-primary" /> Contact</span>
-          <h2 className="section-title mt-3 font-display">Let's Work Together</h2>
+          <h2 className="section-title mt-3 font-display">Get in Touch</h2>
           <p className="section-subtitle mx-auto mt-4 text-[var(--text-secondary)] font-light text-base">
             Have a project in mind or want to discuss an opportunity? I'd love to hear from you.
           </p>
@@ -185,42 +180,48 @@ const Contact = () => {
                   <form ref={formRef} onSubmit={handleSubmit} noValidate className="space-y-4">
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
+                        <label htmlFor="name" className="sr-only">Name</label>
                         <input
+                          id="name"
                           type="text"
                           name="name"
                           placeholder="Your Name"
                           className={`form-input bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-4 text-xs text-[var(--text-primary)] placeholder-slate-500 focus:border-primary focus:ring-0 w-full ${errors.name ? 'border-[#FF3B30]/50' : ''}`}
-                          aria-label="Name"
                         />
                         {errors.name && <p className="text-[10px] text-[#FF3B30] font-semibold mt-1">{errors.name}</p>}
                       </div>
                       <div>
+                        <label htmlFor="email" className="sr-only">Email</label>
                         <input
+                          id="email"
                           type="email"
                           name="email"
                           placeholder="Your Email"
                           className={`form-input bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-4 text-xs text-[var(--text-primary)] placeholder-slate-500 focus:border-primary focus:ring-0 w-full ${errors.email ? 'border-[#FF3B30]/50' : ''}`}
-                          aria-label="Email"
                         />
                         {errors.email && <p className="text-[10px] text-[#FF3B30] font-semibold mt-1">{errors.email}</p>}
                       </div>
                     </div>
 
-                    <input
-                      type="text"
-                      name="subject"
-                      placeholder="Subject"
-                      className="form-input bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-4 text-xs text-[var(--text-primary)] placeholder-slate-500 focus:border-primary focus:ring-0 w-full"
-                      aria-label="Subject"
-                    />
+                    <div>
+                      <label htmlFor="subject" className="sr-only">Subject</label>
+                      <input
+                        id="subject"
+                        type="text"
+                        name="subject"
+                        placeholder="Subject"
+                        className="form-input bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-4 text-xs text-[var(--text-primary)] placeholder-slate-500 focus:border-primary focus:ring-0 w-full"
+                      />
+                    </div>
 
                     <div>
+                      <label htmlFor="message" className="sr-only">Message</label>
                       <textarea
+                        id="message"
                         name="message"
                         rows={5}
                         placeholder="Tell me about your project..."
                         className={`form-input bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-4 text-xs text-[var(--text-primary)] placeholder-slate-500 focus:border-primary focus:ring-0 w-full resize-none ${errors.message ? 'border-[#FF3B30]/50' : ''}`}
-                        aria-label="Message"
                       />
                       {errors.message && <p className="text-[10px] text-[#FF3B30] font-semibold mt-1">{errors.message}</p>}
                     </div>

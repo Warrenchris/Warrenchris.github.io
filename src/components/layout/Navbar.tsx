@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Download, Sun, Moon } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
@@ -7,10 +7,9 @@ import { navLinks, personalInfo } from '@/config/siteData';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
+  const [activeSection, setActiveSection] = useState('');
   const [scrollProgress, setScrollProgress] = useState(0);
   const { isDark, toggleTheme } = useTheme();
-  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,7 +20,7 @@ const Navbar = () => {
 
       // Active section tracking
       const sections = navLinks.map(l => l.href.replace('#', ''));
-      for (const sectionId of sections.reverse()) {
+      for (const sectionId of [...sections].reverse()) {
         const el = document.getElementById(sectionId);
         if (el) {
           const top = el.getBoundingClientRect().top;
@@ -37,6 +36,18 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu on Escape
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape' && isOpen) {
+      setIsOpen(false);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [handleKeyDown]);
+
   const scrollTo = (href: string) => {
     const id = href.replace('#', '');
     const el = document.getElementById(id);
@@ -51,40 +62,41 @@ const Navbar = () => {
       {/* Scroll Progress Bar */}
       <div
         className="scroll-progress-bar"
-        style={{
-          width: `${scrollProgress}%`,
-          transition: 'width 0.1s linear',
-        }}
+        style={{ width: `${scrollProgress}%` }}
+        role="progressbar"
+        aria-valuenow={Math.round(scrollProgress)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label="Page scroll progress"
       />
 
       <motion.nav
-        ref={navRef}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
         className={`fixed top-0 left-0 right-0 z-[1000] border-b transition-all duration-300 ${
-          scrolled 
-            ? 'navbar-glass bg-[var(--glass-bg)] border-[var(--border-color)] shadow-sm' 
+          scrolled
+            ? 'navbar-glass bg-[var(--glass-bg)] border-[var(--border-color)] shadow-sm'
             : 'bg-transparent border-transparent'
         }`}
+        role="navigation"
+        aria-label="Main navigation"
       >
         <div className="container mx-auto px-6 max-w-7xl">
-          <div className="flex items-center justify-between h-14"> {/* Compact 56px Apple height */}
+          <div className="flex items-center justify-between h-14">
             {/* Logo */}
-            <motion.a
+            <a
               href="#hero"
-              onClick={(e) => { e.preventDefault(); scrollTo('#hero'); }}
+              onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="flex items-center gap-2 group"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
             >
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary to-accent-magenta flex items-center justify-center font-sans font-bold text-white text-sm shadow-sm">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary to-primary-600 flex items-center justify-center font-sans font-bold text-white text-sm shadow-sm">
                 W
               </div>
               <span className="font-sans font-semibold text-[15px] tracking-tight text-[var(--text-primary)] hidden sm:block">
                 Warren<span className="text-primary font-bold">Chris</span>
               </span>
-            </motion.a>
+            </a>
 
             {/* Desktop Nav */}
             <div className="hidden lg:flex items-center gap-6">
@@ -92,7 +104,7 @@ const Navbar = () => {
                 const sectionId = link.href.replace('#', '');
                 const isActive = activeSection === sectionId;
                 return (
-                  <motion.a
+                  <a
                     key={link.href}
                     href={link.href}
                     onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
@@ -110,7 +122,7 @@ const Navbar = () => {
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
-                  </motion.a>
+                  </a>
                 );
               })}
             </div>
@@ -118,12 +130,10 @@ const Navbar = () => {
             {/* Right Actions */}
             <div className="flex items-center gap-3">
               {/* Theme Toggle */}
-              <motion.button
+              <button
                 onClick={toggleTheme}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
                 className="p-1.5 rounded-lg border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
-                aria-label="Toggle theme"
+                aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
               >
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -136,30 +146,27 @@ const Navbar = () => {
                     {isDark ? <Sun size={15} /> : <Moon size={15} />}
                   </motion.div>
                 </AnimatePresence>
-              </motion.button>
+              </button>
 
               {/* Download CV */}
-              <motion.a
+              <a
                 href={personalInfo.cvUrl}
                 download
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
                 className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary text-white text-[12px] font-medium hover:bg-primary-600 active:bg-primary-700 transition-all duration-200"
               >
                 <Download size={12} />
                 Download CV
-              </motion.a>
+              </a>
 
               {/* Hamburger */}
-              <motion.button
+              <button
                 onClick={() => setIsOpen(!isOpen)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
                 className="lg:hidden p-1.5 rounded-lg border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
-                aria-label="Toggle menu"
+                aria-label={isOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={isOpen}
               >
                 {isOpen ? <X size={15} /> : <Menu size={15} />}
-              </motion.button>
+              </button>
             </div>
           </div>
         </div>
@@ -192,17 +199,14 @@ const Navbar = () => {
                     {link.label}
                   </motion.a>
                 ))}
-                <motion.a
+                <a
                   href={personalInfo.cvUrl}
                   download
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: navLinks.length * 0.03 }}
                   className="mt-2 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full bg-primary text-white text-[12px] font-medium"
                 >
                   <Download size={12} />
                   Download CV
-                </motion.a>
+                </a>
               </div>
             </motion.div>
           )}

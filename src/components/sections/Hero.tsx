@@ -1,195 +1,193 @@
+'use client';
 
 import { motion } from 'framer-motion';
-import { TypeAnimation } from 'react-type-animation';
-import { ChevronDown, Mail, Github, Linkedin, Sparkles } from 'lucide-react';
-import CountUp from 'react-countup';
-import { useInView } from 'react-intersection-observer';
-import { personalInfo, stats } from '@/config/siteData';
+import { ChevronDown, Mail, Github, Linkedin, Download, FileText } from 'lucide-react';
+import { personalInfo } from '@/config/siteData';
 
-const Hero = () => {
-  const [statsRef, statsInView] = useInView({ threshold: 0.1, triggerOnce: true });
-
-  const scrollToAbout = () => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const typeSequence = personalInfo.roles.flatMap(role => [role, 2000]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
     },
-  };
+  },
+};
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 1, 0.5, 1] } },
-  };
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
 
+export default function Hero() {
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden bg-[var(--bg-primary)]"
+    <section 
+      id="home" 
+      className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden pt-20"
+      style={{
+        backgroundColor: 'var(--bg-primary)',
+        color: 'var(--text-primary)',
+      }}
     >
-      {/* Subtle gradient background */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[var(--bg-primary)] via-[var(--bg-primary)]/95 to-[var(--bg-primary)] pointer-events-none" />
-      <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_top,rgba(221,161,94,0.08),transparent_70%)] pointer-events-none" />
+      {/* Subtle radial gradient background */}
+      <div 
+        className="absolute inset-0 z-0 opacity-40 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle at 50% 0%, var(--border-color) 0%, transparent 60%)',
+        }}
+      />
 
-      {/* Subtle background blobs */}
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/3 blur-[140px] rounded-full pointer-events-none z-[1]" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent-purple/2 blur-[140px] rounded-full pointer-events-none z-[1]" />
-
-      {/* Main Content */}
-      <div className="relative z-10 container mx-auto px-6 max-w-7xl pt-28 pb-12 flex flex-col justify-between min-h-screen">
-        {/* Empty top block to push content down and keep layout centered */}
-        <div className="hidden lg:block h-8"></div>
-
+      <div className="container mx-auto px-4 z-10 w-full max-w-3xl flex flex-col items-center text-center">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-4xl mx-auto text-center my-auto"
+          className="flex flex-col items-center w-full"
         >
           {/* Status Badge */}
-          <motion.div variants={itemVariants} className="flex justify-center mb-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] backdrop-blur-md text-[var(--text-secondary)] text-[12px] font-medium shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#30D158] animate-pulse" />
-              <Sparkles size={12} className="text-primary" />
-              <span>Available for opportunities</span>
+          <motion.div variants={itemVariants} className="mb-8">
+            <div 
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium border"
+              style={{
+                backgroundColor: 'var(--glass-bg)',
+                borderColor: 'var(--border-color)',
+                color: 'var(--text-secondary)',
+              }}
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+              Available for opportunities
             </div>
           </motion.div>
 
-          {/* Name */}
-          <motion.h1
-            variants={itemVariants}
-            className="font-sans text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-[1.05] mb-2 text-[var(--text-primary)]"
+          {/* Name & Headline */}
+          <motion.h1 
+            variants={itemVariants} 
+            className="font-bold tracking-tight mb-4 text-balance"
+            style={{ fontSize: 'clamp(2.5rem, 5vw + 1rem, 4.5rem)' }}
           >
-            Warren <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-[#f6e3d0] to-primary">Chris</span>
+            {personalInfo.name}
           </motion.h1>
 
-          {/* Headline Value Proposition */}
-          <motion.p
-            variants={itemVariants}
-            className="font-sans text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-[var(--text-primary)] mb-6 max-w-2xl mx-auto leading-snug"
+          <motion.p 
+            variants={itemVariants} 
+            className="font-medium text-balance mb-6"
+            style={{ 
+              fontSize: 'clamp(1.25rem, 2vw + 1rem, 2rem)',
+              color: 'var(--text-primary)'
+            }}
           >
-            Software systems that solve real problems.
+            {personalInfo.headline}
           </motion.p>
 
-          {/* Typewriter */}
-          <motion.div
-            variants={itemVariants}
-            className="text-[15px] sm:text-base font-medium tracking-tight text-[var(--text-secondary)] mb-6 h-8 flex items-center justify-center gap-1.5"
+          <motion.p 
+            variants={itemVariants} 
+            className="text-balance mb-10 max-w-2xl"
+            style={{ 
+              fontSize: 'clamp(1rem, 1vw + 0.8rem, 1.25rem)',
+              color: 'var(--text-secondary)'
+            }}
           >
-            <span>I build</span>
-            <TypeAnimation
-              sequence={typeSequence}
-              wrapper="span"
-              speed={50}
-              repeat={Infinity}
-              className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-[#f6e3d0] font-semibold"
-            />
-          </motion.div>
-
-          {/* Description */}
-          <motion.p
-            variants={itemVariants}
-            className="text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl mx-auto mb-10 leading-relaxed font-normal"
-          >
-            Full-stack development + network infrastructure + cybersecurity + intelligent systems. Based in <span className="text-[var(--text-primary)] font-medium">Nairobi, Kenya 🇰🇪</span>
+            {personalInfo.subheadline}
           </motion.p>
 
-          {/* CTA Buttons */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4.5 mb-14">
-            <motion.button
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-6 py-3 rounded-full bg-primary text-white font-medium text-[15px] hover:bg-primary-600 transition-all duration-200 w-full sm:w-auto shadow-sm"
+          {/* CTAs */}
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-4 mb-12 w-full justify-center">
+            <a 
+              href="#projects"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium transition-transform hover:scale-105 active:scale-95 w-full sm:w-auto"
+              style={{
+                backgroundColor: 'var(--text-primary)',
+                color: 'var(--bg-primary)',
+              }}
             >
               View My Work
-            </motion.button>
-
-            <motion.button
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-6 py-3 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] text-[var(--text-primary)] font-medium text-[15px] hover:bg-[var(--border-color)] transition-all duration-200 flex items-center justify-center gap-1.5 w-full sm:w-auto"
+            </a>
+            <a 
+              href={personalInfo.cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium border transition-colors hover:bg-opacity-10 w-full sm:w-auto"
+              style={{
+                backgroundColor: 'transparent',
+                borderColor: 'var(--border-color)',
+                color: 'var(--text-primary)',
+              }}
             >
-              <Mail size={15} />
-              Get In Touch
-            </motion.button>
+              <FileText size={18} />
+              Download CV
+            </a>
           </motion.div>
 
           {/* Social Links */}
-          <motion.div variants={itemVariants} className="flex items-center justify-center gap-3.5 mb-14">
-            {[
-              { icon: <Github size={18} />, href: personalInfo.github, label: 'GitHub' },
-              { icon: <Linkedin size={18} />, href: personalInfo.linkedin, label: 'LinkedIn' },
-              { icon: <Mail size={18} />, href: `mailto:${personalInfo.email}`, label: 'Email' },
-            ].map((social) => (
-              <motion.a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-10 h-10 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-secondary)] transition-all duration-200"
-              >
-                {social.icon}
-              </motion.a>
-            ))}
-          </motion.div>
-
-          {/* Stats Grid */}
-          <motion.div
-            ref={statsRef}
-            variants={itemVariants}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
-          >
-            {stats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 10 }}
-                animate={statsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: i * 0.08, duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
-                className="bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md rounded-2xl p-4.5 text-center shadow-sm"
-              >
-                <div className="font-sans text-3xl font-bold tracking-tight mb-1 text-[var(--text-primary)]">
-                  {statsInView ? (
-                    <CountUp end={stat.value} duration={1.8} delay={i * 0.08} suffix={stat.suffix} />
-                  ) : (
-                    '0'
-                  )}
-                </div>
-                <div className="text-[10px] text-[var(--text-secondary)] font-semibold uppercase tracking-wider">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.8, duration: 0.8 }}
-          className="flex flex-col items-center gap-1 cursor-pointer mt-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-200"
-          onClick={scrollToAbout}
-        >
-          <span className="text-[9px] uppercase tracking-[0.25em] font-semibold text-[var(--text-muted)]">Scroll</span>
-          <motion.div
-            animate={{ y: [0, 4, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <ChevronDown size={16} />
+          <motion.div variants={itemVariants} className="flex items-center gap-4">
+            <a 
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="p-3 rounded-full border transition-transform hover:scale-110"
+              style={{
+                borderColor: 'var(--border-color)',
+                backgroundColor: 'var(--glass-bg)',
+                color: 'var(--text-primary)',
+              }}
+            >
+              <Github size={20} />
+            </a>
+            <a 
+              href={personalInfo.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="p-3 rounded-full border transition-transform hover:scale-110"
+              style={{
+                borderColor: 'var(--border-color)',
+                backgroundColor: 'var(--glass-bg)',
+                color: 'var(--text-primary)',
+              }}
+            >
+              <Linkedin size={20} />
+            </a>
+            <a 
+              href={`mailto:${personalInfo.email}`}
+              aria-label="Email"
+              className="p-3 rounded-full border transition-transform hover:scale-110"
+              style={{
+                borderColor: 'var(--border-color)',
+                backgroundColor: 'var(--glass-bg)',
+                color: 'var(--text-primary)',
+              }}
+            >
+              <Mail size={20} />
+            </a>
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        style={{ color: 'var(--text-secondary)' }}
+      >
+        <span className="text-sm font-medium tracking-widest uppercase">Scroll</span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+        >
+          <ChevronDown size={24} />
+        </motion.div>
+      </motion.div>
     </section>
   );
-};
-
-export default Hero;
+}

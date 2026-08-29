@@ -1,214 +1,134 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import Tilt from 'react-parallax-tilt';
-import { Github, Linkedin, Heart, Shield, Globe, Terminal, Cloud } from 'lucide-react';
-import { personalInfo } from '@/config/siteData';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { Heart, Briefcase, MapPin, CheckCircle2 } from 'lucide-react';
+import { personalInfo, experience, principles } from '@/config/siteData';
 
-const skillBars = [
-  { name: 'Network Security', level: 95 },
-  { name: 'Python & Scripting', level: 90 },
-  { name: 'Cybersecurity Ops', level: 88 },
-  { name: 'React / TypeScript', level: 85 },
-  { name: 'Cloud Infrastructure', level: 82 },
-];
+export const About: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px 0px" });
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
-};
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 25 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 1, 0.5, 1] } },
-};
-
-const About = () => {
-  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
-
-  const whatIDo = [
-    { icon: <Shield size={18} strokeWidth={1.5} />, title: 'Cybersecurity', desc: 'Network security, threat analysis, and compliance implementation' },
-    { icon: <Globe size={18} strokeWidth={1.5} />, title: 'Networking', desc: 'Cisco & Huawei infrastructure, VPN, and SD-WAN solutions' },
-    { icon: <Terminal size={18} strokeWidth={1.5} />, title: 'Development', desc: 'Full-stack web applications using modern frameworks' },
-    { icon: <Cloud size={18} strokeWidth={1.5} />, title: 'Cloud', desc: 'Cloud architecture and deployment strategies' },
-  ];
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
 
   return (
-    <section id="about" className="section-wrapper relative bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
-      {/* Background Blurs */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/3 blur-[140px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent-purple/3 blur-[140px] rounded-full pointer-events-none" />
-
-      <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
-        {/* Section Header */}
-        <motion.div
-          variants={itemVariants}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="mb-16"
-        >
-          <span className="section-tag">
-            <Heart size={12} className="text-primary" /> About Me
-          </span>
-          <h2 className="section-title mt-3 font-display">Driven by curiosity. Secured by engineering.</h2>
-        </motion.div>
-
-        {/* Narrative & Timeline Block */}
+    <section 
+      id="about" 
+      ref={sectionRef}
+      className="py-24 relative overflow-hidden bg-[var(--bg-primary)]"
+    >
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start mb-24"
+          animate={isInView ? "visible" : "hidden"}
+          className="space-y-20"
         >
-          {/* Left: Narrative */}
-          <div className="lg:col-span-7 space-y-6">
-            <h3 className="text-lg font-semibold tracking-tight text-primary mb-2 uppercase text-[10px] tracking-[0.2em]">The Journey</h3>
-            <p className="text-lg font-light text-[var(--text-secondary)] leading-relaxed">{personalInfo.bio}</p>
-            <p className="text-base text-[var(--text-secondary)] leading-relaxed font-light">{personalInfo.bioExtended}</p>
+          {/* Header */}
+          <div className="space-y-4">
+            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-500/10 text-rose-500 text-sm font-medium">
+              <Heart className="w-4 h-4" />
+              <span>About</span>
+            </motion.div>
+            <motion.h2 variants={itemVariants} className="text-3xl md:text-5xl font-bold text-[var(--text-primary)]">
+              About Me
+            </motion.h2>
           </div>
 
-          {/* Right: Academic/Professional Timeline */}
-          <div className="lg:col-span-5 space-y-6">
-            <h3 className="text-lg font-semibold tracking-tight text-primary mb-2 uppercase text-[10px] tracking-[0.2em]">Timeline</h3>
-            <div className="relative pl-6 border-l border-[var(--border-color)] space-y-8">
-              <div className="relative">
-                <span className="absolute -left-[30px] top-1 w-2.5 h-2.5 rounded-full bg-primary border-2 border-[var(--bg-secondary)]" />
-                <span className="text-[10px] uppercase font-semibold text-primary">Current Study</span>
-                <h4 className="text-sm font-semibold text-[var(--text-primary)] mt-1">{personalInfo.degree}</h4>
-                <p className="text-xs text-[var(--text-secondary)] mt-0.5">{personalInfo.university}</p>
+          {/* Part A: Bio narrative */}
+          <motion.div variants={itemVariants} className="prose prose-lg dark:prose-invert max-w-none space-y-6 text-[var(--text-secondary)]">
+            <p className="text-xl font-medium leading-relaxed text-[var(--text-primary)]">
+              {personalInfo.bio}
+            </p>
+            <p className="text-lg leading-relaxed">
+              {personalInfo.bioExtended}
+            </p>
+          </motion.div>
+
+          {/* Part B: Experience Timeline */}
+          <motion.div variants={itemVariants} className="space-y-8">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-blue-500/10 text-blue-500">
+                <Briefcase className="w-6 h-6" />
               </div>
-              <div className="relative">
-                <span className="absolute -left-[30px] top-1 w-2.5 h-2.5 rounded-full bg-accent-purple border-2 border-[var(--bg-secondary)]" />
-                <span className="text-[10px] uppercase font-semibold text-accent-purple">Active Focus</span>
-                <h4 className="text-sm font-semibold text-[var(--text-primary)] mt-1">Freelance IT & Security Consultant</h4>
-                <p className="text-xs text-[var(--text-secondary)] mt-0.5">Designing networks, securing endpoints, and developing React applications.</p>
-              </div>
+              <h3 className="text-2xl font-bold text-[var(--text-primary)]">Experience</h3>
             </div>
-          </div>
-        </motion.div>
-
-        {/* What I Do capabilities grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="mb-24"
-        >
-          <div className="flex flex-col mb-10">
-            <span className="text-[10px] uppercase font-semibold text-primary tracking-[0.2em] mb-2">Capabilities</span>
-            <h3 className="text-2xl font-bold tracking-tight text-[var(--text-primary)]">Areas of expertise</h3>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {whatIDo.map((item) => (
-              <motion.div
-                key={item.title}
-                variants={itemVariants}
-                whileHover={{ y: -4, borderColor: 'rgba(0,113,227,0.2)' }}
-                className="bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md rounded-2xl p-6 transition-all duration-300 shadow-sm"
-              >
-                <div className="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center text-primary mb-4 border border-primary/10">
-                  {item.icon}
-                </div>
-                <h4 className="font-semibold text-[var(--text-primary)] text-base mb-2">{item.title}</h4>
-                <p className="text-xs text-[var(--text-secondary)] leading-relaxed">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Profile Card & Technical Specs */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center"
-        >
-          {/* Left: Spec Sheet / Profile Card */}
-          <div className="lg:col-span-5 flex justify-center">
-            <Tilt
-              tiltMaxAngleX={6}
-              tiltMaxAngleY={6}
-              scale={1.01}
-              transitionSpeed={600}
-              className="w-full max-w-sm"
-            >
-              <div className="bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md rounded-3xl p-6 relative overflow-hidden shadow-lg">
-                <div className="flex flex-col items-center text-center">
-                  <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-[var(--border-color)] mb-4">
-                    <img
-                      src={personalInfo.avatar}
-                      alt={personalInfo.name}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${personalInfo.name}&background=0071E3&color=ffffff&size=200`;
-                      }}
-                    />
-                    <div className="absolute bottom-1 right-1 w-3 h-3 rounded-full bg-[#30D158] border-2 border-[var(--bg-primary)]" />
-                  </div>
-                  <h3 className="font-sans text-lg font-bold text-[var(--text-primary)] mb-0.5">{personalInfo.name}</h3>
-                  <p className="text-xs text-[var(--text-secondary)] mb-6 font-medium">Developer &amp; Engineer</p>
-
-                  <div className="w-full border-t border-[var(--border-color)] pt-5 space-y-3.5 text-left text-xs">
-                    {[
-                      { label: 'Primary Mail', value: personalInfo.email, link: `mailto:${personalInfo.email}` },
-                      { label: 'Hotline', value: personalInfo.phone, link: `tel:${personalInfo.phone.replace(/\s+/g, '')}` },
-                      { label: 'Location', value: personalInfo.location },
-                    ].map((item, i) => (
-                      <div key={i} className="flex flex-col">
-                        <span className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider font-semibold mb-0.5">{item.label}</span>
-                        {item.link ? (
-                          <a href={item.link} className="text-[var(--text-primary)] hover:text-primary transition-colors truncate">{item.value}</a>
-                        ) : (
-                          <span className="text-[var(--text-primary)] truncate">{item.value}</span>
-                        )}
+            
+            <div className="space-y-8 border-l-2 border-slate-200 dark:border-slate-800 ml-4 pl-8 relative">
+              {experience.map((exp, index) => (
+                <div key={index} className="relative group">
+                  {/* Timeline Dot */}
+                  <div className="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-[var(--bg-primary)] border-4 border-blue-500 group-hover:scale-110 transition-transform duration-300" />
+                  
+                  <div className="space-y-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                      <div>
+                        <h4 className="text-xl font-semibold text-[var(--text-primary)]">{exp.role}</h4>
+                        <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--text-tertiary)] mt-1">
+                          <span className="font-medium text-[var(--text-secondary)]">{exp.company}</span>
+                          <span>•</span>
+                          <span>{exp.period}</span>
+                          <span>•</span>
+                          <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {exp.location}</span>
+                        </div>
                       </div>
-                    ))}
-                  </div>
-
-                  <div className="flex gap-3 mt-6">
-                    <a href={personalInfo.github} target="_blank" rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
-                      <Github size={14} />
-                    </a>
-                    <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--glass-bg)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
-                      <Linkedin size={14} />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </Tilt>
-          </div>
-
-          {/* Right: Technical Specs progress bars */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="flex flex-col mb-4">
-              <span className="text-[10px] uppercase font-semibold text-primary tracking-[0.2em] mb-2">Specifications</span>
-              <h3 className="text-xl font-bold tracking-tight text-[var(--text-primary)]">System capabilities</h3>
-            </div>
-            <div className="space-y-4">
-              {skillBars.map(skill => (
-                <div key={skill.name} className="space-y-1.5">
-                  <div className="flex justify-between text-xs font-semibold text-[var(--text-secondary)]">
-                    <span>{skill.name}</span>
-                    <span className="text-primary">{skill.level}%</span>
-                  </div>
-                  <div className="skill-progress-track">
-                    <motion.div
-                      className="skill-progress-fill"
-                      initial={{ scaleX: 0 }}
-                      animate={inView ? { scaleX: skill.level / 100 } : { scaleX: 0 }}
-                      transition={{ duration: 1.2, delay: 0.2, ease: 'easeOut' }}
-                      style={{ background: 'var(--color-primary)' }}
-                    />
+                    </div>
+                    
+                    <ul className="space-y-2 text-[var(--text-secondary)]">
+                      {exp.description.map((desc, i) => (
+                        <li key={i} className="flex gap-2 text-sm leading-relaxed">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                          <span>{desc}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {exp.tech.map((tech, i) => (
+                        <span 
+                          key={i} 
+                          className="px-2.5 py-1 text-xs font-medium rounded-md bg-slate-100 dark:bg-slate-800 text-[var(--text-secondary)]"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
+
+          {/* Part C: Engineering Principles */}
+          <motion.div variants={itemVariants} className="space-y-8">
+            <h3 className="text-2xl font-bold text-[var(--text-primary)]">Engineering Principles</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {principles.map((principle, index) => (
+                <div 
+                  key={index} 
+                  className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-blue-500/50 transition-colors"
+                >
+                  <h4 className="text-lg font-semibold text-[var(--text-primary)] mb-3">{principle.title}</h4>
+                  <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
+                    {principle.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
   );
 };
-
-export default About;

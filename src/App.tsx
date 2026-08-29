@@ -7,9 +7,7 @@ import Footer from '@/components/layout/Footer';
 import Hero from '@/components/sections/Hero';
 import About from '@/components/sections/About';
 import Skills from '@/components/sections/Skills';
-import Principles from '@/components/sections/Principles';
 import Projects from '@/components/sections/Projects';
-import Experience from '@/components/sections/Experience';
 import Certifications from '@/components/sections/Certifications';
 import Contact from '@/components/sections/Contact';
 
@@ -17,7 +15,7 @@ import Contact from '@/components/sections/Contact';
 const Loader = ({ onDone }: { onDone: () => void }) => {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const timer = setTimeout(onDone, prefersReducedMotion ? 0 : 700);
+    const timer = setTimeout(onDone, prefersReducedMotion ? 0 : 600);
     return () => clearTimeout(timer);
   }, [onDone]);
 
@@ -31,7 +29,6 @@ const Loader = ({ onDone }: { onDone: () => void }) => {
       <div className="loader-bar-track">
         <div className="loader-bar-fill" />
       </div>
-      <p className="text-xs text-[var(--text-secondary)] mt-2 tracking-widest uppercase">Loading Portfolio...</p>
     </motion.div>
   );
 };
@@ -50,7 +47,7 @@ function App() {
               key="app"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.4 }}
               className="relative min-h-screen"
             >
               {/* Aurora background */}
@@ -62,11 +59,9 @@ function App() {
               {/* Main content */}
               <main id="main-content">
                 <Hero />
+                <Projects />
                 <About />
                 <Skills />
-                <Principles />
-                <Projects />
-                <Experience />
                 <Certifications />
                 <Contact />
               </main>

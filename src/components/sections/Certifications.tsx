@@ -1,89 +1,87 @@
+import React from 'react';
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import { Award } from 'lucide-react';
+import { useInView } from 'react-intersection-observer';
 import { certifications } from '@/config/siteData';
 
-const Certifications = () => {
-  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
+export default function Certifications() {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: 'easeOut',
+      },
+    },
+  };
 
   return (
-    <section id="certifications" className="section-wrapper relative bg-[var(--bg-primary)] border-b border-[var(--border-color)]">
-      <div className="absolute bottom-10 left-10 w-72 h-72 bg-primary/2 blur-[140px] rounded-full pointer-events-none" />
-
-      <div className="container mx-auto px-6 max-w-6xl" ref={ref}>
-        {/* Header */}
+    <section id="certifications" className="py-24 bg-[var(--bg-primary)]">
+      <div className="max-w-5xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-16"
+          ref={ref}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+          variants={containerVariants}
+          className="space-y-12"
         >
-          <span className="section-tag"><Award size={12} className="text-primary" /> Certifications</span>
-          <h2 className="section-title mt-3 font-display">Verified Credentials</h2>
-          <p className="section-subtitle mx-auto mt-4 text-[var(--text-secondary)] font-light text-base">
-            Industry-recognized certifications validating expertise across networking, security, and technology.
-          </p>
-        </motion.div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
-          {certifications.map((cert, i) => (
-            <motion.div
-              key={cert.id}
-              initial={{ opacity: 0, y: 15, scale: 0.98 }}
-              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ delay: i * 0.05, duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
-              className="cert-card group"
-              style={{ height: '270px' }}
-            >
-              <div className="cert-card-inner w-full h-full relative">
-                {/* Front */}
-                <div className="cert-front absolute inset-0">
-                  <div className="w-full h-full rounded-3xl bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md transition-all duration-300 p-5 flex flex-col items-center justify-between text-center shadow-sm group-hover:border-[var(--text-secondary)]/30">
-                    <div className="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center border border-primary/10 overflow-hidden mt-2">
-                      <img
-                        src={cert.logo}
-                        alt={cert.issuer}
-                        className="w-8 h-8 object-contain"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).style.display = 'none';
-                          const parent = (e.target as HTMLImageElement).parentElement;
-                          if (parent) parent.innerHTML = `<span style="font-size: 1.25rem">🏆</span>`;
-                        }}
-                      />
-                    </div>
-                    <div className="flex-1 flex flex-col justify-center my-3">
-                      <h3 className="font-sans font-bold text-[var(--text-primary)] text-xs leading-tight mb-2 tracking-tight line-clamp-2">{cert.title}</h3>
-                      <span className="text-[10px] font-semibold text-primary px-2.5 py-0.5 rounded-full bg-primary/5 border border-primary/10 self-center">
-                        {cert.issuer}
-                      </span>
-                    </div>
-                    <div className="w-full border-t border-[var(--border-color)] pt-3 flex items-center justify-between">
-                      <span className="text-[9px] uppercase font-semibold text-[var(--text-muted)] tracking-wider">{cert.year}</span>
-                      <span className="text-[9px] uppercase font-bold text-primary/70 tracking-widest">Specs ↻</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Back */}
-                <div className="cert-back absolute inset-0">
-                  <div className="w-full h-full rounded-3xl bg-[var(--glass-bg)] border border-[var(--border-color)] backdrop-blur-md transition-all duration-300 p-5 flex flex-col items-center justify-between text-center shadow-sm group-hover:border-[var(--text-secondary)]/30">
-                    <Award size={20} className="text-primary mt-2" />
-                    <div className="flex-1 flex flex-col justify-center my-3">
-                      <h3 className="font-sans font-bold text-[var(--text-primary)] text-xs mb-1.5 tracking-tight line-clamp-1">{cert.title}</h3>
-                      <p className="text-[10px] text-[var(--text-secondary)] leading-relaxed line-clamp-4">{cert.description}</p>
-                    </div>
-                    <div className="w-full border-t border-[var(--border-color)] pt-3 flex items-center justify-between text-[9px]">
-                      <span className="font-semibold text-primary">{cert.issuer}</span>
-                      <span className="text-[var(--text-muted)] font-medium">{cert.year}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          {/* Header */}
+          <div className="flex flex-col items-center text-center space-y-4">
+            <motion.div variants={itemVariants} className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[var(--bg-secondary)] text-[var(--text-secondary)] border border-[var(--border-primary)]">
+              <Award className="w-4 h-4" />
+              <span className="text-sm font-medium uppercase tracking-wider">Credentials</span>
             </motion.div>
-          ))}
-        </div>
+            <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">
+              Certifications
+            </motion.h2>
+          </div>
+
+          {/* Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {certifications.map((cert, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="group relative flex flex-col p-6 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-primary)] hover:border-[var(--border-hover)] hover:-translate-y-1 transition-all duration-300 ease-out"
+              >
+                <div className="flex justify-between items-start mb-4">
+                  <span className="text-xs font-bold uppercase tracking-widest text-[var(--text-secondary)]">
+                    {cert.issuer}
+                  </span>
+                  <span className="text-xs font-medium text-[var(--text-muted)] bg-[var(--bg-primary)] px-2 py-1 rounded-md border border-[var(--border-primary)]">
+                    {cert.year}
+                  </span>
+                </div>
+                
+                <h3 className="text-lg font-bold text-[var(--text-primary)] mb-3 leading-tight group-hover:text-[var(--text-accent)] transition-colors duration-300">
+                  {cert.title}
+                </h3>
+                
+                <p className="text-sm text-[var(--text-secondary)] leading-relaxed mt-auto">
+                  {cert.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
-};
-
-export default Certifications;
+}

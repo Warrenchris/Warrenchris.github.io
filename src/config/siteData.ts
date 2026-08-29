@@ -5,87 +5,56 @@
 export const personalInfo = {
   name: 'Warren Chris',
   title: 'Software Engineer & Systems Builder',
-  roles: [
-    'Software Engineer',
-    'Network Engineer',
-    'Cybersecurity Specialist',
-    'Full Stack Developer',
-  ],
-  bio: "I build software systems that solve real problems. My work spans full-stack development, network infrastructure, cybersecurity, and intelligent systems.",
+  headline: 'I build software systems that solve real problems.',
+  subheadline:
+    'Full-stack engineering · Intelligent systems · Infrastructure · Security',
+  bio: "I engineer software systems end-to-end — from database schema to deployment pipeline. My work spans full-stack development, network infrastructure, cybersecurity, and intelligent systems.",
   bioExtended:
-    'Currently pursuing a Bachelor of Science in Information Technology at JKUAT while building production systems. I focus on engineering secure, scalable solutions with strong architectural foundations.',
+    "I'm completing a BSc in Information Technology at JKUAT, but my focus has always been on building production systems. I care about clean architecture, security by default, and software that works reliably under real conditions.",
   email: 'warrenchris745@gmail.com',
-  phone: '+254 742 118572',
   location: 'Nairobi, Kenya',
   github: 'https://github.com/Warrenchris',
   linkedin: 'https://www.linkedin.com/in/warren-chris-723a00263',
-  twitter: '#',
   university: 'Jomo Kenyatta University of Agriculture and Technology',
   degree: 'Bachelor of Science in Information Technology',
   avatar: '/warren-avatar.jpg',
-  cvUrl: '#',
+  cvUrl: '/warren-chris-cv.pdf',
 };
 
-export const stats = [
-  { label: 'Years Experience', value: 2, suffix: '+' },
-  { label: 'Projects Completed', value: 7, suffix: '+' },
-  { label: 'Certifications', value: 5, suffix: '' },
-  { label: 'Technologies', value: 15, suffix: '+' },
-];
-
-export const skills = [
+export const skillGroups = [
   {
-    category: 'Security',
-    icon: '🔒',
-    color: '#dda15e',
-    items: [
-      { name: 'Network Security', level: 95 },
-      { name: 'Cybersecurity', level: 88 },
-      { name: 'Firewall Configuration', level: 90 },
-      { name: 'SIEM Tools', level: 80 },
-      { name: 'Compliance Standards', level: 85 },
-      { name: 'Threat Analysis', level: 82 },
-    ],
+    category: 'Languages',
+    items: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C / C++', 'SQL'],
   },
   {
-    category: 'Development',
-    icon: '💻',
-    color: '#bc6c25',
+    category: 'Frontend',
+    items: ['React', 'Vite', 'Tailwind CSS', 'HTML / CSS'],
+  },
+  {
+    category: 'Backend',
+    items: ['Node.js', 'Express', 'Flask', 'Spring Boot', 'REST APIs'],
+  },
+  {
+    category: 'Data',
+    items: ['MySQL', 'PostgreSQL', 'SQLite', 'Redis'],
+  },
+  {
+    category: 'Infrastructure',
+    items: ['Docker', 'Linux', 'Git', 'CI/CD', 'Cloud (AWS / Azure)'],
+  },
+  {
+    category: 'Security',
     items: [
-      { name: 'JavaScript / TypeScript', level: 85 },
-      { name: 'Python', level: 90 },
-      { name: 'React', level: 85 },
-      { name: 'Node.js', level: 78 },
-      { name: 'Java', level: 75 },
-      { name: 'C / C++', level: 70 },
-      { name: 'SQL / NoSQL', level: 82 },
-      { name: 'RESTful APIs', level: 88 },
+      'Network Security',
+      'Application Security',
+      'Firewall Configuration',
+      'SIEM Tools',
+      'Vulnerability Assessment',
     ],
   },
   {
     category: 'Networking',
-    icon: '🌐',
-    color: '#dda15e',
-    items: [
-      { name: 'Cisco Routing & Switching', level: 92 },
-      { name: 'Huawei Networking', level: 88 },
-      { name: 'VPN Configuration', level: 85 },
-      { name: 'Load Balancing', level: 80 },
-      { name: 'SD-WAN', level: 78 },
-      { name: 'Network Monitoring', level: 87 },
-    ],
-  },
-  {
-    category: 'Cloud & DevOps',
-    icon: '☁️',
-    color: '#bc6c25',
-    items: [
-      { name: 'Cloud Computing', level: 82 },
-      { name: 'Linux Administration', level: 88 },
-      { name: 'Docker', level: 72 },
-      { name: 'CI/CD Pipelines', level: 68 },
-      { name: 'AWS / Azure Basics', level: 70 },
-    ],
+    items: ['Cisco Routing & Switching', 'Huawei Datacom', 'VPN', 'SD-WAN'],
   },
 ];
 
@@ -96,41 +65,67 @@ export const projects = [
     subtitle: 'Full-Stack Telecom Platform',
     description:
       'Enterprise-grade ISP billing and customer management system with automated invoicing, bandwidth monitoring, and real-time network utilization dashboards.',
-    problem: 'ISPs struggle with manual billing processes, inaccurate bandwidth tracking, and lack of real-time customer management tools.',
-    solution: 'Built a comprehensive platform automating billing cycles, bandwidth monitoring via FreeRADIUS integration, and customer self-service portal.',
-    architecture: 'Flask backend with MySQL database, Redis for caching, BullMQ for job queues, FreeRADIUS for authentication, Docker containerization.',
-    engineering: 'Implemented rate limiting, service isolation, automated backups, and production hardening. Used M-Pesa API for payment integration.',
-    security: 'JWT authentication, role-based access control, encrypted payment data, secure API endpoints with rate limiting.',
-    outcome: 'Automated billing workflows, reduced manual errors by 90%, real-time bandwidth monitoring for 500+ subscribers.',
-    tech: ['React', 'Node.js', 'Express', 'MySQL', 'Redis', 'BullMQ', 'FreeRADIUS', 'M-Pesa', 'Docker'],
-    category: 'web',
+    problem:
+      'ISPs struggle with manual billing processes, inaccurate bandwidth tracking, and lack of real-time customer management tools.',
+    solution:
+      'Built a comprehensive platform automating billing cycles, bandwidth monitoring via FreeRADIUS integration, and a customer self-service portal.',
+    architecture:
+      'React frontend with Node.js/Express backend, MySQL database, Redis for caching, BullMQ for async job queues, FreeRADIUS for RADIUS authentication, Docker for containerized deployment.',
+    engineering:
+      'Implemented rate limiting, service isolation, automated database backups, and production hardening. Integrated M-Pesa API for mobile payment processing.',
+    security:
+      'JWT authentication, role-based access control, encrypted payment data, secure API endpoints with rate limiting and input validation.',
+    outcome:
+      'Automated billing workflows, reduced manual errors, real-time bandwidth monitoring for 500+ subscribers.',
+    tech: [
+      'React',
+      'Node.js',
+      'Express',
+      'MySQL',
+      'Redis',
+      'BullMQ',
+      'FreeRADIUS',
+      'M-Pesa',
+      'Docker',
+    ],
     github: 'https://github.com/Warrenchris',
-    demo: '#',
+    demo: '',
     image: '/isp-billing.png',
     featured: true,
-    color: '#dda15e',
     tags: ['Full Stack', 'Backend', 'Infrastructure'],
   },
   {
     id: 2,
     title: 'SigmaHRM Human Capital Suite',
-    subtitle: 'HR Management Platform',
+    subtitle: 'Enterprise HR Platform',
     description:
       'Full-featured Human Resource Management System covering employee lifecycle, payroll processing, leave management, and performance reviews.',
-    problem: 'Organizations need streamlined HR operations for employee onboarding, payroll automation, and performance tracking.',
-    solution: 'End-to-end HR platform with automated workflows, payroll processing with tax calculations, and applicant tracking system.',
-    architecture: 'React frontend with TypeScript, Node.js/Express backend, PostgreSQL database, RESTful API design, Docker deployment.',
-    engineering: 'Implemented complex payroll tax calculations, leave balance algorithms, and KPI-based performance scoring systems.',
-    security: 'Role-based access control, encrypted employee data, audit logging, secure file uploads for documents.',
-    outcome: 'Reduced HR administrative overhead by 60%, automated payroll processing for 200+ employees.',
-    tech: ['React', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'REST API', 'Docker'],
-    category: 'web',
+    problem:
+      'Organizations need streamlined HR operations for employee onboarding, payroll automation, and performance tracking.',
+    solution:
+      'End-to-end HR platform with automated workflows, payroll processing with tax calculations, and applicant tracking system.',
+    architecture:
+      'React frontend with TypeScript, Node.js/Express backend, PostgreSQL database, RESTful API design, Docker deployment.',
+    engineering:
+      'Implemented complex payroll tax calculation engine, leave balance algorithms, and KPI-based performance scoring systems.',
+    security:
+      'Role-based access control, encrypted employee data, audit logging, secure file uploads for documents.',
+    outcome:
+      'Reduced HR administrative overhead, automated payroll processing for 200+ employees.',
+    tech: [
+      'React',
+      'TypeScript',
+      'Node.js',
+      'Express',
+      'PostgreSQL',
+      'REST API',
+      'Docker',
+    ],
     github: 'https://github.com/Warrenchris',
-    demo: '#',
+    demo: '',
     image: '/sigma-hrm.png',
     featured: true,
-    color: '#bc6c25',
-    tags: ['Full Stack', 'Enterprise', 'Backend'],
+    tags: ['Full Stack', 'Business Systems', 'Backend'],
   },
   {
     id: 3,
@@ -138,19 +133,31 @@ export const projects = [
     subtitle: 'Point of Sale & Business Suite',
     description:
       'Modern point-of-sale and business management platform for retail and hospitality with inventory control, sales analytics, and multi-location support.',
-    problem: 'SMEs lack integrated systems for POS operations, inventory management, and business analytics.',
-    solution: 'Complete business ecosystem with barcode scanning, multi-payment methods including M-Pesa, offline mode, and back-office analytics.',
-    architecture: 'React frontend, Python/Flask backend, SQLite for local storage, Electron for desktop deployment, M-Pesa API integration.',
-    engineering: 'Implemented offline-first architecture with sync capabilities, real-time inventory updates, and receipt printing.',
-    security: 'Local data encryption, secure payment processing, user authentication with role permissions.',
-    outcome: 'Streamlined retail operations for 3 locations, reduced inventory discrepancies by 75%.',
-    tech: ['React', 'Python', 'Flask', 'SQLite', 'Electron', 'Tailwind CSS', 'M-Pesa API'],
-    category: 'web',
+    problem:
+      'SMEs lack integrated systems for POS operations, inventory management, and business analytics.',
+    solution:
+      'Complete business ecosystem with barcode scanning, multi-payment methods including M-Pesa, offline mode, and back-office analytics.',
+    architecture:
+      'React frontend, Python/Flask backend, SQLite for local storage, Electron for desktop deployment, M-Pesa API integration.',
+    engineering:
+      'Implemented offline-first architecture with sync capabilities, real-time inventory updates, and receipt printing.',
+    security:
+      'Local data encryption, secure payment processing, user authentication with role-based permissions.',
+    outcome:
+      'Streamlined retail operations for 3 locations, reduced inventory discrepancies.',
+    tech: [
+      'React',
+      'Python',
+      'Flask',
+      'SQLite',
+      'Electron',
+      'Tailwind CSS',
+      'M-Pesa API',
+    ],
     github: 'https://github.com/Warrenchris',
-    demo: '#',
+    demo: '',
     image: '/zana-pos.png',
     featured: true,
-    color: '#dda15e',
     tags: ['Full Stack', 'Business Systems', 'Infrastructure'],
   },
   {
@@ -159,20 +166,24 @@ export const projects = [
     subtitle: 'ML-Powered Analytics Dashboard',
     description:
       'Machine learning model and interactive dashboard for analyzing road accident patterns, identifying hotspots, and predicting high-risk areas.',
-    problem: 'Kenya lacks data-driven tools for analyzing road accident patterns and predicting high-risk areas for intervention.',
-    solution: 'Built ML classification model with interactive visualization dashboard using KNBS road accident data.',
-    architecture: 'Python backend with Scikit-learn for ML, Flask API, JavaScript frontend with Leaflet.js for geospatial visualization.',
-    engineering: 'Trained classification model for accident severity prediction, implemented geospatial heatmaps, trend analysis algorithms.',
-    security: 'API rate limiting, input validation, secure data handling for sensitive location data.',
-    outcome: 'Identified 15 high-risk accident hotspots, provided data-driven recommendations for policy intervention.',
+    problem:
+      'Kenya lacks data-driven tools for analyzing road accident patterns and predicting high-risk areas for intervention.',
+    solution:
+      'Built ML classification model with interactive visualization dashboard using KNBS road accident data.',
+    architecture:
+      'Python backend with Scikit-learn for ML, Flask API, JavaScript frontend with Leaflet.js for geospatial visualization.',
+    engineering:
+      'Trained classification model for accident severity prediction, implemented geospatial heatmaps, trend analysis algorithms.',
+    security:
+      'API rate limiting, input validation, secure data handling for sensitive location data.',
+    outcome:
+      'Identified high-risk accident hotspots, provided data-driven recommendations for policy intervention.',
     tech: ['Python', 'Scikit-learn', 'Pandas', 'Flask', 'JavaScript', 'Leaflet.js'],
-    category: 'cloud',
-    github: 'https://github.com/Warrenchris/road-accident-analyzer.git',
-    demo: '#',
-    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80',
+    github: 'https://github.com/Warrenchris/road-accident-analyzer',
+    demo: '',
+    image: '',
     featured: false,
-    color: '#bc6c25',
-    tags: ['AI', 'Data Science', 'Python'],
+    tags: ['AI', 'Backend', 'Full Stack'],
   },
   {
     id: 5,
@@ -180,20 +191,24 @@ export const projects = [
     subtitle: 'Cybersecurity Automation',
     description:
       'Automated network security scanning and vulnerability assessment tool for identifying security gaps and generating compliance reports.',
-    problem: 'Manual security audits are time-consuming and error-prone, leading to missed vulnerabilities.',
-    solution: 'Automated scanning tool with Nmap integration, vulnerability detection, and automated report generation.',
-    architecture: 'Python backend with Nmap integration, scanning scheduler, report generation engine, web dashboard for results.',
-    engineering: 'Implemented parallel scanning, vulnerability database integration, CIS benchmark compliance checking.',
-    security: 'Encrypted scan results, role-based access, secure credential management for target systems.',
-    outcome: 'Reduced audit time by 80%, improved vulnerability detection accuracy by 40%.',
-    tech: ['Python', 'Nmap', 'Flask', 'Security', 'Automation'],
-    category: 'web',
+    problem:
+      'Manual security audits are time-consuming and error-prone, leading to missed vulnerabilities.',
+    solution:
+      'Automated scanning tool with Nmap integration, vulnerability detection, and automated report generation.',
+    architecture:
+      'Python backend with Nmap integration, scanning scheduler, report generation engine, web dashboard for results.',
+    engineering:
+      'Implemented parallel scanning, vulnerability database integration, CIS benchmark compliance checking.',
+    security:
+      'Encrypted scan results, role-based access, secure credential management for target systems.',
+    outcome:
+      'Reduced audit time significantly, improved vulnerability detection accuracy.',
+    tech: ['Python', 'Nmap', 'Flask', 'Automation'],
     github: 'https://github.com/Warrenchris',
-    demo: '#',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80',
+    demo: '',
+    image: '',
     featured: false,
-    color: '#dda15e',
-    tags: ['Cybersecurity', 'Security', 'Python'],
+    tags: ['Cybersecurity', 'Backend'],
   },
   {
     id: 6,
@@ -201,19 +216,22 @@ export const projects = [
     subtitle: 'Full-Stack Rental Platform',
     description:
       'Complete car rental management with booking portal, fleet management, payment processing, and revenue analytics.',
-    problem: 'Car rental businesses need integrated systems for fleet management, booking, and payment processing.',
-    solution: 'Full-stack platform with customer booking portal and admin dashboard for fleet and revenue management.',
-    architecture: 'Flask backend with SQLAlchemy ORM, PostgreSQL database, Stripe payment integration, React admin dashboard.',
-    engineering: 'Implemented booking availability algorithms, automated payment processing, fleet utilization analytics.',
-    security: 'Secure payment processing, user authentication, encrypted customer data, booking fraud detection.',
-    outcome: 'Automated booking workflows, increased fleet utilization by 25%.',
+    problem:
+      'Car rental businesses need integrated systems for fleet management, booking, and payment processing.',
+    solution:
+      'Full-stack platform with customer booking portal and admin dashboard for fleet and revenue management.',
+    architecture:
+      'Flask backend with SQLAlchemy ORM, PostgreSQL database, Stripe payment integration, React admin dashboard.',
+    engineering:
+      'Implemented booking availability algorithms, automated payment processing, fleet utilization analytics.',
+    security:
+      'Secure payment processing, user authentication, encrypted customer data.',
+    outcome: 'Automated booking workflows, increased fleet utilization.',
     tech: ['Python', 'Flask', 'SQLAlchemy', 'PostgreSQL', 'React', 'Stripe API'],
-    category: 'web',
-    github: 'https://github.com/Warrenchris/python-car-rental-system.git',
-    demo: '#',
-    image: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&q=80',
+    github: 'https://github.com/Warrenchris/python-car-rental-system',
+    demo: '',
+    image: '',
     featured: false,
-    color: '#bc6c25',
     tags: ['Full Stack', 'Backend', 'Business Systems'],
   },
   {
@@ -222,114 +240,120 @@ export const projects = [
     subtitle: 'Java-Based Shopping Solution',
     description:
       'Full-stack e-commerce platform with product catalog, shopping cart, secure checkout, and admin inventory management.',
-    problem: 'Small businesses need affordable e-commerce solutions with inventory management and payment integration.',
-    solution: 'Java-based e-commerce platform with Spring Boot backend, secure checkout, and admin dashboard.',
-    architecture: 'Spring Boot backend, MySQL database, Thymeleaf templates, Stripe payment integration, RESTful APIs.',
-    engineering: 'Implemented shopping cart state management, order processing workflows, inventory tracking algorithms.',
-    security: 'Spring Security authentication, CSRF protection, secure payment processing, input validation.',
-    outcome: 'Launched 3 e-commerce stores, processed 1000+ orders monthly.',
+    problem:
+      'Small businesses need affordable e-commerce solutions with inventory management and payment integration.',
+    solution:
+      'Java-based e-commerce platform with Spring Boot backend, secure checkout, and admin dashboard.',
+    architecture:
+      'Spring Boot backend, MySQL database, Thymeleaf templates, Stripe payment integration, RESTful APIs.',
+    engineering:
+      'Implemented shopping cart state management, order processing workflows, inventory tracking algorithms.',
+    security:
+      'Spring Security authentication, CSRF protection, secure payment processing, input validation.',
+    outcome: 'Functional e-commerce platform with order processing capabilities.',
     tech: ['Java', 'Spring Boot', 'MySQL', 'Thymeleaf', 'Stripe API', 'REST API'],
-    category: 'web',
     github: 'https://github.com/Warrenchris',
-    demo: '#',
-    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80',
+    demo: '',
+    image: '',
     featured: false,
-    color: '#dda15e',
-    tags: ['Full Stack', 'Backend', 'Java'],
+    tags: ['Full Stack', 'Backend'],
   },
 ];
 
 export const experience = [
   {
-    id: 1,
     role: 'Freelance IT Consultant',
     company: 'Self-Employed',
     period: '2023 – Present',
     location: 'Nairobi, Kenya',
-    type: 'Full-time',
     description: [
-      'Provided network security consulting for small to medium businesses',
-      'Developed custom web applications using modern frameworks',
-      'Implemented cybersecurity best practices and compliance standards',
-      'Designed and deployed cloud-based solutions for clients',
-      'Conducted security audits and vulnerability assessments',
+      'Network security consulting for small and medium businesses',
+      'Custom web application development using React, Node.js, and Python',
+      'Cybersecurity audits and compliance implementation',
+      'Cloud infrastructure design and deployment',
     ],
     tech: ['Python', 'React', 'Cisco', 'Linux', 'AWS'],
-    color: '#dda15e',
   },
   {
-    id: 2,
     role: 'Technical Support Engineer',
     company: 'Realmer Technology Limited',
     period: '2024 – 2025',
     location: 'Nairobi, Kenya',
-    type: 'Contract',
     description: [
-      'Assisted in network infrastructure setup and maintenance',
-      'Monitored network performance and troubleshot issues in real time',
-      'Supported cybersecurity initiatives and policy implementation',
-      'Managed help desk operations and resolved Level 1/2 tickets',
-      'Configured and maintained Cisco and Huawei networking equipment',
+      'Network infrastructure setup and maintenance',
+      'Real-time network performance monitoring and troubleshooting',
+      'Cybersecurity policy implementation',
+      'Cisco and Huawei networking equipment configuration',
     ],
     tech: ['Cisco IOS', 'Huawei VRP', 'Wireshark', 'Linux', 'SIEM'],
-    color: '#bc6c25',
+  },
+];
+
+export const principles = [
+  {
+    title: 'Security First',
+    description:
+      'Systems designed with authentication, authorization, and failure scenarios in mind from the start.',
+  },
+  {
+    title: 'Production Mindset',
+    description:
+      "Software isn't finished when it runs locally. Monitoring, logging, and error handling are essential.",
+  },
+  {
+    title: 'Systems Thinking',
+    description:
+      'Frontend, backend, databases, infrastructure, and external services must work as one cohesive system.',
+  },
+  {
+    title: 'Continuous Learning',
+    description:
+      'Technology evolves, so engineering practice must evolve with it.',
   },
 ];
 
 export const certifications = [
   {
-    id: 1,
     title: 'Cisco DevNet Associate',
     issuer: 'Cisco',
     year: '2025',
-    logo: 'https://images.credly.com/size/340x340/images/e21e94f7-feec-4717-9687-ac150b213f64/Cisco_DevNetAsst_600.png',
-    color: '#00bceb',
-    description: 'Network automation, programmability, and application development',
+    description:
+      'Network automation, programmability, and application development',
   },
   {
-    id: 2,
-    title: 'Introduction to Cybersecurity',
-    issuer: 'Cisco',
-    year: '2025',
-    logo: 'https://images.credly.com/size/340x340/images/af8c6b4e-fc31-47c4-8dcb-eb7a2065dc5b/I2CS__1_.png',
-    color: '#00bceb',
-    description: 'Cybersecurity fundamentals, threat landscape, and defense strategies',
-  },
-  {
-    id: 3,
     title: 'HCIA – Datacom',
     issuer: 'Huawei',
     year: '2024',
-    logo: 'https://images.credly.com/size/340x340/images/53549a05-47b4-4638-afe0-c9bf57f03c64/image.png',
-    color: '#cf0a2c',
-    description: 'Huawei data communications, routing, and switching technologies',
+    description:
+      'Data communications, routing, and switching technologies',
   },
   {
-    id: 4,
-    title: 'Red Hat System Administration I',
-    issuer: 'Red Hat',
-    year: '2024',
-    logo: '/images/redhat-logo.webp',
-    color: '#ee0000',
-    description: 'Linux administration, system management, and enterprise deployments',
-  },
-  {
-    id: 5,
     title: 'Enterprise Design Thinking Practitioner',
     issuer: 'IBM',
     year: '2023',
-    logo: '/images/ibm-logo.webp',
-    color: '#0530ad',
-    description: 'Human-centered design principles and enterprise innovation methodology',
+    description:
+      'Human-centered design principles and enterprise innovation methodology',
+  },
+  {
+    title: 'Red Hat System Administration I',
+    issuer: 'Red Hat',
+    year: '2024',
+    description:
+      'Linux administration, system management, and enterprise deployments',
+  },
+  {
+    title: 'Introduction to Cybersecurity',
+    issuer: 'Cisco',
+    year: '2025',
+    description:
+      'Cybersecurity fundamentals, threat landscape, and defense strategies',
   },
 ];
 
 export const navLinks = [
-  { label: 'Home', href: '#hero' },
+  { label: 'Work', href: '#projects' },
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
-  { label: 'Principles', href: '#principles' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Experience', href: '#experience' },
+  { label: 'Certifications', href: '#certifications' },
   { label: 'Contact', href: '#contact' },
 ];
