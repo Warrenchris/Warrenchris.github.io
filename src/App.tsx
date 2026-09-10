@@ -5,17 +5,19 @@ import SmoothScroll from '@/components/layout/SmoothScroll';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import Hero from '@/components/sections/Hero';
-import About from '@/components/sections/About';
-import Skills from '@/components/sections/Skills';
+import CredibilityStrip from '@/components/sections/CredibilityStrip';
 import Projects from '@/components/sections/Projects';
-import Certifications from '@/components/sections/Certifications';
+import Engineering from '@/components/sections/Engineering';
+import Experience from '@/components/sections/Experience';
+import GitHubRepos from '@/components/sections/GitHubRepos';
+import About from '@/components/sections/About';
 import Contact from '@/components/sections/Contact';
 
 // Page loader
 const Loader = ({ onDone }: { onDone: () => void }) => {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const timer = setTimeout(onDone, prefersReducedMotion ? 0 : 600);
+    const timer = setTimeout(onDone, prefersReducedMotion ? 0 : 500);
     return () => clearTimeout(timer);
   }, [onDone]);
 
@@ -25,7 +27,7 @@ const Loader = ({ onDone }: { onDone: () => void }) => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="loader-logo">WC</div>
+      <div className="loader-logo">Warren Chris</div>
       <div className="loader-bar-track">
         <div className="loader-bar-fill" />
       </div>
@@ -48,21 +50,24 @@ function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4 }}
-              className="relative min-h-screen"
+              className="relative min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]"
             >
               {/* Navigation */}
               <Navbar />
 
-              {/* Main content */}
+              {/* Main content in recruiter-first sequence */}
               <main id="main-content">
                 <Hero />
+                <CredibilityStrip />
                 <Projects />
+                <Engineering />
+                <Experience />
+                <GitHubRepos />
                 <About />
-                <Skills />
-                <Certifications />
                 <Contact />
               </main>
 
+              {/* Footer */}
               <Footer />
             </motion.div>
           )}
