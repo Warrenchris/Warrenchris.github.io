@@ -1,15 +1,23 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, Code, Cpu, Database, Server, Wrench } from 'lucide-react';
+import { Menu, X, Sun, Moon, Code, Cpu, Shield, Network, Wrench } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 import { navLinks, personalInfo } from '@/config/siteData';
 
-// Skill icons for creative navigation
+// Skill icons for creative navigation - showcasing full tech stack
 const skillIcons: Record<string, any> = {
-  'Work': Code,
-  'Engineering': Cpu,
-  'About': Database,
-  'Contact': Server,
+  'Work': Code,           // Development & coding skills
+  'Engineering': Cpu,     // Systems & infrastructure
+  'About': Network,       // Networking & security expertise
+  'Contact': Shield,      // Security & reliability focus
+};
+
+// Skill descriptions for tooltips
+const skillDescriptions: Record<string, string> = {
+  'Work': 'Full-Stack Development · React · Node.js · Python',
+  'Engineering': 'Systems Architecture · Docker · Microservices · AI',
+  'About': 'Networking · Cisco · Huawei · Cybersecurity · Infrastructure',
+  'Contact': 'Secure Communications · Professional Services',
 };
 
 export default function Navbar() {
@@ -100,6 +108,7 @@ export default function Navbar() {
               {navLinks.map((link) => {
                 const Icon = skillIcons[link.label] || Wrench;
                 const isActive = activeSection === link.label;
+                const description = skillDescriptions[link.label] || '';
                 
                 return (
                   <motion.a
@@ -113,6 +122,7 @@ export default function Navbar() {
                     }`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    title={description}
                   >
                     <Icon size={14} className={isActive ? 'text-[var(--color-accent)]' : ''} />
                     <span className="text-[13px] font-medium">{link.label}</span>
@@ -134,6 +144,11 @@ export default function Navbar() {
                       animate={{ opacity: isActive ? 0.1 : 0 }}
                       transition={{ duration: 0.2 }}
                     />
+                    
+                    {/* Skill tooltip */}
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-md shadow-lg text-[11px] font-medium text-[var(--text-secondary)] whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-50">
+                      {description}
+                    </div>
                   </motion.a>
                 );
               })}
@@ -194,6 +209,7 @@ export default function Navbar() {
               {navLinks.map((link, i) => {
                 const Icon = skillIcons[link.label] || Wrench;
                 const isActive = activeSection === link.label;
+                const description = skillDescriptions[link.label] || '';
                 
                 return (
                   <motion.a
@@ -203,22 +219,27 @@ export default function Navbar() {
                     initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.05 }}
-                    className={`py-4 flex items-center gap-4 text-2xl font-semibold tracking-tight transition-colors border-b border-[var(--border-color)] ${
+                    className={`py-4 flex flex-col items-start gap-2 text-2xl font-semibold tracking-tight transition-colors border-b border-[var(--border-color)] ${
                       isActive 
                         ? 'text-[var(--color-accent)] bg-[var(--bg-secondary)]' 
                         : 'text-[var(--text-primary)] hover:text-[var(--color-accent)]'
                     }`}
                   >
-                    <Icon size={24} className={isActive ? 'text-[var(--color-accent)]' : ''} />
-                    {link.label}
-                    {isActive && (
-                      <motion.div
-                        layoutId="mobileActiveDot"
-                        className="ml-auto w-2 h-2 bg-[var(--color-accent)] rounded-full"
-                        initial={false}
-                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                      />
-                    )}
+                    <div className="flex items-center gap-4 w-full">
+                      <Icon size={24} className={isActive ? 'text-[var(--color-accent)]' : ''} />
+                      {link.label}
+                      {isActive && (
+                        <motion.div
+                          layoutId="mobileActiveDot"
+                          className="ml-auto w-2 h-2 bg-[var(--color-accent)] rounded-full"
+                          initial={false}
+                          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                        />
+                      )}
+                    </div>
+                    <span className="text-sm font-normal text-[var(--text-muted)] ml-8">
+                      {description}
+                    </span>
                   </motion.a>
                 );
               })}
