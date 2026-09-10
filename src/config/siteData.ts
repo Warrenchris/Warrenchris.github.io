@@ -15,8 +15,6 @@ export const personalInfo = {
   location: 'Nairobi, Kenya',
   github: 'https://github.com/Warrenchris',
   linkedin: 'https://www.linkedin.com/in/warren-chris-723a00263',
-  university: 'Jomo Kenyatta University of Agriculture and Technology',
-  degree: 'BSc Information Technology',
   avatar: '/warren-avatar.jpg',
   resumeRequestUrl: 'mailto:warrenchris745@gmail.com?subject=Resume%20Request%20-%20Warren%20Chris',
 };
@@ -27,7 +25,6 @@ export const personalInfo = {
 export const navLinks = [
   { label: 'Work', href: '#work' },
   { label: 'Engineering', href: '#engineering' },
-  { label: 'Experience', href: '#experience' },
   { label: 'About', href: '#about' },
   { label: 'Contact', href: '#contact' },
 ];

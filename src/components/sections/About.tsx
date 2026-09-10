@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { MapPin, Code2, Network, Shield, Cpu } from 'lucide-react';
-import { personalInfo } from '@/config/siteData';
 
 const focusAreas = [
   {
@@ -70,7 +69,7 @@ export default function About() {
                 <MapPin size={18} className="text-[var(--color-accent)] mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-small font-medium text-[var(--text-primary)]">
-                    Based in {personalInfo.location}
+                    Based in Nairobi, Kenya
                   </p>
                   <p className="text-caption text-[var(--text-muted)]">
                     Available for full-time & high-impact roles
