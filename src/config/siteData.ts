@@ -35,18 +35,18 @@ export const navLinks = [
 export interface CredibilityItem {
   label: string;
   value: string;
-  icon: string;
+  icon: string; // Icon name from lucide-react
 }
 
 export const credibilityItems: CredibilityItem[] = [
-  { label: 'Public Repositories', value: '18', icon: '📦' },
-  { label: 'Stack Scope', value: 'Frontend → Backend → Data → AI', icon: '🚀' },
-  { label: 'Certifications', value: 'Cisco · Huawei · IBM · Red Hat', icon: '🎓' },
-  { label: 'Location', value: 'Nairobi, Kenya (UTC+3)', icon: '🌍' },
-  { label: 'Years Experience', value: '2+ Years', icon: '⚡' },
-  { label: 'Focus Areas', value: 'Full-Stack · AI · Security', icon: '🎯' },
-  { label: 'Tech Stack', value: 'React · Node.js · Python · Docker', icon: '🛠️' },
-  { label: 'Available For', value: 'Full-time · Contract · Remote', icon: '💼' },
+  { label: 'Public Repositories', value: '18', icon: 'GitHub' },
+  { label: 'Stack Scope', value: 'Frontend → Backend → Data → AI', icon: 'Layers' },
+  { label: 'Certifications', value: 'Cisco · Huawei · IBM · Red Hat', icon: 'Award' },
+  { label: 'Location', value: 'Nairobi, Kenya (UTC+3)', icon: 'MapPin' },
+  { label: 'Years Experience', value: '2+ Years', icon: 'Clock' },
+  { label: 'Focus Areas', value: 'Full-Stack · AI · Security', icon: 'Target' },
+  { label: 'Tech Stack', value: 'React · Node.js · Python · Docker', icon: 'Cpu' },
+  { label: 'Available For', value: 'Full-time · Contract · Remote', icon: 'Briefcase' },
 ];
 
 // -----------------------------------------------------------

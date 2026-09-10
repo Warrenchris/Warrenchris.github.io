@@ -2,6 +2,29 @@ import { motion, useAnimation, useMotionValue } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useEffect, useRef, useState } from 'react';
 import { credibilityItems } from '@/config/siteData';
+import { 
+  Github, 
+  Layers, 
+  Award, 
+  MapPin, 
+  Clock, 
+  Target, 
+  Cpu, 
+  Briefcase,
+  LucideIcon 
+} from 'lucide-react';
+
+// Icon mapping from string names to lucide components
+const iconMap: Record<string, LucideIcon> = {
+  GitHub: Github,
+  Layers,
+  Award,
+  MapPin,
+  Clock,
+  Target,
+  Cpu,
+  Briefcase,
+};
 
 export default function CredibilityStrip() {
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
@@ -71,28 +94,34 @@ export default function CredibilityStrip() {
             onMouseLeave={handleMouseLeave}
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {credibilityItems.map((item, i) => (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
-                transition={{ delay: i * 0.1, duration: 0.4 }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                className="flex-shrink-0 w-64 p-4 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--color-accent)] transition-all shadow-sm hover:shadow-md"
-              >
-                <div className="flex items-start gap-3">
-                  <span className="text-2xl">{item.icon}</span>
-                  <div className="flex-1 min-w-0">
-                    <span className="text-caption font-mono font-medium text-[var(--text-muted)] tracking-wider uppercase block mb-1">
-                      {item.label}
-                    </span>
-                    <span className="text-small font-medium text-[var(--text-primary)] block">
-                      {item.value}
-                    </span>
+            {credibilityItems.map((item, i) => {
+              const Icon = iconMap[item.icon] || iconMap.GitHub;
+              
+              return (
+                <motion.div
+                  key={item.label}
+                  initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                  animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
+                  transition={{ delay: i * 0.1, duration: 0.4 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  className="flex-shrink-0 w-64 p-4 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--color-accent)] transition-all shadow-sm hover:shadow-md"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="text-[var(--color-accent)]">
+                      <Icon size={24} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <span className="text-caption font-mono font-medium text-[var(--text-muted)] tracking-wider uppercase block mb-1">
+                        {item.label}
+                      </span>
+                      <span className="text-small font-medium text-[var(--text-primary)] block">
+                        {item.value}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
           
           {/* Scroll hint */}
