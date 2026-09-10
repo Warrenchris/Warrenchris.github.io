@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowDown, Github, Mail, Layers } from 'lucide-react';
 import { personalInfo, systemArchitectureNodes } from '@/config/siteData';
@@ -119,7 +119,59 @@ const fadeUp = {
   }),
 };
 
+const typewriterSpecializations = [
+  'full-stack platforms.',
+  'distributed systems.',
+  'intelligent AI services.',
+  'resilient backend architecture.',
+];
+
+function useTypewriter(words: string[], typingSpeed = 70, deletingSpeed = 35, pauseDuration = 2200) {
+  const [wordIndex, setWordIndex] = useState(0);
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setText(words[0]);
+      return;
+    }
+
+    const currentWord = words[wordIndex];
+    let timer: NodeJS.Timeout;
+
+    if (!isDeleting) {
+      if (text.length < currentWord.length) {
+        // Subtle human variation in keystroke cadence
+        const cadenceVariance = Math.random() * 20 - 10;
+        timer = setTimeout(() => {
+          setText(currentWord.slice(0, text.length + 1));
+        }, Math.max(30, typingSpeed + cadenceVariance));
+      } else {
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, pauseDuration);
+      }
+    } else {
+      if (text.length > 0) {
+        timer = setTimeout(() => {
+          setText(currentWord.slice(0, text.length - 1));
+        }, deletingSpeed);
+      } else {
+        setIsDeleting(false);
+        setWordIndex((prev) => (prev + 1) % words.length);
+      }
+    }
+
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, wordIndex, words, typingSpeed, deletingSpeed, pauseDuration]);
+
+  return text;
+}
+
 export default function Hero() {
+  const typedSpecialization = useTypewriter(typewriterSpecializations);
+
   return (
     <section
       id="hero"
@@ -145,15 +197,22 @@ export default function Hero() {
           <span className="section-label hidden md:inline">{personalInfo.location}</span>
         </motion.div>
 
-        {/* Main Heading */}
+        {/* Main Heading with Human Typewriter Animation */}
         <motion.h1
           custom={1}
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="text-display text-[var(--text-primary)] max-w-3xl font-semibold tracking-tight"
+          className="text-display text-[var(--text-primary)] max-w-3xl font-semibold tracking-tight min-h-[2.8em] sm:min-h-[2.2em]"
         >
-          {personalInfo.headline}
+          <span className="sr-only">
+            {personalInfo.headline}
+          </span>
+          <span aria-hidden="true">
+            Software Engineer specializing in{' '}
+            <span className="text-[var(--color-accent)]">{typedSpecialization}</span>
+            <span className="typing-cursor" />
+          </span>
         </motion.h1>
 
         {/* Supporting Narrative */}
