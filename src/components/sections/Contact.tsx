@@ -48,10 +48,9 @@ export default function Contact() {
           <div className="p-6 rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] flex flex-col justify-between gap-6">
             <div>
               <div className="flex items-center justify-between">
-                <span className="font-mono text-caption text-[var(--text-muted)]">DIRECT EMAIL</span>
-                <span className="inline-flex items-center gap-1.5 text-caption font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  Available for hire
+                <span className="font-mono text-caption text-[var(--text-muted)] uppercase tracking-wider">DIRECT EMAIL</span>
+                <span className="text-caption font-medium text-[var(--text-secondary)]">
+                  Available for full-time roles
                 </span>
               </div>
               <p className="mt-3 text-large font-mono font-medium text-[var(--text-primary)] break-all select-all">

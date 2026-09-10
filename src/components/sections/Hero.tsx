@@ -132,17 +132,16 @@ export default function Hero() {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="flex flex-wrap items-center gap-x-3 gap-y-1.5"
+          className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5"
         >
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] font-mono text-[11px] font-medium text-[var(--text-primary)]">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="font-semibold text-[15px] text-[var(--text-primary)] tracking-tight">
             {personalInfo.name}
           </span>
-          <span className="text-[var(--border-color)]">·</span>
+          <span className="text-[var(--border-hover)]">/</span>
           <span className="section-label">{personalInfo.title}</span>
-          <span className="text-[var(--border-color)] hidden sm:inline">·</span>
+          <span className="text-[var(--border-hover)] hidden sm:inline">/</span>
           <span className="section-label hidden sm:inline">{personalInfo.role}</span>
-          <span className="text-[var(--border-color)] hidden md:inline">·</span>
+          <span className="text-[var(--border-hover)] hidden md:inline">/</span>
           <span className="section-label hidden md:inline">{personalInfo.location}</span>
         </motion.div>
 
