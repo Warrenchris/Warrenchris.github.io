@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { GraduationCap, MapPin, Code2, Network, Shield, Cpu } from 'lucide-react';
+import { MapPin, Code2, Network, Shield, Cpu } from 'lucide-react';
 import { personalInfo } from '@/config/siteData';
 
 const focusAreas = [
@@ -64,20 +64,8 @@ export default function About() {
               I focus on building complete, production-grade products: from designing intuitive user interfaces and robust REST/WebSocket APIs, to provisioning databases, containerizing environments with Docker, and wiring secure payment workflows like M-Pesa.
             </p>
 
-            {/* Quick Education & Location Callout */}
-            <div className="pt-6 border-t border-[var(--border-color)] grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="flex items-start gap-3">
-                <GraduationCap size={18} className="text-[var(--color-accent)] mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-small font-medium text-[var(--text-primary)]">
-                    {personalInfo.degree}
-                  </p>
-                  <p className="text-caption text-[var(--text-muted)]">
-                    {personalInfo.university}
-                  </p>
-                </div>
-              </div>
-
+            {/* Location Callout */}
+            <div className="pt-6 border-t border-[var(--border-color)]">
               <div className="flex items-start gap-3">
                 <MapPin size={18} className="text-[var(--color-accent)] mt-1 flex-shrink-0" />
                 <div>

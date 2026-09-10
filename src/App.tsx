@@ -8,7 +8,7 @@ import Hero from '@/components/sections/Hero';
 import CredibilityStrip from '@/components/sections/CredibilityStrip';
 import Projects from '@/components/sections/Projects';
 import Engineering from '@/components/sections/Engineering';
-import Experience from '@/components/sections/Experience';
+
 import GitHubRepos from '@/components/sections/GitHubRepos';
 import About from '@/components/sections/About';
 import Contact from '@/components/sections/Contact';
@@ -61,7 +61,6 @@ function App() {
                 <CredibilityStrip />
                 <Projects />
                 <Engineering />
-                <Experience />
                 <GitHubRepos />
                 <About />
                 <Contact />
