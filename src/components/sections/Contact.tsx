@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Mail, Github, Linkedin, Copy, Check, ArrowUpRight, Clock, MapPin } from 'lucide-react';
+import { Mail, Github, Linkedin, Copy, Check, ArrowUpRight, Clock, MapPin, FileText } from 'lucide-react';
 import { personalInfo } from '@/config/siteData';
 
 export default function Contact() {
@@ -33,7 +33,7 @@ export default function Contact() {
             Let's build something serious together.
           </h2>
           <p className="text-body text-[var(--text-secondary)] mt-4 leading-relaxed">
-            I'm currently considering software engineering opportunities across full-stack, distributed backend, infrastructure, and applied AI. Whether you have an open role, an architectural challenge, or a consulting project, my inbox is open.
+            I'm currently considering software engineering opportunities across full-stack platforms, distributed backend systems, and applied AI. Whether you have an open role, an architectural challenge, or a consulting project, my inbox is open.
           </p>
         </motion.div>
 
@@ -86,13 +86,22 @@ export default function Contact() {
                   </>
                 )}
               </button>
+
+              <a
+                href={personalInfo.resumeRequestUrl}
+                className="btn-secondary"
+                title="Request Warren's resume PDF via email"
+              >
+                <FileText size={15} />
+                <span>Request Resume</span>
+              </a>
             </div>
           </div>
 
           {/* Social Links & Location Card */}
           <div className="p-6 rounded-lg border border-[var(--border-color)] bg-[var(--bg-primary)] flex flex-col justify-between gap-6">
             <div>
-              <span className="font-mono text-caption text-[var(--text-muted)]">PROFILES & LOCATION</span>
+              <span className="font-mono text-caption text-[var(--text-muted)]">PROFILES &amp; LOCATION</span>
               <div className="mt-4 space-y-3">
                 <a
                   href={personalInfo.github}

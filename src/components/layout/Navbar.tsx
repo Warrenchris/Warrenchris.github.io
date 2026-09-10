@@ -37,13 +37,21 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Accessible skip link */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[var(--bg-primary)] focus:border focus:border-[var(--color-accent)] focus:text-[var(--text-primary)] focus:rounded-md focus:shadow-md font-mono text-small"
+      >
+        Skip to main content
+      </a>
+
       <motion.nav
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
         className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 ${
           scrolled
-            ? 'bg-[var(--nav-bg)] backdrop-blur-xl border-b border-[var(--nav-border)]'
+            ? 'bg-[var(--nav-bg)] backdrop-blur-xl border-b border-[var(--nav-border)] shadow-sm'
             : 'bg-transparent border-b border-transparent'
         }`}
         role="navigation"
@@ -76,6 +84,14 @@ export default function Navbar() {
 
             {/* Right Actions */}
             <div className="flex items-center gap-2">
+              <a
+                href={personalInfo.resumeRequestUrl}
+                className="hidden sm:inline-flex text-[13px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                title="Request Warren's resume PDF via email"
+              >
+                Resume
+              </a>
+
               <a
                 href={personalInfo.github}
                 target="_blank"
@@ -134,6 +150,13 @@ export default function Navbar() {
             </nav>
 
             <div className="mt-8 flex flex-col gap-3">
+              <a
+                href={personalInfo.resumeRequestUrl}
+                className="text-sm font-medium text-[var(--text-primary)]"
+                onClick={() => setIsOpen(false)}
+              >
+                Request Resume (PDF) ↗
+              </a>
               <a
                 href={personalInfo.github}
                 target="_blank"
