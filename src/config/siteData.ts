@@ -32,11 +32,21 @@ export const navLinks = [
 // -----------------------------------------------------------
 // CREDIBILITY — verified facts only
 // -----------------------------------------------------------
-export const credibilityItems = [
-  { label: 'Public Repositories', value: '18' },
-  { label: 'Stack Scope', value: 'Frontend → Backend → Data → AI' },
-  { label: 'Certifications', value: 'Cisco · Huawei · IBM · Red Hat' },
-  { label: 'Location', value: 'Nairobi, Kenya (UTC+3)' },
+export interface CredibilityItem {
+  label: string;
+  value: string;
+  icon: string;
+}
+
+export const credibilityItems: CredibilityItem[] = [
+  { label: 'Public Repositories', value: '18', icon: '📦' },
+  { label: 'Stack Scope', value: 'Frontend → Backend → Data → AI', icon: '🚀' },
+  { label: 'Certifications', value: 'Cisco · Huawei · IBM · Red Hat', icon: '🎓' },
+  { label: 'Location', value: 'Nairobi, Kenya (UTC+3)', icon: '🌍' },
+  { label: 'Years Experience', value: '2+ Years', icon: '⚡' },
+  { label: 'Focus Areas', value: 'Full-Stack · AI · Security', icon: '🎯' },
+  { label: 'Tech Stack', value: 'React · Node.js · Python · Docker', icon: '🛠️' },
+  { label: 'Available For', value: 'Full-time · Contract · Remote', icon: '💼' },
 ];
 
 // -----------------------------------------------------------
