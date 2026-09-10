@@ -14,8 +14,8 @@
   --text-primary: #111111;
   --text-secondary: #6B6B6B;
   --text-muted: #999999;
-  --color-accent: #C17F59;
-  --color-accent-hover: #A8694A;
+  --color-accent: #8E441E;
+  --color-accent-hover: #753514;
   --border-color: #E5E5E2;
   --border-hover: #D0D0CC;
 
@@ -43,8 +43,8 @@
   --text-primary: #EAEAEA;
   --text-secondary: #8A8A8E;
   --text-muted: #5A5A5E;
-  --color-accent: #D49A72;
-  --color-accent-hover: #E0AD88;
+  --color-accent: #E09F70;
+  --color-accent-hover: #EBB68E;
   --border-color: #2A2A2E;
   --border-hover: #3A3A3E;
 
@@ -147,9 +147,9 @@ body {
    ================================================================ */
 .section-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-accent);
 }
