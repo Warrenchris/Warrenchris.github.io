@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowDown, Github, Mail, Layers } from 'lucide-react';
+import { ArrowDown, Github, Mail, Layers, Server, Network, Cpu, ShieldCheck, Activity, CheckCircle2 } from 'lucide-react';
 import { personalInfo, systemArchitectureNodes } from '@/config/siteData';
 
 // Interactive System Architecture Visualization
@@ -71,41 +71,123 @@ function ArchitectureVisualizer() {
         })}
       </div>
 
-      {/* Active Node Inspection Card */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeNode.id}
-          initial={{ opacity: 0, y: 4 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -4 }}
-          transition={{ duration: 0.2 }}
-          className="p-4 rounded-md border border-[var(--border-color)] bg-[var(--bg-secondary)] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-small"
-        >
-          <div className="space-y-1 max-w-xl">
-            <div className="flex items-center gap-2">
-              <span className="font-mono text-caption font-semibold text-[var(--text-primary)]">
-                {activeNode.label}
+      {/* Active Node Inspection Card with System Profile */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {/* Main Active Node Card */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeNode.id}
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.2 }}
+            className="lg:col-span-2 p-4 rounded-md border border-[var(--border-color)] bg-[var(--bg-secondary)] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-small"
+          >
+            <div className="space-y-1 max-w-xl">
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-caption font-semibold text-[var(--text-primary)]">
+                  {activeNode.label}
+                </span>
+                <span className="text-[var(--border-color)]">·</span>
+                <span className="font-mono text-caption text-[var(--color-accent)]">
+                  {activeNode.sublabel}
+                </span>
+              </div>
+              <p className="text-caption text-[var(--text-secondary)] leading-relaxed">
+                {activeNode.role}
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:items-end gap-1 flex-shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-[var(--border-color)]">
+              <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider">
+                Deployed In
               </span>
-              <span className="text-[var(--border-color)]">·</span>
-              <span className="font-mono text-caption text-[var(--color-accent)]">
-                {activeNode.sublabel}
+              <span className="text-caption font-medium text-[var(--text-primary)]">
+                {activeNode.evidence}
               </span>
             </div>
-            <p className="text-caption text-[var(--text-secondary)] leading-relaxed">
-              {activeNode.role}
-            </p>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* System Profile Sidebar */}
+        <div className="bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-2xl p-5 shadow-sm relative overflow-hidden">
+          {/* Header Bar */}
+          <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-[var(--border-color)]">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-[var(--color-accent)]"></div>
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--text-secondary)]">SYSTEM PROFILE</span>
+            </div>
+            <span className="text-[10px] font-mono text-[var(--text-muted)] bg-[var(--bg-secondary)] px-2 py-0.5 rounded border border-[var(--border-color)]">
+              PRODUCTION READY
+            </span>
           </div>
 
-          <div className="flex flex-col sm:items-end gap-1 flex-shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-[var(--border-color)]">
-            <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider">
-              Deployed In
-            </span>
-            <span className="text-caption font-medium text-[var(--text-primary)]">
-              {activeNode.evidence}
-            </span>
+          {/* Metrics & Architecture Snapshot */}
+          <div className="space-y-3 font-mono text-xs">
+            
+            {/* Metric Item 1 */}
+            <div className="bg-[var(--bg-primary)] p-3.5 rounded-xl border border-[var(--border-color)]">
+              <div className="text-[var(--text-muted)] text-[10px] flex items-center justify-between mb-1 uppercase tracking-wider">
+                <span>FLAGSHIP SYSTEM</span>
+                <span className="text-[var(--color-accent)] font-medium">99.9% Uptime Target</span>
+              </div>
+              <div className="text-[var(--text-primary)] font-semibold text-sm">
+                ISP Billing & AAA Automation
+              </div>
+              <div className="text-[11px] text-[var(--text-muted)] mt-1">
+                FreeRADIUS · M-Pesa · BullMQ · Redis
+              </div>
+            </div>
+
+            {/* Metric Item 2 */}
+            <div className="bg-[var(--bg-primary)] p-3.5 rounded-xl border border-[var(--border-color)]">
+              <div className="text-[var(--text-muted)] text-[10px] flex items-center justify-between mb-1 uppercase tracking-wider">
+                <span>VERIFIED CREDENTIALS</span>
+                <span className="text-[var(--text-secondary)]">3 Active</span>
+              </div>
+              <div className="text-[var(--text-secondary)] font-medium text-[11px] space-y-1">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[var(--text-muted)] shrink-0" />
+                  <span>Huawei HCIA-Datacom (Routing & Switching)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[var(--text-muted)] shrink-0" />
+                  <span>Cisco DevNet Associate (Automation)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[var(--text-muted)] shrink-0" />
+                  <span>IBM Enterprise Design Thinking</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Metric Item 3 */}
+            <div className="bg-[var(--bg-primary)] p-3.5 rounded-xl border border-[var(--border-color)]">
+              <div className="text-[var(--text-muted)] text-[10px] uppercase tracking-wider mb-1">
+                <span>ENGINEERING DOMAINS</span>
+              </div>
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                <span className="px-2 py-0.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded text-[10px] text-[var(--text-secondary)]">Asynchronous Workers</span>
+                <span className="px-2 py-0.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded text-[10px] text-[var(--text-secondary)]">Idempotent Webhooks</span>
+                <span className="px-2 py-0.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded text-[10px] text-[var(--text-secondary)]">Dockerized Services</span>
+                <span className="px-2 py-0.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded text-[10px] text-[var(--text-secondary)]">Relational DBs</span>
+              </div>
+            </div>
+
+            {/* Quick inspect button */}
+            <button
+              onClick={() => {
+                document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="w-full py-2 bg-[var(--bg-secondary)] hover:bg-[var(--bg-tertiary)] text-[var(--text-primary)] text-xs font-mono rounded-lg border border-[var(--border-color)] hover:border-[var(--border-hover)] flex items-center justify-center gap-1.5 transition-colors"
+            >
+              <Activity className="w-3.5 h-3.5 text-[var(--text-muted)]" />
+              <span>Inspect Flagship Architecture</span>
+            </button>
+
           </div>
-        </motion.div>
-      </AnimatePresence>
+        </div>
+      </div>
     </div>
   );
 }
@@ -175,12 +257,38 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-[85vh] flex flex-col justify-center pt-24 pb-16"
+      className="relative min-h-[85vh] flex flex-col justify-center pt-24 pb-16 overflow-hidden"
     >
-      <div className="container-main flex flex-col gap-6 max-w-4xl">
-        {/* Identity & Metadata Kicker */}
+      {/* Subtle architectural background grid */}
+      <div className="absolute inset-0 pointer-events-none opacity-10 bg-[radial-gradient(var(--text-primary)_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_30%,#000_70%,transparent_100%)]"></div>
+      
+      <div className="container-main flex flex-col gap-6 max-w-4xl relative z-10">
+        {/* Availability Badge */}
         <motion.div
           custom={0}
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          className="flex flex-wrap items-center gap-3"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-color)] text-xs font-mono text-[var(--text-secondary)] shadow-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-accent)] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--color-accent)]"></span>
+            </span>
+            <span>Available for full-time & high-impact roles</span>
+          </div>
+
+          <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-xs font-mono text-[var(--text-muted)]">
+            <span className="text-[var(--text-secondary)]">Nairobi, KE</span>
+            <span className="text-[var(--border-color)]">·</span>
+            <span>Remote Worldwide</span>
+          </div>
+        </motion.div>
+
+        {/* Identity & Metadata Kicker */}
+        <motion.div
+          custom={1}
           variants={fadeUp}
           initial="hidden"
           animate="visible"
@@ -199,7 +307,7 @@ export default function Hero() {
 
         {/* Main Heading with Human Typewriter Animation */}
         <motion.h1
-          custom={1}
+          custom={2}
           variants={fadeUp}
           initial="hidden"
           animate="visible"
@@ -217,7 +325,7 @@ export default function Hero() {
 
         {/* Supporting Narrative */}
         <motion.p
-          custom={2}
+          custom={3}
           variants={fadeUp}
           initial="hidden"
           animate="visible"
@@ -226,9 +334,54 @@ export default function Hero() {
           {personalInfo.subheadline}
         </motion.p>
 
+        {/* Core Competency Pillars */}
+        <motion.div
+          custom={4}
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-2"
+        >
+          <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-3.5 hover:border-[var(--border-hover)] transition-colors">
+            <div className="text-[var(--text-secondary)] mb-1 flex items-center justify-between">
+              <Server className="w-4 h-4 text-[var(--text-muted)]" />
+              <span className="text-[10px] font-mono text-[var(--text-muted)] tracking-wider">BACKEND</span>
+            </div>
+            <div className="text-xs font-semibold text-[var(--text-primary)]">Distributed APIs</div>
+            <div className="text-[11px] text-[var(--text-muted)] font-mono">Node · BullMQ · Queues</div>
+          </div>
+
+          <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-3.5 hover:border-[var(--border-hover)] transition-colors">
+            <div className="text-[var(--text-secondary)] mb-1 flex items-center justify-between">
+              <Network className="w-4 h-4 text-[var(--text-muted)]" />
+              <span className="text-[10px] font-mono text-[var(--text-muted)] tracking-wider">NETWORKS</span>
+            </div>
+            <div className="text-xs font-semibold text-[var(--text-primary)]">AAA & RADIUS</div>
+            <div className="text-[11px] text-[var(--text-muted)] font-mono">FreeRADIUS · MikroTik</div>
+          </div>
+
+          <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-3.5 hover:border-[var(--border-hover)] transition-colors">
+            <div className="text-[var(--text-secondary)] mb-1 flex items-center justify-between">
+              <Cpu className="w-4 h-4 text-[var(--text-muted)]" />
+              <span className="text-[10px] font-mono text-[var(--text-muted)] tracking-wider">FRONTEND</span>
+            </div>
+            <div className="text-xs font-semibold text-[var(--text-primary)]">React & TypeScript</div>
+            <div className="text-[11px] text-[var(--text-muted)] font-mono">Modern UI · Tailored UX</div>
+          </div>
+
+          <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl p-3.5 hover:border-[var(--border-hover)] transition-colors">
+            <div className="text-[var(--text-secondary)] mb-1 flex items-center justify-between">
+              <ShieldCheck className="w-4 h-4 text-[var(--text-muted)]" />
+              <span className="text-[10px] font-mono text-[var(--text-muted)] tracking-wider">DEVSECOPS</span>
+            </div>
+            <div className="text-xs font-semibold text-[var(--text-primary)]">Zero-Trust & Docker</div>
+            <div className="text-[11px] text-[var(--text-muted)] font-mono">RBAC · Rate Limiting</div>
+          </div>
+        </motion.div>
+
         {/* Primary CTAs */}
         <motion.div
-          custom={3}
+          custom={5}
           variants={fadeUp}
           initial="hidden"
           animate="visible"
@@ -268,7 +421,7 @@ export default function Hero() {
 
         {/* Interactive Architecture Visualization */}
         <motion.div
-          custom={4}
+          custom={6}
           variants={fadeUp}
           initial="hidden"
           animate="visible"
