@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, Code, Cpu, Shield, Network, Wrench } from 'lucide-react';
+import { Menu, X, Sun, Moon, Code, Cpu, Shield, Network, Wrench, Terminal, FileText, ChevronRight } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 import { navLinks, personalInfo } from '@/config/siteData';
 
@@ -20,10 +20,97 @@ const skillDescriptions: Record<string, string> = {
   'Contact': 'Secure Communications · Professional Services',
 };
 
+// Terminal modal component
+function TerminalModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const [input, setInput] = useState('');
+  const [output, setOutput] = useState([
+    { type: 'info', text: 'Warren Chris Portfolio CLI v1.0.0' },
+    { type: 'info', text: 'Type "help" to view available commands.' },
+  ]);
+
+  if (!isOpen) return null;
+
+  const handleCommand = (e: React.FormEvent) => {
+    e.preventDefault();
+    const cmd = input.trim().toLowerCase();
+    
+    let response = '';
+    switch (cmd) {
+      case 'help':
+        response = 'Available commands: help, projects, skills, contact, clear';
+        break;
+      case 'projects':
+        response = 'Projects: ISP Billing System, Zena POS, GroupDeal, Artemis Tracker, Road Accident Analyzer';
+        break;
+      case 'skills':
+        response = 'Skills: React, Node.js, Python, Docker, MySQL, Redis, Networking, Security';
+        break;
+      case 'contact':
+        response = `Contact: ${personalInfo.email} | GitHub: ${personalInfo.github}`;
+        break;
+      case 'clear':
+        setOutput([]);
+        setInput('');
+        return;
+      default:
+        response = `Command not found: ${cmd}. Type "help" for available commands.`;
+    }
+
+    setOutput([...output, { type: 'command', text: `$ ${input}` }, { type: 'response', text: response }]);
+    setInput('');
+  };
+
+  return (
+    <div className="fixed inset-0 z-[1000] bg-black/85 backdrop-blur-md flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-[var(--bg-primary)] border border-[var(--border-color)] w-full max-w-3xl h-[80vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col font-mono text-xs" onClick={e => e.stopPropagation()}>
+        {/* Header */}
+        <div className="bg-[var(--bg-secondary)] px-4 py-3 border-b border-[var(--border-color)] flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="flex gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[var(--text-muted)]"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[var(--text-muted)]"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[var(--text-muted)]"></span>
+            </div>
+            <span className="text-xs font-bold text-[var(--text-secondary)] ml-2 flex items-center gap-1.5">
+              <Terminal className="w-3.5 h-3.5 text-[var(--text-muted)]" />
+              warrenchris@portfolio:~$
+            </span>
+          </div>
+          <button onClick={onClose} className="p-1 rounded bg-[var(--bg-tertiary)] hover:bg-[var(--bg-secondary)] text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors border border-[var(--border-color)]">
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Output */}
+        <div className="flex-1 p-4 overflow-y-auto space-y-2 bg-[var(--bg-primary)]">
+          {output.map((line, i) => (
+            <div key={i} className={line.type === 'command' ? 'text-[var(--text-primary)] font-semibold' : line.type === 'info' ? 'text-[var(--color-accent)]' : 'text-[var(--text-secondary)]'}>
+              {line.text}
+            </div>
+          ))}
+        </div>
+
+        {/* Input */}
+        <form onSubmit={handleCommand} className="bg-[var(--bg-secondary)] p-3 border-t border-[var(--border-color)] flex items-center gap-2">
+          <span className="text-[var(--text-muted)] text-xs font-bold">warrenchris@portfolio:~$</span>
+          <input
+            type="text"
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            placeholder="Type 'help', 'projects', 'skills'..."
+            className="flex-1 bg-transparent text-xs text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none font-mono"
+          />
+        </form>
+      </div>
+    </div>
+  );
+}
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('Work');
+  const [terminalOpen, setTerminalOpen] = useState(false);
   const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -104,7 +191,7 @@ export default function Navbar() {
             </a>
 
             {/* Desktop Links */}
-            <div className="hidden lg:flex items-center gap-6">
+            <nav className="hidden lg:flex items-center gap-1 bg-[var(--bg-secondary)] p-1.5 rounded-full border border-[var(--border-color)] backdrop-blur-sm" aria-label="Main Navigation">
               {navLinks.map((link) => {
                 const Icon = skillIcons[link.label] || Wrench;
                 const isActive = activeSection === link.label;
@@ -115,35 +202,27 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
-                    className={`relative group flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${
-                      isActive 
-                        ? 'text-[var(--color-accent)] bg-[var(--bg-secondary)]' 
-                        : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                    className={`relative group flex items-center gap-2 px-3.5 py-1 text-[11px] font-mono uppercase tracking-wider rounded-full transition-all duration-150 ${
+                      isActive
+                        ? 'bg-[var(--bg-primary)] text-[var(--color-accent)] border border-[var(--border-color)]'
+                        : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)]'
                     }`}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     title={description}
                   >
-                    <Icon size={14} className={isActive ? 'text-[var(--color-accent)]' : ''} />
-                    <span className="text-[13px] font-medium">{link.label}</span>
+                    <Icon size={12} className={isActive ? 'text-[var(--color-accent)]' : ''} />
+                    <span className="font-medium">{link.label}</span>
                     
                     {/* Active indicator dot */}
                     {isActive && (
                       <motion.div
                         layoutId="activeDot"
-                        className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-[var(--color-accent)] rounded-full"
+                        className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-[var(--color-accent)] rounded-full"
                         initial={false}
                         transition={{ type: "spring", stiffness: 500, damping: 30 }}
                       />
                     )}
-                    
-                    {/* Glow effect on hover */}
-                    <motion.div
-                      className="absolute inset-0 bg-[var(--color-accent)] opacity-0 group-hover:opacity-10 rounded-lg blur-md"
-                      initial={false}
-                      animate={{ opacity: isActive ? 0.1 : 0 }}
-                      transition={{ duration: 0.2 }}
-                    />
                     
                     {/* Skill tooltip */}
                     <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-md shadow-lg text-[11px] font-medium text-[var(--text-secondary)] whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-50">
@@ -152,10 +231,20 @@ export default function Navbar() {
                   </motion.a>
                 );
               })}
-            </div>
+            </nav>
 
             {/* Right Actions */}
             <div className="flex items-center gap-2">
+              {/* Terminal Button */}
+              <button
+                onClick={() => setTerminalOpen(true)}
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-hover)] hover:bg-[var(--bg-tertiary)] transition-all duration-150"
+                title="Open CLI Terminal"
+              >
+                <Terminal className="w-3.5 h-3.5 text-[var(--text-muted)]" />
+                <span>CLI</span>
+              </button>
+
               <a
                 href={personalInfo.resumeRequestUrl}
                 className="hidden sm:inline-flex text-[13px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
@@ -182,14 +271,23 @@ export default function Navbar() {
               </button>
 
               {/* Mobile toggle */}
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="lg:hidden p-2 rounded-md text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
-                aria-label={isOpen ? 'Close menu' : 'Open menu'}
-                aria-expanded={isOpen}
-              >
-                {isOpen ? <X size={18} /> : <Menu size={18} />}
-              </button>
+              <div className="flex items-center gap-2 lg:hidden">
+                <button
+                  onClick={() => setTerminalOpen(true)}
+                  aria-label="Open CLI"
+                  className="p-2 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:bg-[var(--bg-tertiary)]"
+                >
+                  <Terminal className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setIsOpen(!isOpen)}
+                  className="lg:hidden p-2 rounded-md text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+                  aria-label={isOpen ? 'Close menu' : 'Open menu'}
+                  aria-expanded={isOpen}
+                >
+                  {isOpen ? <X size={18} /> : <Menu size={18} />}
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -246,6 +344,17 @@ export default function Navbar() {
             </nav>
 
             <div className="mt-8 flex flex-col gap-3">
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  setTerminalOpen(true);
+                }}
+                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-primary)] text-xs font-mono uppercase tracking-wider hover:bg-[var(--bg-tertiary)] transition-colors"
+              >
+                <Terminal className="w-4 h-4 text-[var(--text-muted)]" />
+                Launch CLI Terminal
+              </button>
+
               <a
                 href={personalInfo.resumeRequestUrl}
                 className="text-sm font-medium text-[var(--text-primary)]"
@@ -271,6 +380,9 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Terminal Modal */}
+      <TerminalModal isOpen={terminalOpen} onClose={() => setTerminalOpen(false)} />
     </>
   );
 }
