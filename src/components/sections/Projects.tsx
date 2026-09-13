@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ArrowUpRight, Github, ExternalLink, CheckCircle2, Terminal, Layers } from 'lucide-react';
+import { ArrowUpRight, Github, ExternalLink, CheckCircle2, Terminal, Layers, Filter } from 'lucide-react';
 import { projects, type Project } from '@/config/siteData';
 
 // Fallback architectural preview for GroupDeal to avoid blank image slots
@@ -191,9 +192,21 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 }
 
 export default function Projects() {
-  const featured = projects.filter((p) => p.featured);
-  const secondary = projects.filter((p) => !p.featured);
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
+
+  const filteredProjects = selectedCategory === 'all' 
+    ? projects 
+    : projects.filter(project => {
+        if (selectedCategory === 'business') return project.categories.includes('Business Systems');
+        if (selectedCategory === 'fullstack') return project.categories.includes('Full Stack');
+        if (selectedCategory === 'ai') return project.categories.includes('AI / ML');
+        if (selectedCategory === 'frontend') return project.categories.includes('Frontend');
+        return true;
+      });
+
+  const featured = filteredProjects.filter((p) => p.featured);
+  const secondary = filteredProjects.filter((p) => !p.featured);
 
   return (
     <section id="work" className="section-gap">
@@ -213,6 +226,35 @@ export default function Projects() {
           <p className="text-body text-[var(--text-secondary)] mt-3 max-w-2xl leading-relaxed">
             Production-oriented systems evaluated by problem complexity, architecture rigor, payment integration, and real-time data flow.
           </p>
+        </motion.div>
+
+        {/* Category Filter */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.1, duration: 0.4 }}
+          className="flex flex-wrap gap-2 mb-8"
+        >
+          {[
+            { id: 'all', label: 'All Systems' },
+            { id: 'business', label: 'Business Systems' },
+            { id: 'fullstack', label: 'Full Stack' },
+            { id: 'ai', label: 'AI / ML' },
+            { id: 'frontend', label: 'Frontend' },
+          ].map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setSelectedCategory(category.id)}
+              className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all flex items-center gap-2 ${
+                selectedCategory === category.id
+                  ? 'bg-[var(--color-accent)] text-[var(--bg-primary)]'
+                  : 'bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:bg-[var(--bg-tertiary)] border border-[var(--border-color)]'
+              }`}
+            >
+              <Filter size={12} />
+              {category.label}
+            </button>
+          ))}
         </motion.div>
 
         {/* Featured Projects with Strong Visual Hierarchy */}
