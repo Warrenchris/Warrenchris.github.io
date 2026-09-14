@@ -25,6 +25,7 @@ export const personalInfo = {
 export const navLinks = [
   { label: 'Work', href: '#work' },
   { label: 'Engineering', href: '#engineering' },
+  { label: 'Principles', href: '#principles' },
   { label: 'About', href: '#about' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -480,6 +481,58 @@ export const engineeringProcess = [
     step: '07',
     title: 'Iterate',
     description: 'Monitor latency and resource usage, collect operational telemetry, and optimize.',
+  },
+];
+
+// -----------------------------------------------------------
+// ENGINEERING PRINCIPLES
+// -----------------------------------------------------------
+export interface EngineeringPrinciple {
+  id: string;
+  number: string;
+  title: string;
+  tagline: string;
+  description: string;
+  implementation: string;
+  iconName: string;
+}
+
+export const engineeringPrinciples: EngineeringPrinciple[] = [
+  {
+    id: 'security-first',
+    number: '01',
+    title: 'Security by Default',
+    tagline: 'Every system must be battle-ready from day one',
+    description: 'I implement defense-in-depth principles across all layers: input validation, rate limiting, secure authentication, and audit logging. Security is not an afterthought—it\'s the foundation.',
+    implementation: 'JWT with RBAC, rate-limiting middleware, parameterized queries, webhook signature validation, and environment-based secret management.',
+    iconName: 'ShieldCheck',
+  },
+  {
+    id: 'asynchronous-design',
+    number: '02',
+    title: 'Asynchronous Architecture',
+    tagline: 'Design for scale with queues and workers',
+    description: 'I build systems that embrace asynchronous processing for resilience and throughput. Background workers handle heavy operations without blocking user interactions.',
+    implementation: 'BullMQ with Redis for job queues, retry logic with exponential backoff, idempotent webhook handlers, and circuit breakers for external APIs.',
+    iconName: 'Flame',
+  },
+  {
+    id: 'data-integrity',
+    number: '03',
+    title: 'Data Integrity & Consistency',
+    tagline: 'ACID transactions are non-negotiable',
+    description: 'I design databases with proper normalization, foreign key constraints, and transactional boundaries. Data correctness is critical for business operations.',
+    implementation: 'Relational schemas with proper indexes, transactional workflows for financial operations, optimistic locking for concurrent updates, and data validation layers.',
+    iconName: 'Database',
+  },
+  {
+    id: 'operational-observability',
+    number: '04',
+    title: 'Operational Observability',
+    tagline: 'If you can\'t measure it, you can\'t improve it',
+    description: 'I design systems with built-in observability. Logs, metrics, and traces help diagnose issues in production and optimize performance.',
+    implementation: 'Structured logging with correlation IDs, health check endpoints, performance monitoring, and error tracking with actionable context.',
+    iconName: 'Activity',
   },
 ];
 
