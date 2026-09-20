@@ -71,9 +71,6 @@ export default function About() {
                   <p className="text-small font-medium text-[var(--text-primary)]">
                     Based in Nairobi, Kenya
                   </p>
-                  <p className="text-caption text-[var(--text-muted)]">
-                    Available for full-time & high-impact roles
-                  </p>
                 </div>
               </div>
             </div>

@@ -49,9 +49,6 @@ export default function Contact() {
             <div>
               <div className="flex items-center justify-between">
                 <span className="font-mono text-caption text-[var(--text-muted)] uppercase tracking-wider">DIRECT EMAIL</span>
-                <span className="text-caption font-medium text-[var(--text-secondary)]">
-                  Available for full-time roles
-                </span>
               </div>
               <p className="mt-3 text-large font-mono font-medium text-[var(--text-primary)] break-all select-all">
                 {personalInfo.email}
