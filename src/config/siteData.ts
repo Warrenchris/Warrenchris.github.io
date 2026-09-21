@@ -26,6 +26,7 @@ export const navLinks = [
   { label: 'Work', href: '#work' },
   { label: 'Engineering', href: '#engineering' },
   { label: 'Principles', href: '#principles' },
+  { label: 'Skills', href: '#skills' },
   { label: 'About', href: '#about' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -534,6 +535,98 @@ export const engineeringPrinciples: EngineeringPrinciple[] = [
     implementation: 'Structured logging with correlation IDs, health check endpoints, performance monitoring, and error tracking with actionable context.',
     iconName: 'Activity',
   },
+];
+
+// -----------------------------------------------------------
+// SKILL CATEGORIES
+// -----------------------------------------------------------
+export interface Skill {
+  name: string;
+  level: string;
+  context: string;
+  highlight: boolean;
+}
+
+export interface SkillCategory {
+  title: string;
+  description: string;
+  iconName: string;
+  skills: Skill[];
+}
+
+export const skillCategories: SkillCategory[] = [
+  {
+    title: "Backend & Systems",
+    description: "Designing resilient APIs, asynchronous job queues, and robust server architectures.",
+    iconName: "Server",
+    skills: [
+      { name: "Node.js & Express", level: "Advanced", context: "High-throughput APIs & microservices", highlight: true },
+      { name: "BullMQ & Redis Queues", level: "Advanced", context: "Distributed asynchronous job workflows", highlight: true },
+      { name: "Python & FastAPI / Flask", level: "Proficient", context: "Automation, scripts & data services", highlight: false },
+      { name: "RESTful API Architecture", level: "Advanced", context: "Idempotent design, versioning, contract testing", highlight: true },
+      { name: "Background Workers", level: "Advanced", context: "Cron jobs, event listeners & retry policies", highlight: false }
+    ]
+  },
+  {
+    title: "Frontend Engineering",
+    description: "Building responsive, accessible, and high-performance user interfaces.",
+    iconName: "Layout",
+    skills: [
+      { name: "React 18/19", level: "Advanced", context: "Custom hooks, state management & performance", highlight: true },
+      { name: "TypeScript", level: "Advanced", context: "Strict type safety & domain modeling", highlight: true },
+      { name: "Tailwind CSS", level: "Advanced", context: "Design systems & responsive styling", highlight: false },
+      { name: "Vite & Build Tooling", level: "Proficient", context: "Modern bundle optimization & fast HMR", highlight: false },
+      { name: "State Machines & Local Cache", level: "Proficient", context: "Optimistic UI & offline recovery", highlight: false }
+    ]
+  },
+  {
+    title: "Databases & Caching",
+    description: "Data modeling, relational integrity, transactions, and caching layers.",
+    iconName: "Database",
+    skills: [
+      { name: "MySQL (InnoDB)", level: "Advanced", context: "Relational schemas, indexes, ACID transactions", highlight: true },
+      { name: "PostgreSQL", level: "Proficient", context: "Complex joins, views & schema constraints", highlight: false },
+      { name: "Redis", level: "Advanced", context: "Distributed locks, caching & job queuing", highlight: true },
+      { name: "Data Modeling & Normalization", level: "Advanced", context: "Clean relational structures & dual-entry ledgers", highlight: true },
+      { name: "Query Optimization", level: "Proficient", context: "EXPLAIN plan analysis & indexing strategies", highlight: false }
+    ]
+  },
+  {
+    title: "Infrastructure & DevOps",
+    description: "Containerization, service orchestration, Linux server administration, and CI/CD.",
+    iconName: "Cpu",
+    skills: [
+      { name: "Docker & Docker Compose", level: "Advanced", context: "Multi-container isolated production environments", highlight: true },
+      { name: "Linux Server Administration", level: "Advanced", context: "Ubuntu / Debian, systemd, shell automation", highlight: true },
+      { name: "Nginx Reverse Proxy", level: "Proficient", context: "SSL termination, rate limiting, gzip", highlight: false },
+      { name: "Git & Version Control", level: "Advanced", context: "Branching strategies, code reviews, semantic tags", highlight: false },
+      { name: "Automated Backups & Monitoring", level: "Proficient", context: "mysqldump cron tasks, health probes", highlight: false }
+    ]
+  },
+  {
+    title: "Networking & AAA Services",
+    description: "Network protocols, authentication systems, routing, and access control.",
+    iconName: "Network",
+    skills: [
+      { name: "FreeRADIUS 3.x", level: "Advanced", context: "AAA server, MySQL dictionary, CoA disconnects", highlight: true },
+      { name: "TCP/IP & Routing Protocols", level: "Advanced", context: "OSPF, VLANs, Subnetting, IPv4/IPv6 (HCIA)", highlight: true },
+      { name: "MikroTik RouterOS", level: "Proficient", context: "PPPoE Server, Hotspot, API integration", highlight: false },
+      { name: "Socket Programming", level: "Proficient", context: "Raw sockets, packet parsing, protocol analysis", highlight: false },
+      { name: "VPN & Network Security", level: "Proficient", context: "Firewalls, NAT, IPsec, ACLs", highlight: false }
+    ]
+  },
+  {
+    title: "Application Security & DevSecOps",
+    description: "Defensive engineering, access control, credential management, and threat mitigation.",
+    iconName: "ShieldCheck",
+    skills: [
+      { name: "Role-Based Access Control (RBAC)", level: "Advanced", context: "Granular permission matrices & claims", highlight: true },
+      { name: "API Security & Rate Limiting", level: "Advanced", context: "Token bucket, CORS, helmet, input sanitation", highlight: true },
+      { name: "JWT & Session Security", level: "Advanced", context: "HttpOnly cookies, token rotation, signature checks", highlight: true },
+      { name: "Idempotency & Secret Isolation", level: "Advanced", context: "Distributed locks & environment isolation", highlight: true },
+      { name: "Defensive Coding Practices", level: "Proficient", context: "OWASP Top 10 mitigation, parameterization", highlight: false }
+    ]
+  }
 ];
 
 // -----------------------------------------------------------

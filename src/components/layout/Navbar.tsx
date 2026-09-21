@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, Code, Cpu, Shield, Network, Wrench, Terminal, FileText, ChevronRight, ShieldCheck, Flame } from 'lucide-react';
+import { Menu, X, Sun, Moon, Code, Cpu, Shield, Network, Wrench, Terminal, FileText, ChevronRight, ShieldCheck, Flame, Database } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 import { navLinks, personalInfo } from '@/config/siteData';
 
@@ -8,7 +8,8 @@ import { navLinks, personalInfo } from '@/config/siteData';
 const skillIcons: Record<string, any> = {
   'Work': Code,           // Development & coding skills
   'Engineering': Cpu,     // Systems & infrastructure
-  'Principles': Flame,     // Engineering philosophy & principles
+  'Principles': ShieldCheck,     // Engineering philosophy & principles
+  'Skills': Database,      // Technical skills matrix
   'About': Network,       // Networking & security expertise
   'Contact': Shield,      // Security & reliability focus
 };
@@ -18,6 +19,7 @@ const skillDescriptions: Record<string, string> = {
   'Work': 'Full-Stack Development · React · Node.js · Python',
   'Engineering': 'Systems Architecture · Docker · Microservices · AI',
   'Principles': 'Security · Async Architecture · Data Integrity · Observability',
+  'Skills': 'Backend · Frontend · Databases · Infrastructure · Networking · Security',
   'About': 'Networking · Cisco · Huawei · Cybersecurity · Infrastructure',
   'Contact': 'Secure Communications · Professional Services',
 };
